@@ -1,0 +1,2487 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- ============================================
+     METADATOS Y CONFIGURACIÓN DEL DOCUMENTO
+     ============================================ -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduHTML Builder PRO MAX | Prof. Carlos Elizondo</title>
+
+<!-- ============================================
+     ESTILOS CSS - DISEÑO VISUAL
+     ============================================ -->
+<style>
+/* ============================================
+   VARIABLES DE COLOR Y TEMAS
+   ============================================ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+--primary: #6C5CE7;
+--secondary: #00B894;
+--accent: #FF6B35;
+--dark: #2D3436;
+--light: #F5F6FA;
+--success: #00B894;
+--warning: #FDCB6E;
+--danger: #D63031;
+--info: #0984E3;
+--gradient-1: linear-gradient(135deg, #6C5CE7 0%, #A8A4E8 100%);
+--gradient-2: linear-gradient(135deg, #00B894 0%, #55EFC4 100%);
+--gradient-3: linear-gradient(135deg, #FF6B35 0%, #FFA07A 100%);
+--gradient-4: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+--shadow: 0 10px 30px rgba(108, 92, 231, 0.2);
+--shadow-hover: 0 15px 40px rgba(108, 92, 231, 0.3);
+}
+
+/* ============================================
+   ESTILOS GENERALES DEL BODY
+   ============================================ */
+body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+min-height: 100vh;
+color: var(--dark);
+overflow-x: hidden;
+}
+
+/* ============================================
+   HEADER - BARRA DE NAVEGACIÓN SUPERIOR
+   ============================================ */
+.header {
+background: rgba(255,255,255,0.98);
+backdrop-filter: blur(10px);
+padding: 1.5rem;
+position: fixed;
+width: 100%;
+top: 0;
+z-index: 1000;
+box-shadow: var(--shadow);
+animation: slideDown 0.5s ease;
+}
+@keyframes slideDown {
+from { transform: translateY(-100%); }
+to { transform: translateY(0); }
+}
+.header-content {
+max-width: 1400px;
+margin: 0 auto;
+display: flex;
+justify-content: space-between;
+align-items: center;
+flex-wrap: wrap;
+}
+
+/* ============================================
+   LOGO Y BRANDING
+   ============================================ */
+.logo {
+display: flex;
+align-items: center;
+gap: 1rem;
+}
+.logo-icon {
+width: 60px;
+height: 60px;
+background: var(--gradient-1);
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+color: white;
+font-size: 2rem;
+animation: pulse 2s infinite;
+box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+}
+@keyframes pulse {
+0%, 100% { transform: scale(1); }
+50% { transform: scale(1.05); }
+}
+.logo h1 {
+color: var(--primary);
+font-size: 1.5rem;
+font-weight: 700;
+}
+.logo span {
+display: block;
+font-size: 0.85rem;
+color: var(--secondary);
+font-weight: 500;
+font-style: italic;
+}
+
+/* ============================================
+   BOTONES DE NAVEGACIÓN DE MÓDULOS
+   ============================================ */
+.nav-modules {
+display: flex;
+gap: 1rem;
+flex-wrap: wrap;
+}
+.module-btn {
+padding: 0.8rem 1.8rem;
+border: none;
+background: var(--gradient-1);
+color: white;
+border-radius: 30px;
+cursor: pointer;
+transition: all 0.3s;
+font-weight: 600;
+text-decoration: none;
+display: inline-block;
+font-size: 1rem;
+box-shadow: 0 4px 10px rgba(108, 92, 231, 0.3);
+}
+.module-btn:hover {
+background: var(--gradient-2);
+transform: translateY(-3px) scale(1.05);
+box-shadow: 0 8px 20px rgba(0, 184, 148, 0.4);
+}
+.module-btn.active {
+background: var(--gradient-2);
+transform: scale(1.1);
+box-shadow: 0 8px 25px rgba(0, 184, 148, 0.5);
+}
+
+/* ============================================
+   CONTENEDOR PRINCIPAL
+   ============================================ */
+.container {
+max-width: 1400px;
+margin: 0 auto;
+padding: 120px 20px 20px;
+}
+
+/* ============================================
+   PANTALLA DE BIENVENIDA
+   ============================================ */
+.welcome-screen {
+text-align: center;
+padding: 4rem 2rem;
+background: white;
+border-radius: 30px;
+box-shadow: var(--shadow);
+margin-bottom: 2rem;
+animation: fadeInUp 0.8s ease;
+}
+@keyframes fadeInUp {
+from { opacity: 0; transform: translateY(30px); }
+to { opacity: 1; transform: translateY(0); }
+}
+.welcome-screen h1 {
+color: var(--primary);
+font-size: 2.5rem;
+margin-bottom: 1rem;
+}
+.welcome-screen p {
+font-size: 1.2rem;
+color: #666;
+margin-bottom: 3rem;
+max-width: 800px;
+margin-left: auto;
+margin-right: auto;
+}
+
+/* ============================================
+   GRID DE MÓDULOS - TARJETAS
+   ============================================ */
+.modules-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: 2rem;
+margin-top: 2rem;
+}
+.module-card {
+background: white;
+border-radius: 25px;
+padding: 3rem 2rem;
+text-align: center;
+box-shadow: var(--shadow);
+transition: all 0.3s;
+cursor: pointer;
+border: 3px solid transparent;
+position: relative;
+overflow: hidden;
+}
+.module-card::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 5px;
+background: var(--gradient-1);
+}
+.module-card:hover {
+transform: translateY(-10px);
+box-shadow: var(--shadow-hover);
+border-color: var(--primary);
+}
+.module-card .icon {
+font-size: 4rem;
+margin-bottom: 1.5rem;
+display: block;
+}
+.module-card h3 {
+color: var(--primary);
+font-size: 1.8rem;
+margin-bottom: 1rem;
+}
+.module-card p {
+color: #666;
+line-height: 1.6;
+}
+
+/* ============================================
+   DASHBOARD DE ESTADÍSTICAS
+   ============================================ */
+.stats-dashboard {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 1.5rem;
+margin: 2rem 0;
+}
+.stat-card {
+background: white;
+padding: 2rem;
+border-radius: 20px;
+text-align: center;
+box-shadow: var(--shadow);
+transition: all 0.3s;
+border-top: 6px solid var(--primary);
+}
+.stat-card:hover {
+transform: translateY(-10px);
+box-shadow: var(--shadow-hover);
+}
+.stat-number {
+font-size: 3rem;
+font-weight: bold;
+color: var(--primary);
+display: block;
+line-height: 1.2;
+}
+.stat-label {
+color: #666;
+font-size: 1rem;
+margin-top: 0.8rem;
+font-weight: 600;
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+
+/* ============================================
+   SECCIONES DEL FORMULARIO
+   ============================================ */
+.section {
+background: white;
+border-radius: 30px;
+padding: 2.5rem;
+margin-bottom: 2.5rem;
+box-shadow: var(--shadow);
+animation: fadeInUp 0.8s ease;
+border: 1px solid rgba(108, 92, 231, 0.1);
+position: relative;
+overflow: hidden;
+}
+.section::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 5px;
+background: var(--gradient-1);
+}
+.section-title {
+color: var(--primary);
+font-size: 2rem;
+margin-bottom: 1.5rem;
+display: flex;
+align-items: center;
+gap: 0.8rem;
+padding-bottom: 0.8rem;
+border-bottom: 4px solid var(--secondary);
+}
+
+/* ============================================
+   BARRA DE PROGRESO - PASOS
+   ============================================ */
+.progress-steps {
+display: flex;
+justify-content: space-between;
+margin-bottom: 2rem;
+position: relative;
+}
+.progress-steps::before {
+content: '';
+position: absolute;
+top: 50%;
+left: 0;
+width: 100%;
+height: 3px;
+background: #e9ecef;
+transform: translateY(-50%);
+z-index: 1;
+}
+.progress-line {
+position: absolute;
+top: 50%;
+left: 0;
+height: 3px;
+background: var(--gradient-1);
+transform: translateY(-50%);
+z-index: 2;
+transition: width 0.5s ease;
+width: 0%;
+}
+.step {
+display: flex;
+flex-direction: column;
+align-items: center;
+z-index: 3;
+flex: 1;
+}
+.step-number {
+width: 40px;
+height: 40px;
+border-radius: 50%;
+background: #e9ecef;
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: bold;
+color: #666;
+margin-bottom: 0.5rem;
+transition: all 0.3s;
+}
+.step.active .step-number {
+background: var(--gradient-1);
+color: white;
+transform: scale(1.2);
+}
+.step.completed .step-number {
+background: var(--gradient-2);
+color: white;
+}
+.step-label {
+font-size: 0.85rem;
+color: #666;
+text-align: center;
+}
+.step.active .step-label {
+color: var(--primary);
+font-weight: 600;
+}
+
+/* ============================================
+   FORMULARIOS - INPUTS Y CAMPOS
+   ============================================ */
+.form-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 1.5rem;
+margin-bottom: 1.5rem;
+}
+.form-group {
+display: flex;
+flex-direction: column;
+}
+.form-group label {
+font-weight: 600;
+color: var(--primary);
+margin-bottom: 0.5rem;
+font-size: 1rem;
+}
+.form-control {
+padding: 0.9rem;
+border: 2px solid #ddd;
+border-radius: 10px;
+font-size: 1rem;
+transition: all 0.3s;
+}
+.form-control:focus {
+outline: none;
+border-color: var(--primary);
+box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.1);
+}
+
+/* ============================================
+   BOTONES - ESTILOS VARIADOS
+   ============================================ */
+.btn {
+padding: 1rem 2.5rem;
+border: none;
+border-radius: 50px;
+font-weight: 700;
+cursor: pointer;
+transition: all 0.3s;
+text-transform: uppercase;
+letter-spacing: 1px;
+margin: 0.5rem;
+position: relative;
+overflow: hidden;
+font-size: 1rem;
+}
+.btn::before {
+content: '';
+position: absolute;
+top: 50%;
+left: 50%;
+width: 0;
+height: 0;
+border-radius: 50%;
+background: rgba(255,255,255,0.3);
+transform: translate(-50%, -50%);
+transition: width 0.6s, height 0.6s;
+}
+.btn:hover::before {
+width: 300px;
+height: 300px;
+}
+.btn-primary {
+background: var(--gradient-1);
+color: white;
+box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
+}
+.btn-secondary {
+background: var(--gradient-2);
+color: white;
+box-shadow: 0 4px 15px rgba(0, 184, 148, 0.4);
+}
+.btn-success {
+background: var(--gradient-3);
+color: white;
+box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+}
+.btn-warning {
+background: linear-gradient(135deg, #FDCB6E 0%, #F39C12 100%);
+color: white;
+box-shadow: 0 4px 15px rgba(253, 203, 110, 0.4);
+}
+.btn-info {
+background: linear-gradient(135deg, #0984E3 0%, #74B9FF 100%);
+color: white;
+}
+.btn-danger {
+background: linear-gradient(135deg, #D63031 0%, #FF7675 100%);
+color: white;
+}
+.btn-small {
+padding: 0.5rem 1.2rem;
+font-size: 0.85rem;
+}
+
+/* ============================================
+   CHECKBOXES Y GRUPOS DE OPCIONES
+   ============================================ */
+.checkbox-group {
+display: flex;
+align-items: center;
+gap: 1rem;
+padding: 1rem;
+background: var(--light);
+border-radius: 10px;
+margin: 1rem 0;
+}
+.checkbox-group input[type="checkbox"] {
+width: 20px;
+height: 20px;
+cursor: pointer;
+}
+.checkbox-group label {
+font-weight: 600;
+cursor: pointer;
+font-size: 1.1rem;
+}
+
+/* ============================================
+   ÁREAS DE TEXTO - TEXTAREA
+   ============================================ */
+.textarea-large {
+width: 100%;
+min-height: 200px;
+padding: 1rem;
+border: 2px solid #ddd;
+border-radius: 10px;
+font-family: 'Courier New', monospace;
+font-size: 0.95rem;
+resize: vertical;
+}
+
+/* ============================================
+   TARJETAS DE IA - ENLACES
+   ============================================ */
+.ai-links {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 1rem;
+margin: 1.5rem 0;
+}
+.ai-card {
+background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+padding: 1.5rem;
+border-radius: 15px;
+text-align: center;
+cursor: pointer;
+transition: all 0.3s;
+border: 3px solid transparent;
+}
+.ai-card:hover {
+transform: translateY(-5px);
+border-color: var(--primary);
+box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+.ai-card h3 {
+color: var(--primary);
+margin-bottom: 0.5rem;
+font-size: 1.2rem;
+}
+.ai-card p {
+font-size: 0.9rem;
+color: #666;
+}
+
+/* ============================================
+   SECCIÓN DE SALIDA - CÓDIGO GENERADO
+   ============================================ */
+.output-section {
+background: #2d3436;
+color: #dfe6e9;
+padding: 2rem;
+border-radius: 15px;
+margin: 2rem 0;
+}
+.output-section h3 {
+color: #00cec9;
+margin-bottom: 1rem;
+}
+.code-preview {
+background: #1e272e;
+padding: 1.5rem;
+border-radius: 10px;
+font-family: 'Courier New', monospace;
+font-size: 0.9rem;
+overflow-x: auto;
+max-height: 400px;
+overflow-y: auto;
+margin: 1rem 0;
+white-space: pre-wrap;
+word-wrap: break-word;
+}
+
+/* ============================================
+   CAJAS DE INFORMACIÓN
+   ============================================ */
+.info-box {
+background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+padding: 1.5rem;
+border-radius: 10px;
+border-left: 5px solid var(--info);
+margin: 1rem 0;
+}
+.info-box p {
+margin: 0.5rem 0;
+}
+
+/* ============================================
+   CLASES DE UTILIDAD
+   ============================================ */
+.hidden {
+display: none;
+}
+.progress-bar {
+width: 100%;
+height: 10px;
+background: #ddd;
+border-radius: 10px;
+overflow: hidden;
+margin: 1rem 0;
+}
+.progress-fill {
+height: 100%;
+background: var(--gradient-1);
+width: 0%;
+transition: width 0.5s ease;
+}
+
+/* ============================================
+   SECCIÓN DE APOYO CURRICULAR ESPECIAL
+   ============================================ */
+.apoyo-especial-section {
+background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+border: 3px solid var(--warning);
+}
+.apoyo-especial-section .section-title {
+color: #d63031;
+border-bottom-color: var(--warning);
+}
+
+/* ============================================
+   TIPOS DE ÍTEMS - GRID DE SELECCIÓN
+   ============================================ */
+.item-types-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 1rem;
+margin: 1rem 0;
+}
+.item-type-card {
+background: white;
+padding: 1rem;
+border-radius: 15px;
+border: 2px solid #ddd;
+cursor: pointer;
+transition: all 0.3s;
+text-align: center;
+}
+.item-type-card:hover {
+border-color: var(--primary);
+transform: translateY(-3px);
+box-shadow: var(--shadow);
+}
+.item-type-card.selected {
+border-color: var(--success);
+background: #d4edda;
+}
+.item-type-card .icon {
+font-size: 2rem;
+margin-bottom: 0.5rem;
+}
+
+/* ============================================
+   FORMULARIO DE ENVÍO - CONFIGURACIÓN
+   ============================================ */
+.formulario-envio-section {
+background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+border: 3px solid var(--success);
+}
+.formulario-envio-section .section-title {
+color: var(--success);
+border-bottom-color: var(--success);
+}
+.formulario-config {
+background: white;
+padding: 2rem;
+border-radius: 15px;
+margin-top: 1.5rem;
+}
+.formulario-preview {
+background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+padding: 1.5rem;
+border-radius: 15px;
+margin-top: 1rem;
+border: 2px dashed var(--primary);
+}
+
+/* ============================================
+   MÓDULO DE ENLACES - ESTILOS ESPECÍFICOS
+   ============================================ */
+.enlace-item {
+background: white;
+padding: 1.5rem;
+border-radius: 15px;
+border-left: 5px solid var(--primary);
+box-shadow: var(--shadow);
+display: flex;
+justify-content: space-between;
+align-items: center;
+transition: all 0.3s;
+}
+.enlace-item:hover {
+transform: translateX(5px);
+box-shadow: var(--shadow-hover);
+}
+.enlace-info {
+flex: 1;
+}
+.enlace-actions {
+display: flex;
+gap: 0.5rem;
+flex-direction: column;
+}
+
+/* ============================================
+   FOOTER - PIE DE PÁGINA
+   ============================================ */
+.footer {
+background: var(--dark);
+color: white;
+text-align: center;
+padding: 3rem;
+margin-top: 3rem;
+position: relative;
+overflow: hidden;
+}
+.footer::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 3px;
+background: var(--gradient-1);
+}
+.footer h3 {
+color: var(--secondary);
+margin-bottom: 0.5rem;
+font-size: 1.5rem;
+}
+.footer p {
+margin: 0.5rem 0;
+font-size: 1rem;
+}
+.footer a {
+color: var(--secondary);
+text-decoration: none;
+font-weight: 600;
+}
+.footer a:hover {
+text-decoration: underline;
+}
+
+/* ============================================
+   CONTENIDO DE MÓDULOS - VISIBILIDAD
+   ============================================ */
+.module-content {
+display: none;
+}
+.module-content.active {
+display: block;
+animation: fadeInUp 0.5s ease;
+}
+
+/* ============================================
+   BOTÓN DE REGRESO
+   ============================================ */
+.back-btn {
+background: transparent;
+border: 2px solid var(--primary);
+color: var(--primary);
+padding: 0.6rem 1.5rem;
+border-radius: 30px;
+cursor: pointer;
+font-weight: 600;
+margin-bottom: 1.5rem;
+transition: all 0.3s;
+}
+.back-btn:hover {
+background: var(--primary);
+color: white;
+}
+
+/* ============================================
+   RESPONSIVE - MEDIA QUERIES
+   ============================================ */
+@media (max-width: 768px) {
+.header-content { flex-direction: column; text-align: center; }
+.nav-modules { margin-top: 1rem; justify-content: center; }
+.container { padding: 140px 10px 10px; }
+.section { padding: 1.5rem; }
+.form-grid { grid-template-columns: 1fr; }
+.modules-grid { grid-template-columns: 1fr; }
+.progress-steps { flex-wrap: wrap; }
+.step { flex: 0 0 50%; margin-bottom: 1rem; }
+.enlace-item { flex-direction: column; gap: 1rem; text-align: center; }
+.enlace-actions { flex-direction: row; justify-content: center; }
+}
+</style>
+</head>
+
+<!-- ============================================
+     CUERPO DEL DOCUMENTO - ESTRUCTURA HTML
+     ============================================ -->
+<body>
+
+<!-- ============================================
+     HEADER - BARRA DE NAVEGACIÓN SUPERIOR
+     ============================================ -->
+<header class="header">
+<div class="header-content">
+<div class="logo">
+<div class="logo-icon">🎓</div>
+<div>
+<h1>EduHTML Builder PRO MAX</h1>
+<span>Constructor de Actividades Educativas con IA | Prof. Carlos Elizondo</span>
+</div>
+</div>
+<!-- NAVEGACIÓN CON 5 MÓDULOS -->
+<nav class="nav-modules">
+<button class="module-btn active" onclick="showModule('crear', event)">📝 Crear</button>
+<button class="module-btn" onclick="showModule('estadisticas', event)">📊 Estadísticas</button>
+<button class="module-btn" onclick="showModule('banco', event)">📦 Banco</button>
+<button class="module-btn" onclick="showModule('enlaces', event)">🔗 Enlaces</button>
+<button class="module-btn" onclick="showModule('recursos', event)">📚 Recursos</button>
+</nav>
+</div>
+</header>
+
+<!-- ============================================
+     CONTENEDOR PRINCIPAL
+     ============================================ -->
+<div class="container">
+
+<!-- ============================================
+     PANTALLA DE BIENVENIDA - DASHBOARD INICIAL
+     ============================================ -->
+<div id="welcomeScreen" class="welcome-screen">
+<h1>👨‍🏫 Bienvenido, Profesor Carlos Elizondo</h1>
+<p>
+Plataforma profesional para generar actividades educativas interactivas en HTML con teoría completa,
+apoyos curriculares especiales, formulario de envío de respuestas y verificación automática.
+</p>
+<!-- GRID CON 5 TARJETAS DE MÓDULOS -->
+<div class="modules-grid">
+<div class="module-card" onclick="showModule('crear', event)">
+<span class="icon">📝</span>
+<h3>Crear Actividad</h3>
+<p>Diseñe actividades con teoría completa, portada profesional, apoyos especiales, formulario de envío y múltiples tipos de ítems.</p>
+</div>
+<div class="module-card" onclick="showModule('estadisticas', event)">
+<span class="icon">📊</span>
+<h3>Estadísticas</h3>
+<p>Visualice el rendimiento, actividades creadas, materias más usadas y progreso general.</p>
+</div>
+<div class="module-card" onclick="showModule('banco', event)">
+<span class="icon">📦</span>
+<h3>Banco de Actividades</h3>
+<p>Guarde, reutilice y gestione sus actividades creadas anteriormente.</p>
+</div>
+<div class="module-card" onclick="showModule('enlaces', event)">
+<span class="icon">🔗</span>
+<h3>Enlaces y Recursos</h3>
+<p>Guarde y gestione enlaces a páginas web, videos, PDFs y otros recursos digitales.</p>
+</div>
+<div class="module-card" onclick="showModule('recursos', event)">
+<span class="icon">📚</span>
+<h3>Recursos y Ayuda</h3>
+<p>Acceda a tutoriales, ejemplos de prompts, videos y enlaces a herramientas de IA.</p>
+</div>
+</div>
+</div>
+
+<!-- ============================================
+     MÓDULO 1: CREAR ACTIVIDAD
+     ============================================ -->
+<div id="moduleCrear" class="module-content">
+<button class="back-btn" onclick="showWelcome()">← Volver al Inicio</button>
+
+<!-- BARRA DE PROGRESO - 7 PASOS -->
+<div class="progress-steps">
+<div class="progress-line" id="progressLine"></div>
+<div class="step active" data-step="1">
+<div class="step-number">1</div>
+<div class="step-label">Docente</div>
+</div>
+<div class="step" data-step="2">
+<div class="step-number">2</div>
+<div class="step-label">Teoría</div>
+</div>
+<div class="step" data-step="3">
+<div class="step-number">3</div>
+<div class="step-label">Habilidades</div>
+</div>
+<div class="step" data-step="4">
+<div class="step-number">4</div>
+<div class="step-label">Apoyo</div>
+</div>
+<div class="step" data-step="5">
+<div class="step-number">5</div>
+<div class="step-label">Ítems</div>
+</div>
+<div class="step" data-step="6">
+<div class="step-number">6</div>
+<div class="step-label">Formulario</div>
+</div>
+<div class="step" data-step="7">
+<div class="step-number">7</div>
+<div class="step-label">Prompt</div>
+</div>
+</div>
+
+<!-- SECCIÓN 1: DATOS DEL DOCENTE -->
+<section class="section" id="step1">
+<h2 class="section-title">👨‍🏫 1. Información del Docente</h2>
+<div class="form-grid">
+<div class="form-group">
+<label for="profesor">Nombre del Profesor:</label>
+<input type="text" id="profesor" class="form-control" placeholder="Ej: Carlos Elizondo Castillo" onchange="updateProgress(1)">
+</div>
+<div class="form-group">
+<label for="correo">Correo Electrónico (para recibir respuestas):</label>
+<input type="email" id="correo" class="form-control" placeholder="carlos.elizondo@mep.go.cr" onchange="updateProgress(1)">
+</div>
+<div class="form-group">
+<label for="institucion">Institución Educativa:</label>
+<input type="text" id="institucion" class="form-control" placeholder="Ej: Liceo Diurno" onchange="updateProgress(1)">
+</div>
+</div>
+</section>
+
+<!-- SECCIÓN 2: TEORÍA Y CONTENIDOS -->
+<section class="section" id="step2">
+<h2 class="section-title">📖 2. Teoría, Definiciones y Conceptos</h2>
+<div class="info-box">
+<p><strong>💡 Instrucciones:</strong> Ingrese todo el contenido teórico que desea que aparezca en la portada y sección de teoría de la actividad.</p>
+<p><strong>📌 Esto incluirá:</strong> Definiciones, conceptos clave, fórmulas, ejemplos de ejercicios resueltos, y explicaciones amplias.</p>
+</div>
+<div class="form-group">
+<label for="teoriaContenido">📚 Contenido Teórico Completo:</label>
+<textarea id="teoriaContenido" class="textarea-large" style="min-height: 400px;" placeholder="Ejemplo:
+TEMA: Circunferencias y Vectores
+DEFINICIÓN DE CIRCUNFERENCIA:
+La circunferencia es el lugar geométrico de todos los puntos en un plano que equidistan de un punto fijo llamado centro.
+ECUACIÓN ORDINARIA:
+(x - h)² + (y - k)² = r²
+Donde:
+- (h, k) son las coordenadas del centro
+- r es el radio (distancia constante)
+EJEMPLO RESUELTO:
+Dada la ecuación (x - 3)² + (y + 2)² = 16
+Centro: C(3, -2)
+Radio: r = √16 = 4
+VECTORES DE TRASLACIÓN:
+Un vector v⃗ = (a, b) representa un desplazamiento...
+"></textarea>
+</div>
+<div class="form-group">
+<label for="ejemplosResueltos">✏️ Ejemplos de Ejercicios Resueltos:</label>
+<textarea id="ejemplosResueltos" class="textarea-large" style="min-height: 200px;" placeholder="Ejemplo 1:
+Encuentre el centro y radio de: (x - 5)² + (y + 3)² = 25
+Solución:
+Centro: (5, -3)
+Radio: √25 = 5
+Ejemplo 2:
+Trasladar el punto P(2, 5) con vector v⃗ = (-4, 3)
+Solución:
+P' = (2 + (-4), 5 + 3) = (-2, 8)
+"></textarea>
+</div>
+</section>
+
+<!-- SECCIÓN 3: HABILIDADES -->
+<section class="section" id="step3">
+<h2 class="section-title">🎯 3. Habilidades y Datos Académicos</h2>
+<div class="form-grid">
+<div class="form-group">
+<label for="materia">Materia/Asignatura:</label>
+<select id="materia" class="form-control" onchange="updateProgress(3)">
+<option value="">-- Seleccione --</option>
+<option value="matematica">Matemática</option>
+<option value="ciencias">Ciencias</option>
+<option value="estudios_sociales">Estudios Sociales</option>
+<option value="espanol">Español</option>
+<option value="ingles">Inglés</option>
+<option value="educacion_fisica">Educación Física</option>
+<option value="otro">Otro</option>
+</select>
+</div>
+<div class="form-group">
+<label for="nivel">Nivel/Grado:</label>
+<select id="nivel" class="form-control" onchange="updateProgress(3)">
+<option value="">-- Seleccione --</option>
+<option value="7">7° Año</option>
+<option value="8">8° Año</option>
+<option value="9">9° Año</option>
+<option value="10">10° Año</option>
+<option value="11">11° Año</option>
+<option value="12">12° Año</option>
+</select>
+</div>
+<div class="form-group">
+<label for="tema">Tema Específico:</label>
+<input type="text" id="tema" class="form-control" placeholder="Ej: Circunferencia y Vectores" onchange="updateProgress(3)">
+</div>
+</div>
+<div class="form-grid">
+<div class="form-group">
+<label for="habilidadGeneral">Habilidad General:</label>
+<input type="text" id="habilidadGeneral" class="form-control" placeholder="Ej: Resolución de problemas matemáticos" onchange="updateProgress(3)">
+</div>
+<div class="form-group">
+<label for="habilidadEspecifica">Habilidades Específicas:</label>
+<textarea id="habilidadEspecifica" class="textarea-large" style="min-height: 100px;" placeholder="Ej:
+- Calcular el área y circunferencia de círculos
+- Aplicar traslaciones vectoriales
+- Identificar elementos de la circunferencia" onchange="updateProgress(3)"></textarea>
+</div>
+</div>
+</section>
+
+<!-- SECCIÓN 4: APOYO CURRICULAR ESPECIAL -->
+<section class="section apoyo-especial-section" id="step4">
+<h2 class="section-title">♿ 4. Apoyo Curricular para Necesidades Educativas Especiales</h2>
+<div class="info-box">
+<p><strong>🌟 Inclusión Educativa:</strong> Configure adaptaciones para estudiantes con necesidades educativas especiales.</p>
+</div>
+<div class="checkbox-group">
+<input type="checkbox" id="necesitaAdecuacion" onchange="toggleAdecuacion()">
+<label for="necesitaAdecuacion">¿Requiere adecuación curricular o apoyo especial?</label>
+</div>
+<div id="adecuacionContainer" class="hidden">
+<div class="form-grid">
+<div class="form-group">
+<label for="tipoAdecuacion">Tipo de Adecuación:</label>
+<select id="tipoAdecuacion" class="form-control">
+<option value="">-- Seleccione --</option>
+<option value="visual">Discapacidad Visual</option>
+<option value="auditiva">Discapacidad Auditiva</option>
+<option value="motriz">Discapacidad Motriz</option>
+<option value="cognitiva">Discapacidad Cognitiva</option>
+<option value="tdah">TDAH</option>
+<option value="autismo">Trastorno del Espectro Autista</option>
+<option value="dislexia">Dislexia</option>
+<option value="otra">Otra</option>
+</select>
+</div>
+<div class="form-group">
+<label for="descripcionAdecuacion">Descripción de la Necesidad:</label>
+<input type="text" id="descripcionAdecuacion" class="form-control" placeholder="Ej: Necesita más tiempo, letras grandes, etc.">
+</div>
+</div>
+<div class="form-group">
+<label for="estrategiasAdecuacion"> Estrategias de Apoyo a Incluir:</label>
+<textarea id="estrategiasAdecuacion" class="textarea-large" style="min-height: 150px;" placeholder="Ejemplo:
+- Instrucciones más detalladas y paso a paso
+- Tiempo extendido para completar actividades
+- Uso de calculadora permitida
+- Ejercicios con menor cantidad de ítems
+- Apoyos visuales adicionales
+- Lectura en voz alta de instrucciones
+- Espacio para respuestas más amplio"></textarea>
+</div>
+<div class="form-group">
+<label for="recursosApoyo">📚 Recursos de Apoyo Específicos:</label>
+<textarea id="recursosApoyo" class="textarea-large" style="min-height: 100px;" placeholder="Ejemplo:
+- Glosario de términos clave
+- Fórmulas en tarjeta de referencia
+- Ejemplos adicionales resueltos
+- Videos explicativos complementarios"></textarea>
+</div>
+</div>
+</section>
+
+<!-- SECCIÓN 5: TIPOS DE ÍTEMS -->
+<section class="section" id="step5">
+<h2 class="section-title">📝 5. Tipos y Cantidad de Ítems</h2>
+<div class="info-box">
+<p><strong>💡 Seleccione los tipos de preguntas que desea incluir en la actividad:</strong></p>
+</div>
+<div class="item-types-grid">
+<div class="item-type-card" onclick="toggleItemType(this, 'seleccion_multiple')">
+<div class="icon">🔘</div>
+<div>Selección Múltiple</div>
+</div>
+<div class="item-type-card" onclick="toggleItemType(this, 'verdadero_falso')">
+<div class="icon">✅</div>
+<div>Verdadero/Falso</div>
+</div>
+<div class="item-type-card" onclick="toggleItemType(this, 'respuesta_corta')">
+<div class="icon">✏️</div>
+<div>Respuesta Corta</div>
+</div>
+<div class="item-type-card" onclick="toggleItemType(this, 'completar')">
+<div class="icon">📝</div>
+<div>Completar Espacios</div>
+</div>
+<div class="item-type-card" onclick="toggleItemType(this, 'pareo')">
+<div class="icon">🔗</div>
+<div>Pareo/Relación</div>
+</div>
+<div class="item-type-card" onclick="toggleItemType(this, 'ordenar')">
+<div class="icon">📋</div>
+<div>Ordenar Elementos</div>
+</div>
+<div class="item-type-card" onclick="toggleItemType(this, 'desarrollo')">
+<div class="icon">📄</div>
+<div>Desarrollo/Essay</div>
+</div>
+<div class="item-type-card" onclick="toggleItemType(this, 'grafico')">
+<div class="icon">📊</div>
+<div>Análisis Gráfico</div>
+</div>
+<div class="item-type-card" onclick="toggleItemType(this, 'caso')">
+<div class="icon">🎯</div>
+<div>Estudio de Caso</div>
+</div>
+<div class="item-type-card" onclick="toggleItemType(this, 'practico')">
+<div class="icon">🔬</div>
+<div>Ejercicio Práctico</div>
+</div>
+</div>
+<div class="form-grid" style="margin-top: 2rem;">
+<div class="form-group">
+<label for="numPreguntasPractica">📊 Número de preguntas de práctica (con verificación):</label>
+<input type="number" id="numPreguntasPractica" class="form-control" min="1" max="20" value="8">
+</div>
+<div class="form-group">
+<label for="numPreguntasQuiz">📝 Número de preguntas de quiz (evaluación):</label>
+<input type="number" id="numPreguntasQuiz" class="form-control" min="1" max="20" value="10">
+</div>
+</div>
+<div class="form-group">
+<label for="instruccionesEspeciales">📋 Instrucciones Especiales para los Ítems:</label>
+<textarea id="instruccionesEspeciales" class="textarea-large" style="min-height: 100px;" placeholder="Ejemplo:
+- Las preguntas de selección múltiple deben tener 4 opciones
+- Incluir retroalimentación para cada respuesta
+- Las preguntas de desarrollo deben tener rúbrica de evaluación
+- Los ejercicios prácticos deben mostrar el procedimiento paso a paso"></textarea>
+</div>
+</section>
+
+<!-- SECCIÓN 6: FORMULARIO DE ENVÍO DE RESPUESTAS -->
+<section class="section formulario-envio-section" id="step6">
+<h2 class="section-title">📤 6. Formulario de Envío de Respuestas</h2>
+<div class="info-box">
+<p><strong>🌟 NUEVA FUNCIONALIDAD:</strong> Active esta opción para incluir un formulario donde los estudiantes puedan enviar sus respuestas del quiz directamente a su correo.</p>
+<p><strong>✅ Incluye:</strong> Calificación automática, resumen de respuestas, envío a FormSubmit.co, y copia al estudiante.</p>
+</div>
+<div class="checkbox-group" style="background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%); border: 2px solid var(--success);">
+<input type="checkbox" id="activarFormulario" onchange="toggleFormulario()" checked>
+<label for="activarFormulario" style="font-size: 1.2rem; color: var(--success);">✅ ACTIVAR FORMULARIO DE ENVÍO DE RESPUESTAS CON CALIFICACIÓN</label>
+</div>
+<div id="formularioContainer" class="formulario-config">
+<div class="form-grid">
+<div class="form-group">
+<label for="correoDestino">📧 Correo para recibir respuestas:</label>
+<input type="email" id="correoDestino" class="form-control" placeholder="Se usará el correo del docente por defecto">
+</div>
+<div class="form-group">
+<label for="asuntoCorreo">📋 Asunto del correo:</label>
+<input type="text" id="asuntoCorreo" class="form-control" value="📝 Nuevas Respuestas de Estudiante" placeholder="Asunto del email">
+</div>
+</div>
+<div class="form-grid">
+<div class="form-group">
+<label for="datosEstudiante">👤 Datos del estudiante a solicitar:</label>
+<textarea id="datosEstudiante" class="textarea-large" style="min-height: 100px;" placeholder="Ejemplo:
+- Nombre completo (requerido)
+- Correo electrónico (requerido)
+- Grupo/Sección (requerido)
+- Número de identificación (opcional)"></textarea>
+</div>
+<div class="form-group">
+<label for="configuracionFormulario">⚙️ Configuración adicional:</label>
+<textarea id="configuracionFormulario" class="textarea-large" style="min-height: 150px;" placeholder="Ejemplo:
+- Mostrar calificación inmediatamente después de enviar
+- Enviar copia de confirmación al estudiante
+- Incluir resumen de respuestas correctas e incorrectas
+- Mostrar tiempo dedicado al quiz
+- Permitir reintentar el quiz
+- Incluir barra de progreso durante el quiz"></textarea>
+</div>
+</div>
+<div class="formulario-preview">
+<h4 style="color: var(--primary); margin-bottom: 1rem;">📋 Vista Previa de lo que se Incluirá:</h4>
+<ul style="line-height: 2; color: #666;">
+<li>✅ Formulario con datos del estudiante (nombre, correo, grupo)</li>
+<li>✅ 10 preguntas del quiz con selección múltiple</li>
+<li>✅ Cálculo automático de calificación (0-100%)</li>
+<li>✅ Resumen visual de respuestas correctas/incorrectas</li>
+<li>✅ Envío automático a <strong id="previewCorreo">correo@ejemplo.com</strong></li>
+<li>✅ Copia de confirmación al estudiante</li>
+<li>✅ Mensaje de éxito después del envío</li>
+</ul>
+</div>
+</div>
+</section>
+
+<!-- SECCIÓN 7: GENERAR PROMPT Y DESCARGAR HTML -->
+<section class="section" id="step7">
+<h2 class="section-title">🚀 7. Generar Prompt y Descargar HTML</h2>
+<div class="info-box">
+<p><strong>📌 PASO 1:</strong> Genere el prompt optimizado para la IA</p>
+<p><strong>📌 PASO 2:</strong> Pegue el código HTML generado por la IA en el área de texto</p>
+<p><strong>📌 PASO 3:</strong> Descargue el archivo index.html listo para usar</p>
+</div>
+<button class="btn btn-primary" onclick="generarPrompt()">✨ Generar Prompt Optimizado</button>
+<button class="btn btn-success" onclick="mejorarPromptConIA()" style="margin-left: 1rem;">🤖 Mejorar Prompt con IA</button>
+<button class="btn btn-warning" onclick="mostrarAreaDescarga()" style="margin-left: 1rem;">📥 Preparar Descarga de HTML</button>
+
+<div id="promptGenerado" class="output-section hidden">
+<h3>✨ Prompt Generado (Estructurado):</h3>
+<div class="code-preview" id="promptText"></div>
+<button class="btn btn-secondary" onclick="copiarPrompt()">📋 Copiar Prompt</button>
+<button class="btn btn-warning" onclick="guardarEnBanco()" style="margin-left: 1rem;">💾 Guardar en Banco</button>
+</div>
+
+<!-- ÁREA PARA PEGAR CÓDIGO Y DESCARGAR -->
+<div id="areaDescarga" class="output-section hidden">
+<h3>📥 Pegar Código HTML Generado por IA</h3>
+<p style="color: #dfe6e9; margin-bottom: 1rem;">Después de generar el prompt, péguelo en su IA preferida, copie el código HTML resultante y péguelo aquí:</p>
+<textarea id="codigoHTMLGenerado" class="textarea-large" style="min-height: 300px; background: #1e272e; color: #dfe6e9;" placeholder="Pegue aquí el código HTML completo generado por la IA..."></textarea>
+<button class="btn btn-success" onclick="descargarHTML()" style="margin-top: 1rem;">💾 Descargar archivo index.html</button>
+<button class="btn btn-info" onclick="validarHTML()" style="margin-left: 1rem;">✓ Validar Código</button>
+<div id="validacionResultado" style="margin-top: 1rem; padding: 1rem; border-radius: 10px; display: none;"></div>
+</div>
+
+<h3 style="margin: 2rem 0 1rem; color: var(--primary);">🔗 Enlaces a Plataformas de IA:</h3>
+<div class="ai-links">
+<div class="ai-card" onclick="abrirIA('https://chat.deepseek.com')">
+<h3>🧠 Deep Seek</h3>
+<p>IA avanzada para código</p>
+</div>
+<div class="ai-card" onclick="abrirIA('https://chat.qwen.ai')">
+<h3>💬 Qwen AI</h3>
+<p>Modelo multimodal</p>
+</div>
+<div class="ai-card" onclick="abrirIA('https://chat.openai.com')">
+<h3>💡 ChatGPT</h3>
+<p>OpenAI Assistant</p>
+</div>
+<div class="ai-card" onclick="abrirIA('https://gemini.google.com')">
+<h3>⭐ Google Gemini</h3>
+<p>IA de Google</p>
+</div>
+</div>
+</section>
+</div>
+
+<!-- ============================================
+     MÓDULO 2: ESTADÍSTICAS
+     ============================================ -->
+<div id="moduleEstadisticas" class="module-content">
+<button class="back-btn" onclick="showWelcome()">← Volver al Inicio</button>
+<section class="section">
+<h2 class="section-title">📊 Dashboard de Estadísticas</h2>
+<div class="stats-dashboard">
+<div class="stat-card">
+<span class="stat-number" id="statTotalActividades">0</span>
+<div class="stat-label">Actividades Creadas</div>
+</div>
+<div class="stat-card">
+<span class="stat-number" id="statTotalPreguntas">0</span>
+<div class="stat-label">Preguntas Generadas</div>
+</div>
+<div class="stat-card">
+<span class="stat-number" id="statMateriaPopular">-</span>
+<div class="stat-label">Materia Más Usada</div>
+</div>
+<div class="stat-card">
+<span class="stat-number" id="statUltimaActividad">-</span>
+<div class="stat-label">Última Creación</div>
+</div>
+</div>
+<div class="section" style="margin-top: 2rem;">
+<h3 style="color: var(--primary); margin-bottom: 1rem;">📈 Progreso por Materia</h3>
+<div id="progresoMaterias" style="display: grid; gap: 1rem;">
+<!-- Se llenará dinámicamente -->
+</div>
+</div>
+</section>
+</div>
+
+<!-- ============================================
+     MÓDULO 3: BANCO DE ACTIVIDADES
+     ============================================ -->
+<div id="moduleBanco" class="module-content">
+<button class="back-btn" onclick="showWelcome()">← Volver al Inicio</button>
+<section class="section">
+<h2 class="section-title">📦 Banco de Actividades Guardadas</h2>
+<div class="info-box">
+<p><strong>💡 Información:</strong> Aquí se almacenan todas las actividades que ha guardado. Puede reutilizarlas, editarlas o eliminarlas.</p>
+</div>
+<div class="activity-bank" id="activityBank">
+<p style="text-align: center; color: #666; padding: 2rem;">No hay actividades guardadas aún. Cree una actividad y guárdela en el banco.</p>
+</div>
+<div style="text-align: center; margin-top: 2rem;">
+<button class="btn btn-danger" onclick="limpiarBanco()" style="background: var(--danger);">🗑️ Limpiar Todo el Banco</button>
+<button class="btn btn-primary" onclick="exportarBanco()" style="margin-left: 1rem;">📤 Exportar Banco (JSON)</button>
+<button class="btn btn-secondary" onclick="importarBanco()" style="margin-left: 1rem;">📥 Importar Banco</button>
+</div>
+</section>
+</div>
+
+<!-- ============================================
+     MÓDULO 4: ENLACES Y RECURSOS EXTERNOS
+     ============================================ -->
+<div id="moduleEnlaces" class="module-content">
+<button class="back-btn" onclick="showWelcome()">← Volver al Inicio</button>
+
+<section class="section">
+<h2 class="section-title">🔗 Enlaces y Recursos Externos</h2>
+
+<div class="info-box">
+<p><strong>💡 Funcionalidad:</strong> Agregue enlaces a páginas web, videos de YouTube, PDFs, documentos y otros recursos digitales para compartir con sus estudiantes.</p>
+<p><strong>📌 Los enlaces se guardan en el navegador y puede exportarlos/importarlos.</strong></p>
+</div>
+
+<!-- FORMULARIO PARA AGREGAR ENLACE -->
+<div class="formulario-config" style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border: 2px solid var(--info);">
+<h3 style="color: var(--info); margin-bottom: 1rem;">➕ Agregar Nuevo Enlace</h3>
+<div class="form-grid">
+<div class="form-group">
+<label for="enlaceTitulo">📌 Título del Recurso:</label>
+<input type="text" id="enlaceTitulo" class="form-control" placeholder="Ej: Video sobre Circunferencias">
+</div>
+<div class="form-group">
+<label for="enlaceURL">🔗 URL del Enlace:</label>
+<input type="url" id="enlaceURL" class="form-control" placeholder="https://www.youtube.com/watch?v=...">
+</div>
+</div>
+<div class="form-grid">
+<div class="form-group">
+<label for="enlaceTipo">📁 Tipo de Recurso:</label>
+<select id="enlaceTipo" class="form-control">
+<option value="pagina">🌐 Página Web</option>
+<option value="video">🎥 Video (YouTube/Vimeo)</option>
+<option value="pdf">📄 Documento PDF</option>
+<option value="documento">📝 Documento (Word/Excel)</option>
+<option value="imagen">🖼️ Imagen/Infografía</option>
+<option value="otro">📦 Otro</option>
+</select>
+</div>
+<div class="form-group">
+<label for="enlaceMateria">📚 Materia Relacionada:</label>
+<select id="enlaceMateria" class="form-control">
+<option value="">-- Seleccione --</option>
+<option value="matematica">Matemática</option>
+<option value="ciencias">Ciencias</option>
+<option value="estudios_sociales">Estudios Sociales</option>
+<option value="espanol">Español</option>
+<option value="ingles">Inglés</option>
+<option value="educacion_fisica">Educación Física</option>
+<option value="otro">Otro</option>
+</select>
+</div>
+</div>
+<div class="form-group">
+<label for="enlaceDescripcion">📝 Descripción (opcional):</label>
+<textarea id="enlaceDescripcion" class="textarea-large" style="min-height: 80px;" placeholder="Breve descripción del recurso..."></textarea>
+</div>
+<button class="btn btn-primary" onclick="agregarEnlace()">💾 Guardar Enlace</button>
+<button class="btn btn-secondary" onclick="limpiarFormularioEnlace()" style="margin-left: 1rem;">🧹 Limpiar Formulario</button>
+</div>
+
+<!-- LISTA DE ENLACES GUARDADOS -->
+<div style="margin-top: 2rem;">
+<h3 style="color: var(--primary); margin-bottom: 1rem;">📋 Enlaces Guardados (<span id="contadorEnlaces">0</span>)</h3>
+<div id="listaEnlaces" style="display: grid; gap: 1rem;">
+<!-- Se llenará dinámicamente -->
+</div>
+</div>
+
+<!-- BOTONES DE GESTIÓN -->
+<div style="text-align: center; margin-top: 2rem;">
+<button class="btn btn-primary" onclick="exportarEnlaces()">📤 Exportar Enlaces (JSON)</button>
+<button class="btn btn-secondary" onclick="importarEnlaces()" style="margin-left: 1rem;">📥 Importar Enlaces</button>
+<button class="btn btn-danger" onclick="limpiarTodosEnlaces()" style="margin-left: 1rem;">🗑️ Eliminar Todos</button>
+</div>
+</section>
+</div>
+
+<!-- ============================================
+     MÓDULO 5: RECURSOS
+     ============================================ -->
+<div id="moduleRecursos" class="module-content">
+<button class="back-btn" onclick="showWelcome()">← Volver al Inicio</button>
+<section class="section">
+<h2 class="section-title">📚 Recursos para Docentes</h2>
+<div class="info-box">
+<h3>🎯 ¿Cómo usar esta plataforma?</h3>
+<ol style="margin-left: 1.5rem; line-height: 2.2;">
+<li>Vaya a <strong>"Crear Actividad"</strong> y complete los datos del docente</li>
+<li>Ingrese el <strong>contenido teórico completo</strong> (definiciones, conceptos, ejemplos)</li>
+<li>Defina las <strong>habilidades</strong> generales y específicas</li>
+<li>Configure <strong>apoyos curriculares</strong> si necesita adecuaciones</li>
+<li>Seleccione los <strong>tipos de ítems</strong> que desea incluir</li>
+<li><strong>ACTIVE el formulario de envío</strong> si quiere recibir las respuestas por correo</li>
+<li>Genere el prompt con el botón <strong>"Generar Prompt Optimizado"</strong></li>
+<li>Copie el prompt y péguelo en su IA preferida</li>
+<li>Pegue el código HTML generado y descargue el archivo index.html</li>
+<li>Comparta el archivo con sus estudiantes</li>
+</ol>
+</div>
+</section>
+</div>
+</div>
+
+<!-- ============================================
+     FOOTER - PIE DE PÁGINA
+     ============================================ -->
+<footer class="footer">
+<h3>🎓 EduHTML Builder PRO MAX</h3>
+<p><strong>Profesor Carlos Elizondo Castillo</strong></p>
+<p>📧 <a href="mailto:carlos.elizondo.castillo@mep.go.cr">carlos.elizondo.castillo@mep.go.cr</a></p>
+<p>© 2026 - Todos los derechos reservados</p>
+<p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+"Transformando la educación mediante la tecnología inclusiva"
+</p>
+</footer>
+
+<!-- ============================================
+     JAVASCRIPT - LÓGICA Y FUNCIONALIDAD
+     ============================================ -->
+<script>
+// ============================================
+// VARIABLES GLOBALES
+// ============================================
+let itemTypesSeleccionados = [];
+let preguntasPersonalizadas = [];
+
+// ============================================
+// NAVEGACIÓN ENTRE MÓDULOS
+// ============================================
+function showModule(moduleName, event) {
+document.getElementById('welcomeScreen').style.display = 'none';
+document.querySelectorAll('.module-content').forEach(m => m.classList.remove('active'));
+document.getElementById('module' + moduleName.charAt(0).toUpperCase() + moduleName.slice(1)).classList.add('active');
+// Update active button
+document.querySelectorAll('.module-btn').forEach(btn => btn.classList.remove('active'));
+if(event) {
+event.target.classList.add('active');
+}
+window.scrollTo({ top: 0, behavior: 'smooth' });
+// Load specific module data
+if(moduleName === 'banco') {
+cargarBanco();
+}
+if(moduleName === 'estadisticas') {
+actualizarEstadisticas();
+}
+if(moduleName === 'enlaces') {
+cargarEnlaces();
+}
+}
+
+function showWelcome() {
+document.getElementById('welcomeScreen').style.display = 'block';
+document.querySelectorAll('.module-content').forEach(m => m.classList.remove('active'));
+document.querySelectorAll('.module-btn').forEach(btn => btn.classList.remove('active'));
+document.querySelector('.module-btn:first-child').classList.add('active');
+window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ============================================
+// BARRA DE PROGRESO - ACTUALIZACIÓN
+// ============================================
+function updateProgress(step) {
+const progressLine = document.getElementById('progressLine');
+const percentage = (step / 7) * 100;
+progressLine.style.width = percentage + '%';
+document.querySelectorAll('.step').forEach((s, index) => {
+if(index + 1 < step) {
+s.classList.add('completed');
+s.classList.remove('active');
+} else if(index + 1 === step) {
+s.classList.add('active');
+s.classList.remove('completed');
+} else {
+s.classList.remove('active', 'completed');
+}
+});
+}
+
+// ============================================
+// TOGGLE ADECUACIÓN CURRICULAR
+// ============================================
+function toggleAdecuacion() {
+const checkbox = document.getElementById('necesitaAdecuacion');
+const container = document.getElementById('adecuacionContainer');
+container.classList.toggle('hidden', !checkbox.checked);
+}
+
+// ============================================
+// TOGGLE FORMULARIO DE ENVÍO
+// ============================================
+function toggleFormulario() {
+const checkbox = document.getElementById('activarFormulario');
+const container = document.getElementById('formularioContainer');
+const correo = document.getElementById('correo').value || 'correo@ejemplo.com';
+document.getElementById('previewCorreo').textContent = correo;
+container.classList.toggle('hidden', !checkbox.checked);
+}
+
+// ============================================
+// SELECCIÓN DE TIPOS DE ÍTEMS
+// ============================================
+function toggleItemType(card, type) {
+card.classList.toggle('selected');
+if (itemTypesSeleccionados.includes(type)) {
+itemTypesSeleccionados = itemTypesSeleccionados.filter(t => t !== type);
+} else {
+itemTypesSeleccionados.push(type);
+}
+}
+
+// ============================================
+// MOSTRAR ÁREA DE DESCARGA
+// ============================================
+function mostrarAreaDescarga() {
+const promptGenerado = document.getElementById('promptGenerado');
+if (promptGenerado.classList.contains('hidden')) {
+alert('⚠️ Primero genere el prompt con el botón "Generar Prompt Optimizado"');
+return;
+}
+document.getElementById('areaDescarga').classList.remove('hidden');
+window.scrollTo({ top: document.getElementById('areaDescarga').offsetTop - 100, behavior: 'smooth' });
+}
+
+// ============================================
+// VALIDAR CÓDIGO HTML
+// ============================================
+function validarHTML() {
+const codigo = document.getElementById('codigoHTMLGenerado').value;
+const resultadoDiv = document.getElementById('validacionResultado');
+resultadoDiv.style.display = 'block';
+
+if (!codigo.trim()) {
+resultadoDiv.style.background = '#ff7675';
+resultadoDiv.style.color = 'white';
+resultadoDiv.innerHTML = '❌ El área de código está vacía. Pegue el código HTML primero.';
+return;
+}
+
+// Validaciones básicas
+let errores = [];
+if (!codigo.includes('<!DOCTYPE html>')) {
+errores.push('Falta la declaración DOCTYPE');
+}
+if (!codigo.includes('<html')) {
+errores.push('Falta la etiqueta <html>');
+}
+if (!codigo.includes('</html>')) {
+errores.push('Falta la etiqueta de cierre </html>');
+}
+if (!codigo.includes('<head>')) {
+errores.push('Falta la etiqueta <head>');
+}
+if (!codigo.includes('<body>')) {
+errores.push('Falta la etiqueta <body>');
+}
+
+if (errores.length > 0) {
+resultadoDiv.style.background = '#ffeaa7';
+resultadoDiv.style.color = '#2d3436';
+resultadoDiv.innerHTML = '⚠️ Advertencias: ' + errores.join(', ');
+} else {
+resultadoDiv.style.background = '#55efc4';
+resultadoDiv.style.color = '#2d3436';
+resultadoDiv.innerHTML = '✅ Código HTML válido. Listo para descargar.';
+}
+}
+
+// ============================================
+// DESCARGAR ARCHIVO HTML
+// ============================================
+function descargarHTML() {
+const codigo = document.getElementById('codigoHTMLGenerado').value;
+
+if (!codigo.trim()) {
+alert('❌ Por favor pegue el código HTML generado por la IA primero.');
+return;
+}
+
+// Validar que sea código HTML
+if (!codigo.includes('<!DOCTYPE html>') && !codigo.includes('<html')) {
+alert('⚠️ El código no parece ser HTML válido. Verifique que haya copiado todo el código de la IA.');
+return;
+}
+
+// Crear blob y descargar
+const blob = new Blob([codigo], { type: 'text/html' });
+const url = URL.createObjectURL(blob);
+const a = document.createElement('a');
+a.href = url;
+
+// Generar nombre de archivo con fecha
+const fecha = new Date().toISOString().slice(0, 10);
+const tema = document.getElementById('tema').value || 'actividad';
+a.download = `index_${tema.replace(/\s+/g, '_').toLowerCase()}_${fecha}.html`;
+
+document.body.appendChild(a);
+a.click();
+document.body.removeChild(a);
+URL.revokeObjectURL(url);
+
+// Mostrar mensaje de éxito
+alert('✅ Archivo HTML descargado exitosamente.\n\n📁 Nombre: ' + a.download + '\n\n📍 El archivo se encuentra en su carpeta de Descargas.');
+}
+
+// ============================================
+// GENERAR PROMPT ESTRUCTURADO
+// ============================================
+function generarPrompt() {
+const profesor = document.getElementById('profesor').value || 'Profesor';
+const correo = document.getElementById('correo').value || 'correo@ejemplo.com';
+const institucion = document.getElementById('institucion').value || 'Institución Educativa';
+const materia = document.getElementById('materia').value || 'Materia';
+const nivel = document.getElementById('nivel').value || 'Nivel';
+const tema = document.getElementById('tema').value || 'Tema';
+const habilidadGeneral = document.getElementById('habilidadGeneral').value || 'Habilidad general';
+const habilidadEspecifica = document.getElementById('habilidadEspecifica').value || 'Habilidad específica';
+const teoriaContenido = document.getElementById('teoriaContenido').value || 'Sin contenido teórico';
+const ejemplosResueltos = document.getElementById('ejemplosResueltos').value || 'Sin ejemplos';
+const numPractica = document.getElementById('numPreguntasPractica').value || 8;
+const numQuiz = document.getElementById('numPreguntasQuiz').value || 10;
+const necesitaAdecuacion = document.getElementById('necesitaAdecuacion').checked;
+const tipoAdecuacion = document.getElementById('tipoAdecuacion').value || 'No especificado';
+const estrategiasAdecuacion = document.getElementById('estrategiasAdecuacion').value || 'Ninguna';
+const instruccionesEspeciales = document.getElementById('instruccionesEspeciales').value || 'Sin instrucciones especiales';
+// NUEVO: Formulario de envío
+const activarFormulario = document.getElementById('activarFormulario').checked;
+const correoDestino = document.getElementById('correoDestino').value || correo;
+const asuntoCorreo = document.getElementById('asuntoCorreo').value || '📝 Nuevas Respuestas de Estudiante';
+const datosEstudiante = document.getElementById('datosEstudiante').value || 'Nombre, Correo, Grupo';
+const configuracionFormulario = document.getElementById('configuracionFormulario').value || 'Calificación automática, copia al estudiante';
+let formularioSection = '';
+if (activarFormulario) {
+formularioSection = `
+🔷 SECCIÓN DE FORMULARIO DE ENVÍO (ACTIVADA):
+- Incluir formulario completo con datos del estudiante:
+* Nombre completo (requerido)
+* Correo electrónico (requerido)
+* Grupo/Sección (requerido)
+- ${numQuiz} preguntas de quiz con selección múltiple
+- Calificación automática al enviar (0-100%)
+- Mostrar resumen de respuestas correctas e incorrectas
+- Enviar datos a FormSubmit.co: ${correoDestino}
+- Asunto: ${asuntoCorreo}
+- Enviar copia de confirmación al estudiante
+- Mostrar mensaje de éxito después del envío
+- Incluir botón para ver resultados y volver a intentar
+- Diseño profesional con gradientes y animaciones
+`;
+} else {
+formularioSection = `
+🔷 SECCIÓN DE FORMULARIO DE ENVÍO (DESACTIVADA):
+- No incluir formulario de envío
+- Solo mostrar calificación en pantalla sin envío por correo
+`;
+}
+const prompt = `========================================
+📋 PROMPT ESTRUCTURADO PARA GENERAR ACTIVIDAD HTML PROFESIONAL
+========================================
+1️⃣ DATOS DEL DOCENTE:
+- Profesor: ${profesor}
+- Correo: ${correo}
+- Institución: ${institucion}
+- Materia: ${materia}
+- Nivel: ${nivel}° año
+- Tema: ${tema}
+2️⃣ HABILIDADES:
+- Habilidad General: ${habilidadGeneral}
+- Habilidades Específicas: ${habilidadEspecifica}
+3️⃣ CONTENIDO TEÓRICO COMPLETO (INCLUIR EN PORTADA):
+${teoriaContenido}
+4️⃣ EJEMPLOS RESUELTOS:
+${ejemplosResueltos}
+5️⃣ TIPOS DE ÍTEMS SELECCIONADOS:
+${itemTypesSeleccionados.length > 0 ? itemTypesSeleccionados.join(', ') : 'Selección múltiple, Verdadero/Falso, Respuesta corta'}
+6️⃣ CANTIDAD DE PREGUNTAS:
+- Práctica (con verificación): ${numPractica} preguntas
+- Quiz (evaluación): ${numQuiz} preguntas
+7️⃣ INSTRUCCIONES ESPECIALES:
+${instruccionesEspeciales}
+8️⃣ ADECUACIÓN CURRICULAR ${necesitaAdecuacion ? '(INCLUIR)' : '(NO INCLUIR)'}:
+${necesitaAdecuacion ? `
+- Tipo: ${tipoAdecuacion}
+- Estrategias de apoyo: ${estrategiasAdecuacion}
+- Incluir sección especial con adaptaciones
+- Considerar: tiempo extendido, instrucciones simplificadas, apoyos visuales` : ''}
+${formularioSection}
+9️⃣ ESTRUCTURA REQUERIDA DEL HTML:
+- PORTADA PROFESIONAL con:
+* Nombre del profesor
+* Habilidades generales y específicas
+* Teoría completa explicada ampliamente
+* Ejemplos resueltos
+- SECCIÓN DE TEORÍA con formato claro
+- SECCIÓN DE PRÁCTICA con verificación automática
+- SECCIÓN DE QUIZ autocorregible
+${activarFormulario ? '- SECCIÓN DE FORMULARIO DE ENVÍO con FormSubmit.co' : ''}
+${activarFormulario ? '- CÁLCULO AUTOMÁTICO DE CALIFICACIÓN' : ''}
+${activarFormulario ? '- RESUMEN DE RESPUESTAS (correctas/incorrectas)' : ''}
+- SECCIÓN DE APOYO ESPECIAL (si aplica)
+- ESTADÍSTICAS de rendimiento del estudiante
+🔟 REQUISITOS TÉCNICOS:
+- Diseño moderno con gradientes y animaciones
+- Totalmente responsive
+- Verificación automática de respuestas
+- Retroalimentación inmediata
+- Un solo archivo HTML autocontenido
+- CSS inline en <head>
+- JavaScript optimizado
+========================================
+⚠️ IMPORTANTE: Generar código completo y funcional
+========================================`;
+document.getElementById('promptText').textContent = prompt;
+document.getElementById('promptGenerado').classList.remove('hidden');
+updateProgress(7);
+}
+
+// ============================================
+// COPIAR PROMPT AL PORTAPAPELES
+// ============================================
+function copiarPrompt() {
+const promptText = document.getElementById('promptText').textContent;
+navigator.clipboard.writeText(promptText).then(() => {
+alert('✅ Prompt copiado al portapapeles.\nAhora pégalo en la IA de tu preferencia.');
+});
+}
+
+// ============================================
+// MEJORAR PROMPT CON IA
+// ============================================
+function mejorarPromptConIA() {
+const promptText = document.getElementById('promptText').textContent;
+if (!promptText) {
+alert('❌ Primero genere el prompt con el botón "Generar Prompt Optimizado"');
+return;
+}
+window.open('https://chat.deepseek.com', '_blank');
+}
+
+// ============================================
+// ABRIR PLATAFORMAS DE IA
+// ============================================
+function abrirIA(url) {
+window.open(url, '_blank');
+}
+
+// ============================================
+// ESTADÍSTICAS - ACTUALIZAR DASHBOARD
+// ============================================
+function actualizarEstadisticas() {
+const banco = JSON.parse(localStorage.getItem('eduHTML_banco') || '[]');
+// Total actividades
+document.getElementById('statTotalActividades').textContent = banco.length;
+// Total preguntas
+let totalPreguntas = 0;
+banco.forEach(act => {
+totalPreguntas += (parseInt(act.numPractica) || 0) + (parseInt(act.numQuiz) || 0);
+});
+document.getElementById('statTotalPreguntas').textContent = totalPreguntas;
+// Materia más usada
+if (banco.length > 0) {
+const materias = banco.map(a => a.materia || 'Sin materia');
+const materiaPopular = materias.sort((a,b) =>
+materias.filter(v => v===a).length - materias.filter(v => v===b).length
+).pop();
+document.getElementById('statMateriaPopular').textContent = materiaPopular;
+// Última actividad
+const ultima = banco[banco.length - 1];
+document.getElementById('statUltimaActividad').textContent = ultima.fecha || 'N/A';
+// Progreso por materia
+const conteoMaterias = {};
+materias.forEach(m => {
+conteoMaterias[m] = (conteoMaterias[m] || 0) + 1;
+});
+let htmlProgreso = '';
+for (const [materia, cantidad] of Object.entries(conteoMaterias)) {
+const porcentaje = (cantidad / banco.length) * 100;
+htmlProgreso += `
+<div style="background: white; padding: 1rem; border-radius: 10px;">
+<div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+<strong>${materia}</strong>
+<span>${cantidad} actividades</span>
+</div>
+<div style="background: #e9ecef; border-radius: 10px; height: 20px; overflow: hidden;">
+<div style="background: var(--gradient-1); height: 100%; width: ${porcentaje}%; border-radius: 10px;"></div>
+</div>
+</div>
+`;
+}
+document.getElementById('progresoMaterias').innerHTML = htmlProgreso;
+}
+}
+
+// ============================================
+// BANCO DE ACTIVIDADES - GUARDAR
+// ============================================
+function guardarEnBanco() {
+const actividad = {
+id: Date.now(),
+fecha: new Date().toLocaleDateString(),
+profesor: document.getElementById('profesor').value || 'Sin nombre',
+materia: document.getElementById('materia').value || 'Sin materia',
+nivel: document.getElementById('nivel').value || 'Sin nivel',
+tema: document.getElementById('tema').value || 'Sin tema',
+habilidadGeneral: document.getElementById('habilidadGeneral').value || '',
+habilidadEspecifica: document.getElementById('habilidadEspecifica').value || '',
+teoriaContenido: document.getElementById('teoriaContenido').value || '',
+ejemplosResueltos: document.getElementById('ejemplosResueltos').value || '',
+necesitaAdecuacion: document.getElementById('necesitaAdecuacion').checked,
+tipoAdecuacion: document.getElementById('tipoAdecuacion').value || '',
+estrategiasAdecuacion: document.getElementById('estrategiasAdecuacion').value || '',
+activarFormulario: document.getElementById('activarFormulario').checked,
+correoDestino: document.getElementById('correoDestino').value || '',
+itemTypes: itemTypesSeleccionados,
+numPractica: document.getElementById('numPreguntasPractica').value || 8,
+numQuiz: document.getElementById('numPreguntasQuiz').value || 10,
+prompt: document.getElementById('promptText').textContent || ''
+};
+let banco = JSON.parse(localStorage.getItem('eduHTML_banco') || '[]');
+banco.push(actividad);
+localStorage.setItem('eduHTML_banco', JSON.stringify(banco));
+alert('✅ Actividad guardada en el banco.\nPuede acceder a ella desde el módulo "Banco de Actividades".');
+}
+
+// ============================================
+// BANCO DE ACTIVIDADES - CARGAR LISTA
+// ============================================
+function cargarBanco() {
+const banco = JSON.parse(localStorage.getItem('eduHTML_banco') || '[]');
+const container = document.getElementById('activityBank');
+if(banco.length === 0) {
+container.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem;">No hay actividades guardadas aún. Cree una actividad y guárdela en el banco.</p>';
+return;
+}
+let html = '';
+banco.forEach((actividad, index) => {
+html += `
+<div class="activity-item" style="background: var(--light); padding: 1.5rem; border-radius: 15px; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s;">
+<div class="activity-info">
+<h4 style="color: var(--primary); margin-bottom: 0.5rem;">📚 ${actividad.tema || 'Actividad sin título'}</h4>
+<p><strong>Materia:</strong> ${actividad.materia} | <strong>Nivel:</strong> ${actividad.nivel}°</p>
+<p><strong>Habilidad:</strong> ${actividad.habilidadEspecifica || 'No especificada'}</p>
+<p><strong>Fecha:</strong> ${actividad.fecha} | <strong>Profesor:</strong> ${actividad.profesor}</p>
+${actividad.necesitaAdecuacion ? '<p style="color: var(--warning);">♿ Incluye adecuación curricular</p>' : ''}
+${actividad.activarFormulario ? '<p style="color: var(--success);">📤 Incluye formulario de envío</p>' : ''}
+</div>
+<div class="activity-actions" style="display: flex; gap: 0.5rem;">
+<button class="btn btn-primary btn-small" onclick="cargarActividad(${index})">📋 Cargar</button>
+<button class="btn btn-danger btn-small" onclick="eliminarActividad(${index})" style="background: var(--danger);">🗑️ Eliminar</button>
+</div>
+</div>
+`;
+});
+container.innerHTML = html;
+}
+
+// ============================================
+// BANCO DE ACTIVIDADES - CARGAR ACTIVIDAD
+// ============================================
+function cargarActividad(index) {
+const banco = JSON.parse(localStorage.getItem('eduHTML_banco') || '[]');
+const actividad = banco[index];
+if(actividad) {
+document.getElementById('profesor').value = actividad.profesor || '';
+document.getElementById('materia').value = actividad.materia || '';
+document.getElementById('nivel').value = actividad.nivel || '';
+document.getElementById('tema').value = actividad.tema || '';
+document.getElementById('habilidadGeneral').value = actividad.habilidadGeneral || '';
+document.getElementById('habilidadEspecifica').value = actividad.habilidadEspecifica || '';
+document.getElementById('teoriaContenido').value = actividad.teoriaContenido || '';
+document.getElementById('ejemplosResueltos').value = actividad.ejemplosResueltos || '';
+document.getElementById('numPreguntasPractica').value = actividad.numPractica || 8;
+document.getElementById('numPreguntasQuiz').value = actividad.numQuiz || 10;
+if(actividad.necesitaAdecuacion) {
+document.getElementById('necesitaAdecuacion').checked = true;
+toggleAdecuacion();
+document.getElementById('tipoAdecuacion').value = actividad.tipoAdecuacion || '';
+document.getElementById('estrategiasAdecuacion').value = actividad.estrategiasAdecuacion || '';
+}
+if(actividad.activarFormulario) {
+document.getElementById('activarFormulario').checked = true;
+toggleFormulario();
+document.getElementById('correoDestino').value = actividad.correoDestino || '';
+}
+showModule('crear', null);
+updateProgress(2);
+alert('✅ Actividad cargada. Puede editarla y generar un nuevo prompt.');
+}
+}
+
+// ============================================
+// BANCO DE ACTIVIDADES - ELIMINAR
+// ============================================
+function eliminarActividad(index) {
+if(confirm('¿Está seguro de que desea eliminar esta actividad?')) {
+let banco = JSON.parse(localStorage.getItem('eduHTML_banco') || '[]');
+banco.splice(index, 1);
+localStorage.setItem('eduHTML_banco', JSON.stringify(banco));
+cargarBanco();
+alert('✅ Actividad eliminada.');
+}
+}
+
+// ============================================
+// BANCO DE ACTIVIDADES - LIMPIAR TODO
+// ============================================
+function limpiarBanco() {
+if(confirm('⚠️ ¿Está seguro de que desea eliminar TODAS las actividades del banco? Esta acción no se puede deshacer.')) {
+localStorage.removeItem('eduHTML_banco');
+cargarBanco();
+alert('✅ Banco limpiado.');
+}
+}
+
+// ============================================
+// BANCO DE ACTIVIDADES - EXPORTAR JSON
+// ============================================
+function exportarBanco() {
+const banco = localStorage.getItem('eduHTML_banco') || '[]';
+const blob = new Blob([banco], { type: 'application/json' });
+const url = URL.createObjectURL(blob);
+const a = document.createElement('a');
+a.href = url;
+a.download = 'actividades.json';
+document.body.appendChild(a);
+a.click();
+document.body.removeChild(a);
+URL.revokeObjectURL(url);
+}
+
+// ============================================
+// BANCO DE ACTIVIDADES - IMPORTAR JSON
+// ============================================
+function importarBanco() {
+const input = document.createElement('input');
+input.type = 'file';
+input.accept = '.json';
+input.onchange = function(e) {
+const file = e.target.files[0];
+const reader = new FileReader();
+reader.onload = function(e) {
+try {
+const contenido = e.target.result;
+JSON.parse(contenido);
+localStorage.setItem('eduHTML_banco', contenido);
+cargarBanco();
+alert('✅ Banco importado correctamente.');
+} catch(error) {
+alert('❌ El archivo no es válido.');
+}
+};
+reader.readAsText(file);
+};
+input.click();
+}
+
+// ============================================
+// GESTIÓN DE ENLACES Y RECURSOS EXTERNOS
+// ============================================
+
+// AGREGAR NUEVO ENLACE
+function agregarEnlace() {
+const titulo = document.getElementById('enlaceTitulo').value.trim();
+const url = document.getElementById('enlaceURL').value.trim();
+const tipo = document.getElementById('enlaceTipo').value;
+const materia = document.getElementById('enlaceMateria').value;
+const descripcion = document.getElementById('enlaceDescripcion').value.trim();
+
+// Validaciones
+if (!titulo) {
+alert('❌ Por favor ingrese un título para el recurso.');
+return;
+}
+if (!url) {
+alert('❌ Por favor ingrese la URL del enlace.');
+return;
+}
+// Validar URL básica
+if (!url.startsWith('http://') && !url.startsWith('https://')) {
+alert('⚠️ La URL debe comenzar con http:// o https://');
+return;
+}
+
+// Crear objeto enlace
+const nuevoEnlace = {
+id: Date.now(),
+fecha: new Date().toLocaleDateString(),
+titulo: titulo,
+url: url,
+tipo: tipo,
+materia: materia || 'General',
+descripcion: descripcion || 'Sin descripción'
+};
+
+// Guardar en localStorage
+let enlaces = JSON.parse(localStorage.getItem('eduHTML_enlaces') || '[]');
+enlaces.push(nuevoEnlace);
+localStorage.setItem('eduHTML_enlaces', JSON.stringify(enlaces));
+
+// Limpiar formulario y recargar lista
+limpiarFormularioEnlace();
+cargarEnlaces();
+
+alert('✅ Enlace guardado exitosamente.');
+}
+
+// CARGAR LISTA DE ENLACES
+function cargarEnlaces() {
+const enlaces = JSON.parse(localStorage.getItem('eduHTML_enlaces') || '[]');
+const container = document.getElementById('listaEnlaces');
+const contador = document.getElementById('contadorEnlaces');
+
+contador.textContent = enlaces.length;
+
+if (enlaces.length === 0) {
+container.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem;">No hay enlaces guardados aún. Agregue su primer recurso.</p>';
+return;
+}
+
+// Iconos por tipo
+const iconosTipo = {
+'pagina': '🌐',
+'video': '🎥',
+'pdf': '📄',
+'documento': '📝',
+'imagen': '🖼️',
+'otro': '📦'
+};
+
+let html = '';
+enlaces.forEach((enlace, index) => {
+html += `
+<div class="enlace-item" style="background: white; padding: 1.5rem; border-radius: 15px; border-left: 5px solid var(--primary); box-shadow: var(--shadow); display: flex; justify-content: space-between; align-items: center; transition: all 0.3s;">
+<div class="enlace-info" style="flex: 1;">
+<div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+<span style="font-size: 1.5rem;">${iconosTipo[enlace.tipo] || '🔗'}</span>
+<h4 style="color: var(--primary); margin: 0;">${enlace.titulo}</h4>
+</div>
+<p style="color: #666; margin: 0.5rem 0;"><strong>URL:</strong> <a href="${enlace.url}" target="_blank" style="color: var(--info); text-decoration: none;">${enlace.url.substring(0, 50)}${enlace.url.length > 50 ? '...' : ''}</a></p>
+<p style="color: #666; margin: 0.5rem 0;"><strong>Tipo:</strong> ${enlace.tipo} | <strong>Materia:</strong> ${enlace.materia}</p>
+${enlace.descripcion ? `<p style="color: #888; margin: 0.5rem 0; font-style: italic;">"${enlace.descripcion}"</p>` : ''}
+<p style="color: #999; font-size: 0.85rem; margin-top: 0.5rem;">📅 Agregado: ${enlace.fecha}</p>
+</div>
+<div class="enlace-actions" style="display: flex; gap: 0.5rem; flex-direction: column;">
+<a href="${enlace.url}" target="_blank" class="btn btn-primary btn-small" style="padding: 0.5rem 1rem; font-size: 0.85rem;">🔗 Abrir</a>
+<button class="btn btn-secondary btn-small" onclick="copiarEnlace('${enlace.url}')" style="padding: 0.5rem 1rem; font-size: 0.85rem;">📋 Copiar URL</button>
+<button class="btn btn-danger btn-small" onclick="eliminarEnlace(${index})" style="padding: 0.5rem 1rem; font-size: 0.85rem; background: var(--danger);">🗑️ Eliminar</button>
+</div>
+</div>
+`;
+});
+
+container.innerHTML = html;
+}
+
+// ELIMINAR ENLACE INDIVIDUAL
+function eliminarEnlace(index) {
+if(confirm('¿Está seguro de que desea eliminar este enlace?')) {
+let enlaces = JSON.parse(localStorage.getItem('eduHTML_enlaces') || '[]');
+enlaces.splice(index, 1);
+localStorage.setItem('eduHTML_enlaces', JSON.stringify(enlaces));
+cargarEnlaces();
+alert('✅ Enlace eliminado.');
+}
+}
+
+// COPIAR URL AL PORTAPAPELES
+function copiarEnlace(url) {
+navigator.clipboard.writeText(url).then(() => {
+alert('✅ URL copiada al portapapeles.');
+});
+}
+
+// LIMPIAR FORMULARIO
+function limpiarFormularioEnlace() {
+document.getElementById('enlaceTitulo').value = '';
+document.getElementById('enlaceURL').value = '';
+document.getElementById('enlaceTipo').value = 'pagina';
+document.getElementById('enlaceMateria').value = '';
+document.getElementById('enlaceDescripcion').value = '';
+}
+
+// LIMPIAR TODOS LOS ENLACES
+function limpiarTodosEnlaces() {
+if(confirm('⚠️ ¿Está seguro de que desea eliminar TODOS los enlaces? Esta acción no se puede deshacer.')) {
+localStorage.removeItem('eduHTML_enlaces');
+cargarEnlaces();
+alert('✅ Todos los enlaces han sido eliminados.');
+}
+}
+
+// EXPORTAR ENLACES A JSON
+function exportarEnlaces() {
+const enlaces = localStorage.getItem('eduHTML_enlaces') || '[]';
+const blob = new Blob([enlaces], { type: 'application/json' });
+const url = URL.createObjectURL(blob);
+const a = document.createElement('a');
+a.href = url;
+a.download = 'enlaces_recursos.json';
+document.body.appendChild(a);
+a.click();
+document.body.removeChild(a);
+URL.revokeObjectURL(url);
+alert('✅ Enlaces exportados exitosamente.');
+}
+
+// IMPORTAR ENLACES DESDE JSON
+function importarEnlaces() {
+const input = document.createElement('input');
+input.type = 'file';
+input.accept = '.json';
+input.onchange = function(e) {
+const file = e.target.files[0];
+const reader = new FileReader();
+reader.onload = function(e) {
+try {
+const contenido = e.target.result;
+JSON.parse(contenido); // Validar JSON
+localStorage.setItem('eduHTML_enlaces', contenido);
+cargarEnlaces();
+alert('✅ Enlaces importados correctamente.');
+} catch(error) {
+alert('❌ El archivo no es válido.');
+}
+};
+reader.readAsText(file);
+};
+input.click();
+}
+
+// ============================================
+// AUTO-GUARDADO - ANTES DE CERRAR
+// ============================================
+window.addEventListener('beforeunload', () => {
+const datos = {
+profesor: document.getElementById('profesor').value,
+correo: document.getElementById('correo').value,
+institucion: document.getElementById('institucion').value,
+materia: document.getElementById('materia').value,
+nivel: document.getElementById('nivel').value,
+tema: document.getElementById('tema').value,
+habilidadGeneral: document.getElementById('habilidadGeneral').value,
+habilidadEspecifica: document.getElementById('habilidadEspecifica').value,
+teoriaContenido: document.getElementById('teoriaContenido').value,
+ejemplosResueltos: document.getElementById('ejemplosResueltos').value,
+numPreguntasPractica: document.getElementById('numPreguntasPractica').value,
+numPreguntasQuiz: document.getElementById('numPreguntasQuiz').value,
+activarFormulario: document.getElementById('activarFormulario').checked,
+correoDestino: document.getElementById('correoDestino').value
+};
+localStorage.setItem('eduHTML_v6', JSON.stringify(datos));
+});
+
+// ============================================
+// CARGAR DATOS GUARDADOS - AL INICIAR
+// ============================================
+window.addEventListener('load', () => {
+const datos = JSON.parse(localStorage.getItem('eduHTML_v6'));
+if (datos) {
+document.getElementById('profesor').value = datos.profesor || '';
+document.getElementById('correo').value = datos.correo || '';
+document.getElementById('institucion').value = datos.institucion || '';
+document.getElementById('materia').value = datos.materia || '';
+document.getElementById('nivel').value = datos.nivel || '';
+document.getElementById('tema').value = datos.tema || '';
+document.getElementById('habilidadGeneral').value = datos.habilidadGeneral || '';
+document.getElementById('habilidadEspecifica').value = datos.habilidadEspecifica || '';
+document.getElementById('teoriaContenido').value = datos.teoriaContenido || '';
+document.getElementById('ejemplosResueltos').value = datos.ejemplosResueltos || '';
+document.getElementById('numPreguntasPractica').value = datos.numPreguntasPractica || 8;
+document.getElementById('numPreguntasQuiz').value = datos.numPreguntasQuiz || 10;
+document.getElementById('activarFormulario').checked = datos.activarFormulario !== false;
+document.getElementById('correoDestino').value = datos.correoDestino || '';
+toggleFormulario();
+}
+updateProgress(1);
+});
+
+// ============================================
+// ACTUALIZAR VISTA PREVIA DE CORREO
+// ============================================
+document.getElementById('correo').addEventListener('input', function() {
+const correo = this.value || 'correo@ejemplo.com';
+document.getElementById('previewCorreo').textContent = correo;
+if(!document.getElementById('correoDestino').value) {
+document.getElementById('correoDestino').value = correo;
+}
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+================================================================================
+                    📚 GUÍA DE REFERENCIA RÁPIDA - EDUHTML BUILDER PRO MAX
+                    Profesor: Carlos Elizondo Castillo
+                    Última Actualización: 2026
+================================================================================
+
+================================================================================
+🌐 PLATAFORMAS GRATUITAS PARA PUBLICAR SU PÁGINA HTML
+================================================================================
+
+1️⃣ NETLIFY (RECOMENDADO - MÁS FÁCIL)
+   🔗 URL: https://www.netlify.com
+   ⭐ Dificultad: Muy Fácil (Arrastrar y soltar)
+   💰 Precio: 100% Gratis
+   📦 Límite: 100 GB/mes
+   🔒 SSL: HTTPS incluido
+   🌐 Dominio: sutitio.netlify.app
+   📌 Cómo usar:
+      - Cree cuenta en netlify.com
+      - Vaya a "Sites" → "Add new site" → "Deploy manually"
+      - Arrastre su archivo index.html
+      - ¡Listo! URL generada automáticamente
+
+2️⃣ VERCEL
+   🔗 URL: https://vercel.com
+   ⭐ Dificultad: Muy Fácil
+   💰 Precio: 100% Gratis para hobby
+   📦 Límite: Ilimitado
+   🔒 SSL: HTTPS incluido
+   🌐 Dominio: sutitio.vercel.app
+   📌 Requiere: Cuenta de GitHub
+
+3️⃣ GITHUB PAGES
+   🔗 URL: https://pages.github.com
+   ⭐ Dificultad: Fácil
+   💰 Precio: 100% Gratis
+   📦 Límite: Ilimitado
+   🔒 SSL: HTTPS incluido
+   🌐 Dominio: usuario.github.io/repositorio
+   📌 Requiere: Cuenta de GitHub + Repositorio
+
+4️⃣ CLOUDFLARE PAGES
+   🔗 URL: https://pages.cloudflare.com
+   ⭐ Dificultad: Fácil
+   💰 Precio: 100% Gratis
+   📦 Límite: Ilimitado
+   🔒 SSL: HTTPS incluido
+   🌐 Dominio: sutitio.pages.dev
+   📌 Requiere: Cuenta de GitHub o GitLab
+
+5️⃣ FIREBASE HOSTING
+   🔗 URL: https://firebase.google.com
+   ⭐ Dificultad: Media
+   💰 Precio: Gratis (plan Spark)
+   📦 Límite: 10 GB
+   🔒 SSL: HTTPS incluido
+   🌐 Dominio: sutitio.web.app
+   📌 Requiere: Firebase CLI instalado
+
+================================================================================
+🔗 ENLACES IMPORTANTES - PLATAFORMAS DE IA PARA GENERAR CÓDIGO
+================================================================================
+
+🧠 Deep Seek (Recomendado para código)
+   🔗 https://chat.deepseek.com
+   ✅ Especialidad: Generación de código HTML/CSS/JS
+   ✅ Gratis con límites generosos
+
+💬 Qwen AI
+   🔗 https://chat.qwen.ai
+   ✅ Especialidad: Modelo multimodal
+   ✅ Bueno para código y texto
+
+💡 ChatGPT (OpenAI)
+   🔗 https://chat.openai.com
+   ✅ Especialidad: Uso general
+   ⚠️ Versión gratis con límites
+
+⭐ Google Gemini
+   🔗 https://gemini.google.com
+   ✅ Especialidad: Integración con Google
+   ✅ Gratis con cuenta Google
+
+🎨 Claude AI
+   🔗 https://claude.ai
+   ✅ Especialidad: Texto y código limpio
+   ⚠️ Límites en versión gratis
+
+================================================================================
+📁 ESTRUCTURA DEL PROYECTO
+================================================================================
+
+📂 EduHTML Builder PRO MAX
+   │
+   ├── 📄 index.html (Este archivo - Constructor de actividades)
+   │
+   ├── 📄 actividades_generadas/ (Carpeta para guardar HTMLs generados)
+   │   └── index_tema_fecha.html
+   │
+   ├── 📄 respaldos/ (Carpeta para backups JSON)
+   │   ├── actividades.json
+   │   └── enlaces_recursos.json
+   │
+   └── 📄 dokumentos/ (Recursos adicionales)
+       ├── prompts_ejemplo.txt
+       └── guia_uso.pdf
+
+================================================================================
+🎯 FLUJO DE TRABAJO RECOMENDADO
+================================================================================
+
+PASO 1: Crear Actividad
+   → Complete los 7 pasos en el módulo "Crear Actividad"
+   → Datos del docente → Teoría → Habilidades → Apoyo → Ítems → Formulario → Prompt
+
+PASO 2: Generar Prompt
+   → Click en "✨ Generar Prompt Optimizado"
+   → Copie el prompt generado
+
+PASO 3: Usar IA
+   → Abra su IA preferida (Deep Seek recomendado)
+   → Pegue el prompt
+   → Espere a que genere el código HTML completo
+
+PASO 4: Descargar HTML
+   → Copie el código HTML de la IA
+   → Pegue en el área "📥 Pegar Código HTML Generado por IA"
+   → Click en "💾 Descargar archivo index.html"
+
+PASO 5: Publicar en Internet
+   → Vaya a Netlify (https://www.netlify.com)
+   → Arrastre el archivo index.html descargado
+   → Copie la URL generada
+   → Comparta con estudiantes
+
+PASO 6: Recibir Respuestas
+   → Los estudiantes completan la actividad
+   → Las respuestas llegan a su correo (FormSubmit.co)
+   → Revise calificaciones automáticas
+
+================================================================================
+💾 GESTIÓN DE DATOS Y RESPALDOS
+================================================================================
+
+📊 localStorage (Datos guardados en el navegador)
+   ├── eduHTML_v6 (Datos del formulario actual)
+   ├── eduHTML_banco (Actividades guardadas)
+   └── eduHTML_enlaces (Enlaces a recursos externos)
+
+📤 Exportar Datos
+   → Módulo "Banco" → "📤 Exportar Banco (JSON)"
+   → Módulo "Enlaces" → "📤 Exportar Enlaces (JSON)"
+   → Guarde los archivos en Google Drive o USB
+
+📥 Importar Datos
+   → Módulo "Banco" → "📥 Importar Banco"
+   → Módulo "Enlaces" → "📥 Importar Enlaces"
+   → Seleccione el archivo JSON previamente exportado
+
+⚠️ IMPORTANTE:
+   - Los datos se guardan SOLO en el navegador actual
+   - Si borra el caché, pierde los datos (por eso exporte)
+   - Exporte regularmente (recomendado: cada semana)
+
+================================================================================
+🔧 SOLUCIÓN DE PROBLEMAS COMUNES
+================================================================================
+
+❌ Problema: El archivo HTML no se descarga
+   ✅ Solución: Verifique que el navegador permite descargas
+   ✅ Solución: Revise la carpeta de "Descargas" de su computadora
+
+❌ Problema: El prompt no genera código completo
+   ✅ Solución: Use Deep Seek o ChatGPT-4
+   ✅ Solución: Agregue al final: "Genera el código HTML completo sin omitir nada"
+
+❌ Problema: Las respuestas no llegan al correo
+   ✅ Solución: Verifique que FormSubmit.co esté activado
+   ✅ Solución: Revise la carpeta de Spam/Correo no deseado
+   ✅ Solución: Confirme el correo la primera vez que usa FormSubmit
+
+❌ Problema: Los datos del banco se pierden
+   ✅ Solución: Exporte regularmente el banco a JSON
+   ✅ Solución: No borre el caché del navegador sin respaldo
+
+❌ Problema: La página no se ve bien en Netlify
+   ✅ Solución: Asegúrese de que el archivo se llame "index.html"
+   ✅ Solución: Verifique que todo el código esté en un solo archivo
+
+================================================================================
+📞 CONTACTO Y SOPORTE
+================================================================================
+
+👨‍🏫 Profesor: Carlos Elizondo Castillo
+📧 Correo: carlos.elizondo.castillo@mep.go.cr
+🏫 Institución: Ministerio de Educación Pública (MEP) - Costa Rica
+📅 Año: 2026
+
+================================================================================
+📚 RECURSOS ADICIONALES RECOMENDADOS
+================================================================================
+
+🎓 Tutoriales de HTML/CSS:
+   → https://www.w3schools.com
+   → https://developer.mozilla.org/es/
+   → https://www.freecodecamp.org
+
+🛠️ Herramientas de Desarrollo:
+   → Visual Studio Code: https://code.visualstudio.com
+   → Live Server (extensión VS Code)
+   → HTML Validator: https://validator.w3.org
+
+📖 Documentación de FormSubmit:
+   → https://formsubmit.co
+
+🎨 Recursos de Diseño:
+   → Iconos: https://fontawesome.com
+   → Colores: https://coolors.co
+   → Gradientes: https://webgradients.com
+
+================================================================================
+⚙️ CONFIGURACIONES TÉCNICAS
+================================================================================
+
+✅ Requisitos del Navegador:
+   - Google Chrome (Recomendado)
+   - Mozilla Firefox
+   - Microsoft Edge
+   - Safari
+
+✅ Características Requeridas:
+   - JavaScript habilitado
+   - localStorage habilitado
+   - Descargas permitidas
+
+✅ Dimensiones Recomendadas:
+   - Mínimo: 1366x768 píxeles
+   - Óptimo: 1920x1080 píxeles
+
+================================================================================
+📝 NOTAS IMPORTANTES
+================================================================================
+
+1. Este archivo es AUTOCONTENIDO - Todo el código está en un solo HTML
+2. No requiere servidor - Funciona directamente en el navegador
+3. Los datos se guardan en LOCALSTORAGE del navegador
+4. Exporte regularmente para no perder información
+5. Use siempre el mismo navegador para mantener los datos
+6. Para compartir actividades, use Netlify u otra plataforma de hosting
+
+================================================================================
+🔄 HISTORIAL DE VERSIONES
+================================================================================
+
+Versión 6.0 (2026)
+   ✅ Módulo de Enlaces y Recursos Externos agregado
+   ✅ Botón para descargar archivo index.html
+   ✅ Área para pegar código HTML generado por IA
+   ✅ Validador de código HTML
+   ✅ Comentarios detallados en todo el código
+   ✅ Exportar/Importar enlaces en JSON
+   ✅ 5 módulos principales (Crear, Estadísticas, Banco, Enlaces, Recursos)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

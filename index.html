@@ -1,811 +1,325 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<!-- ============================================
-     METADATOS Y CONFIGURACIÓN DEL DOCUMENTO
-     ============================================ -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EduHTML Builder PRO MAX | Prof. Carlos Elizondo</title>
-
-<!-- ============================================
-     ESTILOS CSS - DISEÑO VISUAL
-     ============================================ -->
 <style>
 /* ============================================
-   VARIABLES DE COLOR Y TEMAS
-   ============================================ */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+VARIABLES Y RESET - FUENTES DEL SISTEMA (OFFLINE)
+============================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
---primary: #6C5CE7;
---secondary: #00B894;
---accent: #FF6B35;
---dark: #2D3436;
---light: #F5F6FA;
---success: #00B894;
---warning: #FDCB6E;
---danger: #D63031;
---info: #0984E3;
---gradient-1: linear-gradient(135deg, #6C5CE7 0%, #A8A4E8 100%);
---gradient-2: linear-gradient(135deg, #00B894 0%, #55EFC4 100%);
---gradient-3: linear-gradient(135deg, #FF6B35 0%, #FFA07A 100%);
---gradient-4: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
---shadow: 0 10px 30px rgba(108, 92, 231, 0.2);
---shadow-hover: 0 15px 40px rgba(108, 92, 231, 0.3);
+--ink: #0f1117; --ink-mid: #3d4152; --ink-soft: #7a7f94;
+--paper: #fafafa; --surface: #ffffff; --border: rgba(0,0,0,0.07);
+--teal: #0d9488; --teal-lt: #ccfbf1; --teal-dk: #0f766e;
+--amber: #d97706; --amber-lt: #fef3c7;
+--rose: #e11d48; --rose-lt: #ffe4e6;
+--indigo: #4f46e5; --indigo-lt: #eef2ff;
+--sky: #0ea5e9;
+--grad-hero: linear-gradient(135deg, #0f766e 0%, #0d9488 40%, #0ea5e9 100%);
+--grad-card: linear-gradient(145deg, #ffffff 0%, #f0fdfa 100%);
+--grad-warm: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
+--grad-cool: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+--r-sm: 12px; --r-md: 20px; --r-lg: 28px; --r-xl: 36px;
+--sh-sm: 0 2px 8px rgba(0,0,0,0.06);
+--sh-md: 0 8px 24px rgba(0,0,0,0.09);
+--sh-lg: 0 20px 48px rgba(0,0,0,0.12);
+--sh-teal: 0 8px 24px rgba(13,148,136,0.25);
 }
-
-/* ============================================
-   ESTILOS GENERALES DEL BODY
-   ============================================ */
 body {
-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+font-family: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+background: #f0f4f8;
 min-height: 100vh;
-color: var(--dark);
+color: var(--ink);
 overflow-x: hidden;
+background-image:
+radial-gradient(circle at 10% 20%, rgba(13,148,136,0.06) 0%, transparent 50%),
+radial-gradient(circle at 90% 80%, rgba(14,165,233,0.06) 0%, transparent 50%);
 }
-
 /* ============================================
-   HEADER - BARRA DE NAVEGACIÓN SUPERIOR
-   ============================================ */
+HEADER
+============================================ */
 .header {
-background: rgba(255,255,255,0.98);
-backdrop-filter: blur(10px);
-padding: 1.5rem;
+background: rgba(255,255,255,0.92);
+backdrop-filter: blur(16px);
+-webkit-backdrop-filter: blur(16px);
+border-bottom: 1px solid var(--border);
+padding: 0 2rem;
 position: fixed;
 width: 100%;
 top: 0;
 z-index: 1000;
-box-shadow: var(--shadow);
-animation: slideDown 0.5s ease;
-}
-@keyframes slideDown {
-from { transform: translateY(-100%); }
-to { transform: translateY(0); }
-}
-.header-content {
-max-width: 1400px;
-margin: 0 auto;
-display: flex;
-justify-content: space-between;
-align-items: center;
-flex-wrap: wrap;
-}
-
-/* ============================================
-   LOGO Y BRANDING
-   ============================================ */
-.logo {
+height: 72px;
 display: flex;
 align-items: center;
-gap: 1rem;
+animation: slideDown 0.4s ease;
 }
-.logo-icon {
-width: 60px;
-height: 60px;
-background: var(--gradient-1);
-border-radius: 50%;
-display: flex;
-align-items: center;
-justify-content: center;
-color: white;
-font-size: 2rem;
-animation: pulse 2s infinite;
-box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
-}
-@keyframes pulse {
-0%, 100% { transform: scale(1); }
-50% { transform: scale(1.05); }
-}
-.logo h1 {
-color: var(--primary);
-font-size: 1.5rem;
-font-weight: 700;
-}
-.logo span {
-display: block;
-font-size: 0.85rem;
-color: var(--secondary);
-font-weight: 500;
-font-style: italic;
-}
-
+@keyframes slideDown { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.header-content { max-width: 1400px; margin: 0 auto; width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.logo { display: flex; align-items: center; gap: 0.9rem; text-decoration: none; }
+.logo-icon { width: 44px; height: 44px; background: var(--grad-hero); border-radius: var(--r-sm); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; box-shadow: var(--sh-teal); flex-shrink: 0; }
+.logo-text h1 { font-size: 1.05rem; font-weight: 700; color: var(--ink); line-height: 1.2; letter-spacing: -0.02em; }
+.logo-text span { font-size: 0.72rem; color: var(--teal); font-weight: 500; letter-spacing: 0.02em; }
+.nav-modules { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.module-btn { padding: 0.5rem 1.1rem; border: 1.5px solid var(--border); background: transparent; color: var(--ink-mid); border-radius: 100px; cursor: pointer; font-family: inherit; font-size: 0.85rem; font-weight: 600; transition: all 0.2s ease; white-space: nowrap; }
+.module-btn:hover { border-color: var(--teal); color: var(--teal); background: var(--teal-lt); }
+.module-btn.active { background: var(--teal); border-color: var(--teal); color: white; box-shadow: var(--sh-teal); }
 /* ============================================
-   BOTONES DE NAVEGACIÓN DE MÓDULOS
-   ============================================ */
-.nav-modules {
-display: flex;
-gap: 1rem;
-flex-wrap: wrap;
-}
-.module-btn {
-padding: 0.8rem 1.8rem;
-border: none;
-background: var(--gradient-1);
-color: white;
-border-radius: 30px;
-cursor: pointer;
-transition: all 0.3s;
-font-weight: 600;
-text-decoration: none;
-display: inline-block;
-font-size: 1rem;
-box-shadow: 0 4px 10px rgba(108, 92, 231, 0.3);
-}
-.module-btn:hover {
-background: var(--gradient-2);
-transform: translateY(-3px) scale(1.05);
-box-shadow: 0 8px 20px rgba(0, 184, 148, 0.4);
-}
-.module-btn.active {
-background: var(--gradient-2);
-transform: scale(1.1);
-box-shadow: 0 8px 25px rgba(0, 184, 148, 0.5);
-}
-
+CONTENEDOR
+============================================ */
+.container { max-width: 1400px; margin: 0 auto; padding: 92px 24px 40px; }
 /* ============================================
-   CONTENEDOR PRINCIPAL
-   ============================================ */
-.container {
-max-width: 1400px;
-margin: 0 auto;
-padding: 120px 20px 20px;
-}
-
+BIENVENIDA
+============================================ */
+.welcome-screen { animation: fadeUp 0.6s ease both; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+.hero-banner { background: var(--grad-hero); border-radius: var(--r-xl); padding: 3.5rem 3rem; margin-bottom: 2rem; position: relative; overflow: hidden; display: flex; align-items: center; gap: 2rem; }
+.hero-banner::before, .hero-banner::after { content: ''; position: absolute; border-radius: 50%; background: rgba(255,255,255,0.06); }
+.hero-banner::before { top: -60px; right: -60px; width: 300px; height: 300px; }
+.hero-banner::after { bottom: -80px; left: 30%; width: 400px; height: 400px; background: rgba(255,255,255,0.04); }
+.hero-emoji { font-size: 4rem; flex-shrink: 0; position: relative; z-index: 1; }
+.hero-text { position: relative; z-index: 1; }
+.hero-text h1 { font-family: Georgia, 'Times New Roman', serif; font-size: 2.4rem; color: white; line-height: 1.15; margin-bottom: 0.6rem; letter-spacing: -0.01em; }
+.hero-text p { color: rgba(255,255,255,0.82); font-size: 1.05rem; line-height: 1.6; max-width: 600px; font-weight: 400; }
 /* ============================================
-   PANTALLA DE BIENVENIDA
-   ============================================ */
-.welcome-screen {
-text-align: center;
-padding: 4rem 2rem;
-background: white;
-border-radius: 30px;
-box-shadow: var(--shadow);
-margin-bottom: 2rem;
-animation: fadeInUp 0.8s ease;
-}
-@keyframes fadeInUp {
-from { opacity: 0; transform: translateY(30px); }
-to { opacity: 1; transform: translateY(0); }
-}
-.welcome-screen h1 {
-color: var(--primary);
-font-size: 2.5rem;
-margin-bottom: 1rem;
-}
-.welcome-screen p {
-font-size: 1.2rem;
-color: #666;
-margin-bottom: 3rem;
-max-width: 800px;
-margin-left: auto;
-margin-right: auto;
-}
-
+GRID DE MÓDULOS
+============================================ */
+.modules-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
+.module-card { background: var(--surface); border-radius: var(--r-lg); padding: 2rem 1.8rem; border: 1.5px solid var(--border); cursor: pointer; transition: all 0.25s ease; position: relative; overflow: hidden; }
+.module-card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: var(--grad-hero); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
+.module-card:hover { border-color: var(--teal); transform: translateY(-4px); box-shadow: var(--sh-lg); }
+.module-card:hover::after { transform: scaleX(1); }
+.module-card .card-icon { width: 52px; height: 52px; border-radius: var(--r-sm); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 1.2rem; }
+.card-icon.teal { background: var(--teal-lt); } .card-icon.amber { background: var(--amber-lt); }
+.card-icon.indigo { background: var(--indigo-lt); } .card-icon.rose { background: var(--rose-lt); }
+.module-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.5rem; letter-spacing: -0.01em; }
+.module-card p { font-size: 0.88rem; color: var(--ink-soft); line-height: 1.55; }
 /* ============================================
-   GRID DE MÓDULOS - TARJETAS
-   ============================================ */
-.modules-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-gap: 2rem;
-margin-top: 2rem;
-}
-.module-card {
-background: white;
-border-radius: 25px;
-padding: 3rem 2rem;
-text-align: center;
-box-shadow: var(--shadow);
-transition: all 0.3s;
-cursor: pointer;
-border: 3px solid transparent;
-position: relative;
-overflow: hidden;
-}
-.module-card::before {
-content: '';
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 5px;
-background: var(--gradient-1);
-}
-.module-card:hover {
-transform: translateY(-10px);
-box-shadow: var(--shadow-hover);
-border-color: var(--primary);
-}
-.module-card .icon {
-font-size: 4rem;
-margin-bottom: 1.5rem;
-display: block;
-}
-.module-card h3 {
-color: var(--primary);
-font-size: 1.8rem;
-margin-bottom: 1rem;
-}
-.module-card p {
-color: #666;
-line-height: 1.6;
-}
-
+STATS
+============================================ */
+.stats-dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; margin: 1.5rem 0; }
+.stat-card { background: var(--surface); padding: 1.8rem; border-radius: var(--r-lg); border: 1.5px solid var(--border); transition: all 0.25s ease; position: relative; overflow: hidden; }
+.stat-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--grad-hero); }
+.stat-card:hover { transform: translateY(-3px); box-shadow: var(--sh-md); border-color: var(--teal); }
+.stat-number { font-family: Georgia, serif; font-size: 2.8rem; color: var(--teal); display: block; line-height: 1; margin-bottom: 0.4rem; }
+.stat-label { font-size: 0.8rem; color: var(--ink-soft); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
 /* ============================================
-   DASHBOARD DE ESTADÍSTICAS
-   ============================================ */
-.stats-dashboard {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-gap: 1.5rem;
-margin: 2rem 0;
-}
-.stat-card {
-background: white;
-padding: 2rem;
-border-radius: 20px;
-text-align: center;
-box-shadow: var(--shadow);
-transition: all 0.3s;
-border-top: 6px solid var(--primary);
-}
-.stat-card:hover {
-transform: translateY(-10px);
-box-shadow: var(--shadow-hover);
-}
-.stat-number {
-font-size: 3rem;
-font-weight: bold;
-color: var(--primary);
-display: block;
-line-height: 1.2;
-}
-.stat-label {
-color: #666;
-font-size: 1rem;
-margin-top: 0.8rem;
-font-weight: 600;
-text-transform: uppercase;
-letter-spacing: 1px;
-}
-
+SECCIONES
+============================================ */
+.section { background: var(--surface); border-radius: var(--r-lg); padding: 2.5rem; margin-bottom: 1.8rem; border: 1.5px solid var(--border); box-shadow: var(--sh-sm); animation: fadeUp 0.5s ease both; position: relative; overflow: hidden; }
+.section-title { font-family: Georgia, serif; font-size: 1.6rem; color: var(--ink); margin-bottom: 1.4rem; display: flex; align-items: center; gap: 0.7rem; padding-bottom: 1rem; border-bottom: 2px solid var(--teal-lt); letter-spacing: -0.01em; }
+.section.apoyo-especial-section { background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border-color: #fcd34d; }
+.section.formulario-envio-section { background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%); border-color: var(--teal); }
 /* ============================================
-   SECCIONES DEL FORMULARIO
-   ============================================ */
-.section {
-background: white;
-border-radius: 30px;
-padding: 2.5rem;
-margin-bottom: 2.5rem;
-box-shadow: var(--shadow);
-animation: fadeInUp 0.8s ease;
-border: 1px solid rgba(108, 92, 231, 0.1);
-position: relative;
-overflow: hidden;
-}
-.section::before {
-content: '';
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 5px;
-background: var(--gradient-1);
-}
-.section-title {
-color: var(--primary);
-font-size: 2rem;
-margin-bottom: 1.5rem;
-display: flex;
-align-items: center;
-gap: 0.8rem;
-padding-bottom: 0.8rem;
-border-bottom: 4px solid var(--secondary);
-}
-
+BARRA DE PROGRESO
+============================================ */
+.progress-steps { display: flex; justify-content: space-between; margin-bottom: 2rem; position: relative; background: var(--surface); border-radius: var(--r-lg); padding: 1.5rem 2rem; border: 1.5px solid var(--border); box-shadow: var(--sh-sm); overflow: hidden; }
+.progress-steps::before { content: ''; position: absolute; top: 50%; left: 2rem; right: 2rem; height: 2px; background: #e5e7eb; transform: translateY(-50%); z-index: 1; }
+.progress-line { position: absolute; top: 50%; left: 2rem; height: 2px; background: var(--grad-hero); transform: translateY(-50%); z-index: 2; transition: width 0.4s ease; width: 0%; }
+.step { display: flex; flex-direction: column; align-items: center; z-index: 3; flex: 1; gap: 0.4rem; }
+.step-number { width: 36px; height: 36px; border-radius: 50%; background: white; border: 2px solid #e5e7eb; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; color: var(--ink-soft); transition: all 0.3s ease; }
+.step.active .step-number { background: var(--teal); border-color: var(--teal); color: white; box-shadow: var(--sh-teal); transform: scale(1.15); }
+.step.completed .step-number { background: var(--teal-lt); border-color: var(--teal); color: var(--teal); }
+.step-label { font-size: 0.72rem; font-weight: 600; color: var(--ink-soft); letter-spacing: 0.02em; text-transform: uppercase; }
+.step.active .step-label { color: var(--teal); }
 /* ============================================
-   BARRA DE PROGRESO - PASOS
-   ============================================ */
-.progress-steps {
-display: flex;
-justify-content: space-between;
-margin-bottom: 2rem;
-position: relative;
-}
-.progress-steps::before {
-content: '';
-position: absolute;
-top: 50%;
-left: 0;
-width: 100%;
-height: 3px;
-background: #e9ecef;
-transform: translateY(-50%);
-z-index: 1;
-}
-.progress-line {
-position: absolute;
-top: 50%;
-left: 0;
-height: 3px;
-background: var(--gradient-1);
-transform: translateY(-50%);
-z-index: 2;
-transition: width 0.5s ease;
-width: 0%;
-}
-.step {
-display: flex;
-flex-direction: column;
-align-items: center;
-z-index: 3;
-flex: 1;
-}
-.step-number {
-width: 40px;
-height: 40px;
-border-radius: 50%;
-background: #e9ecef;
-display: flex;
-align-items: center;
-justify-content: center;
-font-weight: bold;
-color: #666;
-margin-bottom: 0.5rem;
-transition: all 0.3s;
-}
-.step.active .step-number {
-background: var(--gradient-1);
-color: white;
-transform: scale(1.2);
-}
-.step.completed .step-number {
-background: var(--gradient-2);
-color: white;
-}
-.step-label {
-font-size: 0.85rem;
-color: #666;
-text-align: center;
-}
-.step.active .step-label {
-color: var(--primary);
-font-weight: 600;
-}
-
+FORMULARIOS
+============================================ */
+.form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; margin-bottom: 1.2rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.45rem; }
+.form-group label { font-size: 0.85rem; font-weight: 600; color: var(--ink-mid); letter-spacing: 0.01em; }
+.form-control { padding: 0.75rem 1rem; border: 1.5px solid #e5e7eb; border-radius: var(--r-sm); font-family: inherit; font-size: 0.95rem; color: var(--ink); background: #fafafa; transition: all 0.2s ease; outline: none; }
+.form-control:focus { border-color: var(--teal); background: white; box-shadow: 0 0 0 3px rgba(13,148,136,0.1); }
+.textarea-large { width: 100%; min-height: 180px; padding: 0.9rem 1rem; border: 1.5px solid #e5e7eb; border-radius: var(--r-sm); font-family: inherit; font-size: 0.93rem; color: var(--ink); background: #fafafa; resize: vertical; transition: all 0.2s ease; outline: none; line-height: 1.6; }
+.textarea-large:focus { border-color: var(--teal); background: white; box-shadow: 0 0 0 3px rgba(13,148,136,0.1); }
 /* ============================================
-   FORMULARIOS - INPUTS Y CAMPOS
-   ============================================ */
-.form-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-gap: 1.5rem;
-margin-bottom: 1.5rem;
-}
-.form-group {
-display: flex;
-flex-direction: column;
-}
-.form-group label {
-font-weight: 600;
-color: var(--primary);
-margin-bottom: 0.5rem;
-font-size: 1rem;
-}
-.form-control {
-padding: 0.9rem;
-border: 2px solid #ddd;
-border-radius: 10px;
-font-size: 1rem;
-transition: all 0.3s;
-}
-.form-control:focus {
-outline: none;
-border-color: var(--primary);
-box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.1);
-}
-
+BOTONES
+============================================ */
+.btn { padding: 0.75rem 1.8rem; border: none; border-radius: 100px; font-family: inherit; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 0.4rem; white-space: nowrap; letter-spacing: 0.01em; }
+.btn:hover { transform: translateY(-2px); } .btn:active { transform: translateY(0); }
+.btn-primary { background: var(--teal); color: white; box-shadow: var(--sh-teal); }
+.btn-primary:hover { background: var(--teal-dk); box-shadow: 0 12px 28px rgba(13,148,136,0.35); }
+.btn-secondary { background: var(--indigo); color: white; box-shadow: 0 4px 14px rgba(79,70,229,0.3); }
+.btn-secondary:hover { background: #4338ca; }
+.btn-success { background: var(--grad-warm); color: white; box-shadow: 0 4px 14px rgba(217,119,6,0.3); }
+.btn-warning { background: #f59e0b; color: white; }
+.btn-info { background: var(--sky); color: white; }
+.btn-danger { background: var(--rose); color: white; }
+.btn-outline { background: transparent; border: 1.5px solid var(--teal); color: var(--teal); }
+.btn-outline:hover { background: var(--teal-lt); }
+.btn-small { padding: 0.4rem 1rem; font-size: 0.8rem; }
 /* ============================================
-   BOTONES - ESTILOS VARIADOS
-   ============================================ */
-.btn {
-padding: 1rem 2.5rem;
-border: none;
-border-radius: 50px;
-font-weight: 700;
-cursor: pointer;
-transition: all 0.3s;
-text-transform: uppercase;
-letter-spacing: 1px;
-margin: 0.5rem;
-position: relative;
-overflow: hidden;
-font-size: 1rem;
-}
-.btn::before {
-content: '';
-position: absolute;
-top: 50%;
-left: 50%;
-width: 0;
-height: 0;
-border-radius: 50%;
-background: rgba(255,255,255,0.3);
-transform: translate(-50%, -50%);
-transition: width 0.6s, height 0.6s;
-}
-.btn:hover::before {
-width: 300px;
-height: 300px;
-}
-.btn-primary {
-background: var(--gradient-1);
-color: white;
-box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
-}
-.btn-secondary {
-background: var(--gradient-2);
-color: white;
-box-shadow: 0 4px 15px rgba(0, 184, 148, 0.4);
-}
-.btn-success {
-background: var(--gradient-3);
-color: white;
-box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
-}
-.btn-warning {
-background: linear-gradient(135deg, #FDCB6E 0%, #F39C12 100%);
-color: white;
-box-shadow: 0 4px 15px rgba(253, 203, 110, 0.4);
-}
-.btn-info {
-background: linear-gradient(135deg, #0984E3 0%, #74B9FF 100%);
-color: white;
-}
-.btn-danger {
-background: linear-gradient(135deg, #D63031 0%, #FF7675 100%);
-color: white;
-}
-.btn-small {
-padding: 0.5rem 1.2rem;
-font-size: 0.85rem;
-}
-
+CHECKBOX
+============================================ */
+.checkbox-group { display: flex; align-items: center; gap: 0.8rem; padding: 1rem 1.2rem; background: var(--teal-lt); border-radius: var(--r-sm); border: 1.5px solid rgba(13,148,136,0.2); margin: 1rem 0; cursor: pointer; }
+.checkbox-group input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--teal); cursor: pointer; }
+.checkbox-group label { font-weight: 600; color: var(--ink); cursor: pointer; font-size: 0.95rem; }
 /* ============================================
-   CHECKBOXES Y GRUPOS DE OPCIONES
-   ============================================ */
-.checkbox-group {
-display: flex;
-align-items: center;
-gap: 1rem;
-padding: 1rem;
-background: var(--light);
-border-radius: 10px;
-margin: 1rem 0;
-}
-.checkbox-group input[type="checkbox"] {
-width: 20px;
-height: 20px;
-cursor: pointer;
-}
-.checkbox-group label {
-font-weight: 600;
-cursor: pointer;
-font-size: 1.1rem;
-}
-
+INFO BOX
+============================================ */
+.info-box { background: var(--indigo-lt); border-left: 4px solid var(--indigo); border-radius: 0 var(--r-sm) var(--r-sm) 0; padding: 1rem 1.2rem; margin: 1rem 0; font-size: 0.9rem; color: var(--ink-mid); line-height: 1.5; }
+.info-box strong { color: var(--indigo); }
 /* ============================================
-   ÁREAS DE TEXTO - TEXTAREA
-   ============================================ */
-.textarea-large {
-width: 100%;
-min-height: 200px;
-padding: 1rem;
-border: 2px solid #ddd;
-border-radius: 10px;
-font-family: 'Courier New', monospace;
-font-size: 0.95rem;
-resize: vertical;
-}
-
+TIPOS DE ÍTEMS
+============================================ */
+.item-types-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.8rem; margin: 1rem 0; }
+.item-type-card { background: #fafafa; border: 1.5px solid #e5e7eb; border-radius: var(--r-sm); padding: 1rem; cursor: pointer; transition: all 0.2s ease; text-align: center; user-select: none; }
+.item-type-card:hover { border-color: var(--teal); background: var(--teal-lt); transform: translateY(-2px); }
+.item-type-card.selected { border-color: var(--teal); background: var(--teal-lt); box-shadow: 0 0 0 3px rgba(13,148,136,0.15); }
+.item-type-card.selected .item-check { display: block; }
+.item-check { display: none; font-size: 0.7rem; color: var(--teal); font-weight: 700; }
+.item-type-card .icon { font-size: 1.8rem; margin-bottom: 0.4rem; display: block; }
+.item-type-card div:last-child { font-size: 0.8rem; font-weight: 600; color: var(--ink-mid); }
 /* ============================================
-   TARJETAS DE IA - ENLACES
-   ============================================ */
-.ai-links {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-gap: 1rem;
-margin: 1.5rem 0;
-}
-.ai-card {
-background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-padding: 1.5rem;
-border-radius: 15px;
-text-align: center;
-cursor: pointer;
-transition: all 0.3s;
-border: 3px solid transparent;
-}
-.ai-card:hover {
-transform: translateY(-5px);
-border-color: var(--primary);
-box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-}
-.ai-card h3 {
-color: var(--primary);
-margin-bottom: 0.5rem;
-font-size: 1.2rem;
-}
-.ai-card p {
-font-size: 0.9rem;
-color: #666;
-}
-
+OUTPUT / CÓDIGO
+============================================ */
+.output-section { background: #0f172a; border-radius: var(--r-lg); padding: 2rem; margin: 1.5rem 0; border: 1px solid rgba(255,255,255,0.08); }
+.output-section h3 { color: #67e8f9; font-size: 1rem; font-weight: 700; margin-bottom: 1rem; letter-spacing: 0.02em; }
+.code-preview { background: #020617; border-radius: var(--r-sm); padding: 1.4rem; font-family: 'Courier New', monospace; font-size: 0.82rem; color: #94a3b8; max-height: 380px; overflow-y: auto; overflow-x: auto; white-space: pre-wrap; word-break: break-word; line-height: 1.6; border: 1px solid rgba(255,255,255,0.06); }
+.code-preview::-webkit-scrollbar { width: 6px; height: 6px; }
+.code-preview::-webkit-scrollbar-track { background: transparent; }
+.code-preview::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
 /* ============================================
-   SECCIÓN DE SALIDA - CÓDIGO GENERADO
-   ============================================ */
-.output-section {
-background: #2d3436;
-color: #dfe6e9;
-padding: 2rem;
-border-radius: 15px;
-margin: 2rem 0;
-}
-.output-section h3 {
-color: #00cec9;
-margin-bottom: 1rem;
-}
-.code-preview {
-background: #1e272e;
-padding: 1.5rem;
-border-radius: 10px;
-font-family: 'Courier New', monospace;
-font-size: 0.9rem;
-overflow-x: auto;
-max-height: 400px;
-overflow-y: auto;
-margin: 1rem 0;
-white-space: pre-wrap;
-word-wrap: break-word;
-}
-
+AI LINKS
+============================================ */
+.ai-links { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 0.8rem; margin: 1.2rem 0; }
+.ai-card { background: var(--surface); border: 1.5px solid var(--border); padding: 1.2rem; border-radius: var(--r-md); cursor: pointer; transition: all 0.2s ease; text-align: center; }
+.ai-card:hover { border-color: var(--teal); transform: translateY(-3px); box-shadow: var(--sh-md); background: var(--teal-lt); }
+.ai-card h3 { color: var(--ink); font-size: 0.95rem; font-weight: 700; margin-bottom: 0.3rem; }
+.ai-card p { font-size: 0.8rem; color: var(--ink-soft); }
 /* ============================================
-   CAJAS DE INFORMACIÓN
-   ============================================ */
-.info-box {
-background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-padding: 1.5rem;
-border-radius: 10px;
-border-left: 5px solid var(--info);
-margin: 1rem 0;
-}
-.info-box p {
-margin: 0.5rem 0;
-}
-
+BANCO
+============================================ */
+.activity-item { background: #fafafa; border: 1.5px solid var(--border); border-radius: var(--r-md); padding: 1.4rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; transition: all 0.2s ease; margin-bottom: 0.8rem; }
+.activity-item:hover { border-color: var(--teal); box-shadow: var(--sh-sm); background: var(--surface); }
+.activity-item h4 { color: var(--teal); font-size: 1rem; margin-bottom: 0.3rem; }
+.activity-item p { font-size: 0.82rem; color: var(--ink-soft); margin: 0.15rem 0; }
+.activity-actions { display: flex; gap: 0.5rem; flex-shrink: 0; }
 /* ============================================
-   CLASES DE UTILIDAD
-   ============================================ */
-.hidden {
-display: none;
-}
-.progress-bar {
-width: 100%;
-height: 10px;
-background: #ddd;
-border-radius: 10px;
-overflow: hidden;
-margin: 1rem 0;
-}
-.progress-fill {
-height: 100%;
-background: var(--gradient-1);
-width: 0%;
-transition: width 0.5s ease;
-}
-
+ENLACES
+============================================ */
+.enlace-item { background: #fafafa; border: 1.5px solid var(--border); border-radius: var(--r-md); padding: 1.4rem; display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; transition: all 0.2s ease; margin-bottom: 0.8rem; }
+.enlace-item:hover { border-color: var(--teal); box-shadow: var(--sh-sm); }
+.enlace-info { flex: 1; min-width: 0; }
+.enlace-info h4 { color: var(--ink); font-size: 0.97rem; font-weight: 700; margin-bottom: 0.4rem; }
+.enlace-info p { font-size: 0.82rem; color: var(--ink-soft); margin: 0.2rem 0; }
+.enlace-info a { color: var(--sky); text-decoration: none; }
+.enlace-info a:hover { text-decoration: underline; }
+.enlace-actions { display: flex; gap: 0.4rem; flex-direction: column; flex-shrink: 0; }
 /* ============================================
-   SECCIÓN DE APOYO CURRICULAR ESPECIAL
-   ============================================ */
-.apoyo-especial-section {
-background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
-border: 3px solid var(--warning);
-}
-.apoyo-especial-section .section-title {
-color: #d63031;
-border-bottom-color: var(--warning);
-}
-
+FORMULARIO CONFIG
+============================================ */
+.formulario-config { background: white; border-radius: var(--r-md); padding: 1.8rem; border: 1.5px solid rgba(13,148,136,0.2); margin-top: 1.2rem; }
+.formulario-preview { background: var(--teal-lt); border-radius: var(--r-sm); padding: 1.2rem 1.4rem; margin-top: 1rem; border: 1.5px dashed var(--teal); }
+.formulario-preview h4 { color: var(--teal); margin-bottom: 0.8rem; font-size: 0.9rem; }
+.formulario-preview li { font-size: 0.87rem; color: var(--ink-mid); line-height: 2; list-style: none; }
 /* ============================================
-   TIPOS DE ÍTEMS - GRID DE SELECCIÓN
-   ============================================ */
-.item-types-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-gap: 1rem;
-margin: 1rem 0;
-}
-.item-type-card {
-background: white;
-padding: 1rem;
-border-radius: 15px;
-border: 2px solid #ddd;
-cursor: pointer;
-transition: all 0.3s;
-text-align: center;
-}
-.item-type-card:hover {
-border-color: var(--primary);
-transform: translateY(-3px);
-box-shadow: var(--shadow);
-}
-.item-type-card.selected {
-border-color: var(--success);
-background: #d4edda;
-}
-.item-type-card .icon {
-font-size: 2rem;
-margin-bottom: 0.5rem;
-}
-
+PROGRESS BAR
+============================================ */
+.progress-bar { width: 100%; height: 8px; background: #e5e7eb; border-radius: 100px; overflow: hidden; margin: 0.8rem 0; }
+.progress-fill { height: 100%; background: var(--grad-hero); border-radius: 100px; width: 0%; transition: width 0.4s ease; }
 /* ============================================
-   FORMULARIO DE ENVÍO - CONFIGURACIÓN
-   ============================================ */
-.formulario-envio-section {
-background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
-border: 3px solid var(--success);
-}
-.formulario-envio-section .section-title {
-color: var(--success);
-border-bottom-color: var(--success);
-}
-.formulario-config {
-background: white;
-padding: 2rem;
-border-radius: 15px;
-margin-top: 1.5rem;
-}
-.formulario-preview {
-background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-padding: 1.5rem;
-border-radius: 15px;
-margin-top: 1rem;
-border: 2px dashed var(--primary);
-}
-
+BACK BTN
+============================================ */
+.back-btn { background: transparent; border: 1.5px solid var(--border); color: var(--ink-mid); padding: 0.5rem 1.2rem; border-radius: 100px; cursor: pointer; font-family: inherit; font-size: 0.85rem; font-weight: 600; margin-bottom: 1.5rem; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 0.4rem; }
+.back-btn:hover { border-color: var(--teal); color: var(--teal); background: var(--teal-lt); }
 /* ============================================
-   MÓDULO DE ENLACES - ESTILOS ESPECÍFICOS
-   ============================================ */
-.enlace-item {
-background: white;
-padding: 1.5rem;
-border-radius: 15px;
-border-left: 5px solid var(--primary);
-box-shadow: var(--shadow);
-display: flex;
-justify-content: space-between;
-align-items: center;
-transition: all 0.3s;
-}
-.enlace-item:hover {
-transform: translateX(5px);
-box-shadow: var(--shadow-hover);
-}
-.enlace-info {
-flex: 1;
-}
-.enlace-actions {
-display: flex;
-gap: 0.5rem;
-flex-direction: column;
-}
-
+VALIDACIÓN
+============================================ */
+#validacionResultado { border-radius: var(--r-sm); padding: 0.9rem 1.2rem; font-weight: 600; font-size: 0.9rem; }
 /* ============================================
-   FOOTER - PIE DE PÁGINA
-   ============================================ */
-.footer {
-background: var(--dark);
-color: white;
-text-align: center;
-padding: 3rem;
-margin-top: 3rem;
-position: relative;
-overflow: hidden;
-}
-.footer::before {
-content: '';
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 3px;
-background: var(--gradient-1);
-}
-.footer h3 {
-color: var(--secondary);
-margin-bottom: 0.5rem;
-font-size: 1.5rem;
-}
-.footer p {
-margin: 0.5rem 0;
-font-size: 1rem;
-}
-.footer a {
-color: var(--secondary);
-text-decoration: none;
-font-weight: 600;
-}
-.footer a:hover {
-text-decoration: underline;
-}
-
+UTILIDADES
+============================================ */
+.hidden { display: none !important; }
+.module-content { display: none; }
+.module-content.active { display: block; animation: fadeUp 0.4s ease; }
+.tag { display: inline-block; padding: 0.2rem 0.7rem; border-radius: 100px; font-size: 0.75rem; font-weight: 600; }
+.tag-teal { background: var(--teal-lt); color: var(--teal-dk); }
+.tag-amber { background: var(--amber-lt); color: #92400e; }
+.tag-indigo { background: var(--indigo-lt); color: var(--indigo); }
+.divider { height: 1px; background: var(--border); margin: 1.5rem 0; }
 /* ============================================
-   CONTENIDO DE MÓDULOS - VISIBILIDAD
-   ============================================ */
-.module-content {
-display: none;
-}
-.module-content.active {
-display: block;
-animation: fadeInUp 0.5s ease;
-}
-
+MODO DE GENERACIÓN
+============================================ */
+.modo-selector { background: var(--indigo-lt); border: 1.5px solid rgba(79,70,229,0.2); border-radius: var(--r-md); padding: 1.4rem; margin-bottom: 1.4rem; }
+.modo-selector h3 { color: var(--indigo); font-size: 0.95rem; font-weight: 700; margin-bottom: 0.8rem; }
+.modo-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem; margin-bottom: 1rem; }
+.modo-card { background: white; border: 2px solid #e5e7eb; border-radius: var(--r-md); padding: 1.2rem; cursor: pointer; transition: all 0.2s ease; text-align: center; user-select: none; }
+.modo-card strong { display: block; font-size: 0.95rem; color: var(--ink); margin-bottom: 0.35rem; }
+.modo-card p { font-size: 0.78rem; color: var(--ink-soft); line-height: 1.45; margin-bottom: 0.5rem; }
+.modo-card:hover { border-color: var(--indigo); transform: translateY(-2px); box-shadow: var(--sh-sm); }
+.modo-card.selected { border-color: var(--indigo); background: var(--indigo-lt); box-shadow: 0 0 0 3px rgba(79,70,229,0.15); }
+.modo-badge { display: inline-block; padding: 0.15rem 0.6rem; border-radius: 100px; font-size: 0.7rem; font-weight: 700; }
+.tasa-cumplimiento { margin-top: 1rem; padding: 0.8rem; background: rgba(255,255,255,0.6); border-radius: 10px; font-size: 0.82rem; color: var(--ink-mid); }
 /* ============================================
-   BOTÓN DE REGRESO
-   ============================================ */
-.back-btn {
-background: transparent;
-border: 2px solid var(--primary);
-color: var(--primary);
-padding: 0.6rem 1.5rem;
-border-radius: 30px;
-cursor: pointer;
-font-weight: 600;
-margin-bottom: 1.5rem;
-transition: all 0.3s;
-}
-.back-btn:hover {
-background: var(--primary);
-color: white;
-}
-
+FASES MODULARES
+============================================ */
+.fases-container { display: none; margin-top: 1.2rem; }
+.fases-container.active { display: block; }
+.fase-card { background: #0f172a; border: 1px solid rgba(255,255,255,0.08); border-radius: var(--r-md); padding: 1.4rem; margin-bottom: 1rem; }
+.fase-card h4 { color: #67e8f9; font-size: 0.9rem; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem; }
+.fase-numero { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: var(--indigo); color: white; font-weight: 800; font-size: 0.8rem; flex-shrink: 0; }
+.fase-card .code-preview { max-height: 220px; }
+.fase-pegar-area { margin-top: 1rem; }
+.fase-pegar-area textarea { width: 100%; min-height: 180px; background: #020617; color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); border-radius: var(--r-sm); padding: 1rem; font-family: monospace; font-size: 0.85rem; resize: vertical; }
+.fase-validacion { margin-top: 0.8rem; padding: 0.8rem; background: rgba(255,255,255,0.05); border-radius: 8px; font-size: 0.8rem; display: none; }
+.fase-validacion.active { display: block; }
+.fase-validacion.ok { background: rgba(16,185,129,0.2); border-left: 3px solid #10b981; }
+.fase-validacion.error { background: rgba(239,68,68,0.2); border-left: 3px solid #ef4444; }
 /* ============================================
-   RESPONSIVE - MEDIA QUERIES
-   ============================================ */
+ENSAMBLADO FINAL
+============================================ */
+.ensamblado-final { display: none; text-align: center; padding: 2rem; background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%); border-radius: var(--r-lg); border: 2px solid #10b981; margin-top: 1.5rem; }
+.ensamblado-final.active { display: block; }
+.ensamblado-final h3 { color: #065f46; margin-bottom: 1rem; }
+.ensamblado-final .btn { margin: 0.3rem; }
+/* ============================================
+FOOTER
+============================================ */
+.footer { background: var(--ink); color: rgba(255,255,255,0.75); text-align: center; padding: 3rem 2rem; margin-top: 3rem; border-radius: var(--r-xl) var(--r-xl) 0 0; }
+.footer h3 { color: white; font-family: Georgia, serif; font-size: 1.4rem; margin-bottom: 0.4rem; }
+.footer p { margin: 0.3rem 0; font-size: 0.9rem; }
+.footer a { color: #5eead4; text-decoration: none; font-weight: 600; }
+.footer a:hover { text-decoration: underline; }
+.footer-quote { font-style: italic; margin-top: 1rem; opacity: 0.55; font-size: 0.85rem; }
+/* ============================================
+RESPONSIVE
+============================================ */
 @media (max-width: 768px) {
-.header-content { flex-direction: column; text-align: center; }
-.nav-modules { margin-top: 1rem; justify-content: center; }
-.container { padding: 140px 10px 10px; }
+.header { padding: 0 1rem; height: auto; padding-top: 0.8rem; padding-bottom: 0.8rem; }
+.header-content { flex-direction: column; gap: 0.6rem; }
+.nav-modules { justify-content: center; flex-wrap: wrap; }
+.container { padding: 130px 12px 24px; }
+.hero-banner { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
+.hero-text h1 { font-size: 1.8rem; }
 .section { padding: 1.5rem; }
 .form-grid { grid-template-columns: 1fr; }
-.modules-grid { grid-template-columns: 1fr; }
-.progress-steps { flex-wrap: wrap; }
-.step { flex: 0 0 50%; margin-bottom: 1rem; }
-.enlace-item { flex-direction: column; gap: 1rem; text-align: center; }
-.enlace-actions { flex-direction: row; justify-content: center; }
+.progress-steps { flex-wrap: wrap; gap: 0.5rem; padding: 1rem; }
+.progress-steps::before, .progress-line { display: none; }
+.step { flex: 0 0 auto; }
+.enlace-item, .activity-item { flex-direction: column; }
+.enlace-actions, .activity-actions { flex-direction: row; }
+.modules-grid, .stats-dashboard { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+.modules-grid, .stats-dashboard { grid-template-columns: 1fr; }
+.item-types-grid { grid-template-columns: repeat(2, 1fr); }
+.modo-options { grid-template-columns: 1fr; }
 }
 </style>
 </head>
-
-<!-- ============================================
-     CUERPO DEL DOCUMENTO - ESTRUCTURA HTML
-     ============================================ -->
 <body>
-
-<!-- ============================================
-     HEADER - BARRA DE NAVEGACIÓN SUPERIOR
-     ============================================ -->
+<!-- HEADER -->
 <header class="header">
 <div class="header-content">
 <div class="logo">
 <div class="logo-icon">🎓</div>
-<div>
+<div class="logo-text">
 <h1>EduHTML Builder PRO MAX</h1>
 <span>Constructor de Actividades Educativas con IA | Prof. Carlos Elizondo</span>
 </div>
 </div>
-<!-- NAVEGACIÓN CON 5 MÓDULOS -->
 <nav class="nav-modules">
 <button class="module-btn active" onclick="showModule('crear', event)">📝 Crear</button>
 <button class="module-btn" onclick="showModule('estadisticas', event)">📊 Estadísticas</button>
@@ -815,1673 +329,904 @@ color: white;
 </nav>
 </div>
 </header>
-
-<!-- ============================================
-     CONTENEDOR PRINCIPAL
-     ============================================ -->
+<!-- CONTENEDOR PRINCIPAL -->
 <div class="container">
-
-<!-- ============================================
-     PANTALLA DE BIENVENIDA - DASHBOARD INICIAL
-     ============================================ -->
+<!-- BIENVENIDA -->
 <div id="welcomeScreen" class="welcome-screen">
-<h1>👨‍🏫 Bienvenido, Profesor Carlos Elizondo</h1>
-<p>
-Plataforma profesional para generar actividades educativas interactivas en HTML con teoría completa,
-apoyos curriculares especiales, formulario de envío de respuestas y verificación automática.
-</p>
-<!-- GRID CON 5 TARJETAS DE MÓDULOS -->
+<div class="hero-banner">
+<div class="hero-emoji">👨‍🏫</div>
+<div class="hero-text">
+<h1>Bienvenido, Profesor Carlos Elizondo</h1>
+<p>Plataforma profesional para generar actividades educativas interactivas en HTML con teoría completa, apoyos curriculares especiales, formulario de envío de respuestas y verificación automática.</p>
+</div>
+</div>
 <div class="modules-grid">
-<div class="module-card" onclick="showModule('crear', event)">
-<span class="icon">📝</span>
-<h3>Crear Actividad</h3>
-<p>Diseñe actividades con teoría completa, portada profesional, apoyos especiales, formulario de envío y múltiples tipos de ítems.</p>
-</div>
-<div class="module-card" onclick="showModule('estadisticas', event)">
-<span class="icon">📊</span>
-<h3>Estadísticas</h3>
-<p>Visualice el rendimiento, actividades creadas, materias más usadas y progreso general.</p>
-</div>
-<div class="module-card" onclick="showModule('banco', event)">
-<span class="icon">📦</span>
-<h3>Banco de Actividades</h3>
-<p>Guarde, reutilice y gestione sus actividades creadas anteriormente.</p>
-</div>
-<div class="module-card" onclick="showModule('enlaces', event)">
-<span class="icon">🔗</span>
-<h3>Enlaces y Recursos</h3>
-<p>Guarde y gestione enlaces a páginas web, videos, PDFs y otros recursos digitales.</p>
-</div>
-<div class="module-card" onclick="showModule('recursos', event)">
-<span class="icon">📚</span>
-<h3>Recursos y Ayuda</h3>
-<p>Acceda a tutoriales, ejemplos de prompts, videos y enlaces a herramientas de IA.</p>
+<div class="module-card" onclick="showModule('crear', event)"><div class="card-icon teal">📝</div><h3>Crear Actividad</h3><p>Diseñe actividades con teoría completa, portada profesional, apoyos especiales, formulario de envío y múltiples tipos de ítems.</p></div>
+<div class="module-card" onclick="showModule('estadisticas', event)"><div class="card-icon amber">📊</div><h3>Estadísticas</h3><p>Visualice el rendimiento, actividades creadas, materias más usadas y progreso general.</p></div>
+<div class="module-card" onclick="showModule('banco', event)"><div class="card-icon indigo">📦</div><h3>Banco de Actividades</h3><p>Guarde, reutilice y gestione sus actividades creadas anteriormente.</p></div>
+<div class="module-card" onclick="showModule('enlaces', event)"><div class="card-icon teal">🔗</div><h3>Enlaces y Recursos</h3><p>Guarde y gestione enlaces a páginas web, videos, PDFs y otros recursos digitales.</p></div>
+<div class="module-card" onclick="showModule('recursos', event)"><div class="card-icon rose">📚</div><h3>Recursos y Ayuda</h3><p>Acceda a tutoriales, ejemplos de prompts, videos y herramientas de IA.</p></div>
 </div>
 </div>
-</div>
-
-<!-- ============================================
-     MÓDULO 1: CREAR ACTIVIDAD
-     ============================================ -->
+<!-- MÓDULO 1: CREAR -->
 <div id="moduleCrear" class="module-content">
 <button class="back-btn" onclick="showWelcome()">← Volver al Inicio</button>
-
-<!-- BARRA DE PROGRESO - 7 PASOS -->
 <div class="progress-steps">
 <div class="progress-line" id="progressLine"></div>
-<div class="step active" data-step="1">
-<div class="step-number">1</div>
-<div class="step-label">Docente</div>
+<div class="step active" data-step="1"><div class="step-number">1</div><div class="step-label">Docente</div></div>
+<div class="step" data-step="2"><div class="step-number">2</div><div class="step-label">Teoría</div></div>
+<div class="step" data-step="3"><div class="step-number">3</div><div class="step-label">Habilidades</div></div>
+<div class="step" data-step="4"><div class="step-number">4</div><div class="step-label">Apoyo</div></div>
+<div class="step" data-step="5"><div class="step-number">5</div><div class="step-label">Ítems</div></div>
+<div class="step" data-step="6"><div class="step-number">6</div><div class="step-label">Formulario</div></div>
+<div class="step" data-step="7"><div class="step-number">7</div><div class="step-label">Prompt</div></div>
 </div>
-<div class="step" data-step="2">
-<div class="step-number">2</div>
-<div class="step-label">Teoría</div>
-</div>
-<div class="step" data-step="3">
-<div class="step-number">3</div>
-<div class="step-label">Habilidades</div>
-</div>
-<div class="step" data-step="4">
-<div class="step-number">4</div>
-<div class="step-label">Apoyo</div>
-</div>
-<div class="step" data-step="5">
-<div class="step-number">5</div>
-<div class="step-label">Ítems</div>
-</div>
-<div class="step" data-step="6">
-<div class="step-number">6</div>
-<div class="step-label">Formulario</div>
-</div>
-<div class="step" data-step="7">
-<div class="step-number">7</div>
-<div class="step-label">Prompt</div>
-</div>
-</div>
-
-<!-- SECCIÓN 1: DATOS DEL DOCENTE -->
+<!-- PASO 1 -->
 <section class="section" id="step1">
 <h2 class="section-title">👨‍🏫 1. Información del Docente</h2>
 <div class="form-grid">
-<div class="form-group">
-<label for="profesor">Nombre del Profesor:</label>
-<input type="text" id="profesor" class="form-control" placeholder="Ej: Carlos Elizondo Castillo" onchange="updateProgress(1)">
-</div>
-<div class="form-group">
-<label for="correo">Correo Electrónico (para recibir respuestas):</label>
-<input type="email" id="correo" class="form-control" placeholder="carlos.elizondo@mep.go.cr" onchange="updateProgress(1)">
-</div>
-<div class="form-group">
-<label for="institucion">Institución Educativa:</label>
-<input type="text" id="institucion" class="form-control" placeholder="Ej: Liceo Diurno" onchange="updateProgress(1)">
-</div>
+<div class="form-group"><label for="profesor">Nombre del Profesor</label><input type="text" id="profesor" class="form-control" placeholder="Carlos Elizondo Castillo" onchange="updateProgress(1)"></div>
+<div class="form-group"><label for="correo">Correo Electrónico</label><input type="email" id="correo" class="form-control" placeholder="carlos.elizondo@mep.go.cr" onchange="updateProgress(1)"></div>
+<div class="form-group"><label for="institucion">Institución Educativa</label><input type="text" id="institucion" class="form-control" placeholder="Liceo Diurno" onchange="updateProgress(1)"></div>
 </div>
 </section>
-
-<!-- SECCIÓN 2: TEORÍA Y CONTENIDOS -->
+<!-- PASO 2 -->
 <section class="section" id="step2">
 <h2 class="section-title">📖 2. Teoría, Definiciones y Conceptos</h2>
-<div class="info-box">
-<p><strong>💡 Instrucciones:</strong> Ingrese todo el contenido teórico que desea que aparezca en la portada y sección de teoría de la actividad.</p>
-<p><strong>📌 Esto incluirá:</strong> Definiciones, conceptos clave, fórmulas, ejemplos de ejercicios resueltos, y explicaciones amplias.</p>
-</div>
-<div class="form-group">
-<label for="teoriaContenido">📚 Contenido Teórico Completo:</label>
-<textarea id="teoriaContenido" class="textarea-large" style="min-height: 400px;" placeholder="Ejemplo:
-TEMA: Circunferencias y Vectores
-DEFINICIÓN DE CIRCUNFERENCIA:
-La circunferencia es el lugar geométrico de todos los puntos en un plano que equidistan de un punto fijo llamado centro.
-ECUACIÓN ORDINARIA:
-(x - h)² + (y - k)² = r²
-Donde:
-- (h, k) son las coordenadas del centro
-- r es el radio (distancia constante)
-EJEMPLO RESUELTO:
-Dada la ecuación (x - 3)² + (y + 2)² = 16
-Centro: C(3, -2)
-Radio: r = √16 = 4
-VECTORES DE TRASLACIÓN:
-Un vector v⃗ = (a, b) representa un desplazamiento...
-"></textarea>
-</div>
-<div class="form-group">
-<label for="ejemplosResueltos">✏️ Ejemplos de Ejercicios Resueltos:</label>
-<textarea id="ejemplosResueltos" class="textarea-large" style="min-height: 200px;" placeholder="Ejemplo 1:
-Encuentre el centro y radio de: (x - 5)² + (y + 3)² = 25
-Solución:
-Centro: (5, -3)
-Radio: √25 = 5
-Ejemplo 2:
-Trasladar el punto P(2, 5) con vector v⃗ = (-4, 3)
-Solución:
-P' = (2 + (-4), 5 + 3) = (-2, 8)
-"></textarea>
-</div>
+<div class="info-box"><strong>💡 Instrucciones:</strong> Ingrese todo el contenido teórico que desea que aparezca en la actividad.</div>
+<div class="form-group" style="margin-bottom:1.2rem"><label for="teoriaContenido">📚 Contenido Teórico Completo</label><textarea id="teoriaContenido" class="textarea-large" style="min-height:300px" placeholder="TEMA: Circunferencias y Vectores&#10;DEFINICIÓN DE CIRCUNFERENCIA:&#10;La circunferencia es el lugar geométrico..."></textarea></div>
+<div class="form-group"><label for="ejemplosResueltos">✏️ Ejemplos de Ejercicios Resueltos</label><textarea id="ejemplosResueltos" class="textarea-large" style="min-height:160px" placeholder="Ejemplo 1:&#10;Encuentre el centro y radio de: (x - 5)² + (y + 3)² = 25"></textarea></div>
 </section>
-
-<!-- SECCIÓN 3: HABILIDADES -->
+<!-- PASO 3 -->
 <section class="section" id="step3">
 <h2 class="section-title">🎯 3. Habilidades y Datos Académicos</h2>
 <div class="form-grid">
-<div class="form-group">
-<label for="materia">Materia/Asignatura:</label>
-<select id="materia" class="form-control" onchange="updateProgress(3)">
-<option value="">-- Seleccione --</option>
-<option value="matematica">Matemática</option>
-<option value="ciencias">Ciencias</option>
-<option value="estudios_sociales">Estudios Sociales</option>
-<option value="espanol">Español</option>
-<option value="ingles">Inglés</option>
-<option value="educacion_fisica">Educación Física</option>
-<option value="otro">Otro</option>
-</select>
-</div>
-<div class="form-group">
-<label for="nivel">Nivel/Grado:</label>
-<select id="nivel" class="form-control" onchange="updateProgress(3)">
-<option value="">-- Seleccione --</option>
-<option value="7">7° Año</option>
-<option value="8">8° Año</option>
-<option value="9">9° Año</option>
-<option value="10">10° Año</option>
-<option value="11">11° Año</option>
-<option value="12">12° Año</option>
-</select>
-</div>
-<div class="form-group">
-<label for="tema">Tema Específico:</label>
-<input type="text" id="tema" class="form-control" placeholder="Ej: Circunferencia y Vectores" onchange="updateProgress(3)">
-</div>
+<div class="form-group"><label for="materia">Materia / Asignatura</label><select id="materia" class="form-control" onchange="updateProgress(3)"><option value="">— Seleccione —</option><option value="matematica">Matemática</option><option value="ciencias">Ciencias</option><option value="estudios_sociales">Estudios Sociales</option><option value="espanol">Español</option><option value="ingles">Inglés</option><option value="educacion_fisica">Educación Física</option><option value="otro">Otro</option></select></div>
+<div class="form-group"><label for="nivel">Nivel / Grado</label><select id="nivel" class="form-control" onchange="updateProgress(3)"><option value="">— Seleccione —</option><option value="7">7° Año</option><option value="8">8° Año</option><option value="9">9° Año</option><option value="10">10° Año</option><option value="11">11° Año</option><option value="12">12° Año</option></select></div>
+<div class="form-group"><label for="tema">Tema Específico</label><input type="text" id="tema" class="form-control" placeholder="Circunferencia y Vectores" onchange="updateProgress(3)"></div>
 </div>
 <div class="form-grid">
-<div class="form-group">
-<label for="habilidadGeneral">Habilidad General:</label>
-<input type="text" id="habilidadGeneral" class="form-control" placeholder="Ej: Resolución de problemas matemáticos" onchange="updateProgress(3)">
-</div>
-<div class="form-group">
-<label for="habilidadEspecifica">Habilidades Específicas:</label>
-<textarea id="habilidadEspecifica" class="textarea-large" style="min-height: 100px;" placeholder="Ej:
-- Calcular el área y circunferencia de círculos
-- Aplicar traslaciones vectoriales
-- Identificar elementos de la circunferencia" onchange="updateProgress(3)"></textarea>
-</div>
+<div class="form-group"><label for="habilidadGeneral">Habilidad General</label><input type="text" id="habilidadGeneral" class="form-control" placeholder="Resolución de problemas matemáticos"></div>
+<div class="form-group"><label for="habilidadEspecifica">Habilidades Específicas</label><textarea id="habilidadEspecifica" class="textarea-large" style="min-height:90px" placeholder="- Calcular el área y circunferencia de círculos&#10;- Aplicar traslaciones vectoriales"></textarea></div>
 </div>
 </section>
-
-<!-- SECCIÓN 4: APOYO CURRICULAR ESPECIAL -->
+<!-- PASO 4 -->
 <section class="section apoyo-especial-section" id="step4">
 <h2 class="section-title">♿ 4. Apoyo Curricular para Necesidades Educativas Especiales</h2>
-<div class="info-box">
-<p><strong>🌟 Inclusión Educativa:</strong> Configure adaptaciones para estudiantes con necesidades educativas especiales.</p>
-</div>
-<div class="checkbox-group">
-<input type="checkbox" id="necesitaAdecuacion" onchange="toggleAdecuacion()">
-<label for="necesitaAdecuacion">¿Requiere adecuación curricular o apoyo especial?</label>
-</div>
+<div class="info-box"><strong>🌟 Inclusión Educativa:</strong> Configure adaptaciones para estudiantes con necesidades educativas especiales.</div>
+<div class="checkbox-group"><input type="checkbox" id="necesitaAdecuacion" onchange="toggleAdecuacion()"><label for="necesitaAdecuacion">¿Requiere adecuación curricular o apoyo especial?</label></div>
 <div id="adecuacionContainer" class="hidden">
 <div class="form-grid">
-<div class="form-group">
-<label for="tipoAdecuacion">Tipo de Adecuación:</label>
-<select id="tipoAdecuacion" class="form-control">
-<option value="">-- Seleccione --</option>
-<option value="visual">Discapacidad Visual</option>
-<option value="auditiva">Discapacidad Auditiva</option>
-<option value="motriz">Discapacidad Motriz</option>
-<option value="cognitiva">Discapacidad Cognitiva</option>
-<option value="tdah">TDAH</option>
-<option value="autismo">Trastorno del Espectro Autista</option>
-<option value="dislexia">Dislexia</option>
-<option value="otra">Otra</option>
-</select>
+<div class="form-group"><label for="tipoAdecuacion">Tipo de Adecuación</label><select id="tipoAdecuacion" class="form-control"><option value="">— Seleccione —</option><option value="visual">Discapacidad Visual</option><option value="auditiva">Discapacidad Auditiva</option><option value="motriz">Discapacidad Motriz</option><option value="cognitiva">Discapacidad Cognitiva</option><option value="tdah">TDAH</option><option value="autismo">Trastorno del Espectro Autista</option><option value="dislexia">Dislexia</option><option value="otra">Otra</option></select></div>
+<div class="form-group"><label for="descripcionAdecuacion">Descripción de la Necesidad</label><input type="text" id="descripcionAdecuacion" class="form-control" placeholder="Necesita más tiempo, letras grandes, etc."></div>
 </div>
-<div class="form-group">
-<label for="descripcionAdecuacion">Descripción de la Necesidad:</label>
-<input type="text" id="descripcionAdecuacion" class="form-control" placeholder="Ej: Necesita más tiempo, letras grandes, etc.">
-</div>
-</div>
-<div class="form-group">
-<label for="estrategiasAdecuacion"> Estrategias de Apoyo a Incluir:</label>
-<textarea id="estrategiasAdecuacion" class="textarea-large" style="min-height: 150px;" placeholder="Ejemplo:
-- Instrucciones más detalladas y paso a paso
-- Tiempo extendido para completar actividades
-- Uso de calculadora permitida
-- Ejercicios con menor cantidad de ítems
-- Apoyos visuales adicionales
-- Lectura en voz alta de instrucciones
-- Espacio para respuestas más amplio"></textarea>
-</div>
-<div class="form-group">
-<label for="recursosApoyo">📚 Recursos de Apoyo Específicos:</label>
-<textarea id="recursosApoyo" class="textarea-large" style="min-height: 100px;" placeholder="Ejemplo:
-- Glosario de términos clave
-- Fórmulas en tarjeta de referencia
-- Ejemplos adicionales resueltos
-- Videos explicativos complementarios"></textarea>
-</div>
+<div class="form-group" style="margin-bottom:1rem"><label for="estrategiasAdecuacion">⚙️ Estrategias de Apoyo a Incluir</label><textarea id="estrategiasAdecuacion" class="textarea-large" style="min-height:120px" placeholder="- Instrucciones más detalladas y paso a paso&#10;- Tiempo extendido para completar actividades"></textarea></div>
+<div class="form-group"><label for="recursosApoyo">📚 Recursos de Apoyo Específicos</label><textarea id="recursosApoyo" class="textarea-large" style="min-height:90px" placeholder="- Glosario de términos clave&#10;- Fórmulas en tarjeta de referencia"></textarea></div>
 </div>
 </section>
-
-<!-- SECCIÓN 5: TIPOS DE ÍTEMS -->
+<!-- PASO 5 -->
 <section class="section" id="step5">
 <h2 class="section-title">📝 5. Tipos y Cantidad de Ítems</h2>
-<div class="info-box">
-<p><strong>💡 Seleccione los tipos de preguntas que desea incluir en la actividad:</strong></p>
-</div>
+<div class="info-box"><strong>💡 Seleccione los tipos de preguntas que desea incluir:</strong></div>
 <div class="item-types-grid">
-<div class="item-type-card" onclick="toggleItemType(this, 'seleccion_multiple')">
-<div class="icon">🔘</div>
-<div>Selección Múltiple</div>
+<div class="item-type-card" onclick="toggleItemType(this, 'seleccion_multiple')"><span class="icon">🔘</span><div>Selección Múltiple</div><div class="item-check">✓ Seleccionado</div></div>
+<div class="item-type-card" onclick="toggleItemType(this, 'verdadero_falso')"><span class="icon">✅</span><div>Verdadero/Falso</div><div class="item-check">✓ Seleccionado</div></div>
+<div class="item-type-card" onclick="toggleItemType(this, 'respuesta_corta')"><span class="icon">✏️</span><div>Respuesta Corta</div><div class="item-check">✓ Seleccionado</div></div>
+<div class="item-type-card" onclick="toggleItemType(this, 'completar')"><span class="icon">📝</span><div>Completar Espacios</div><div class="item-check">✓ Seleccionado</div></div>
+<div class="item-type-card" onclick="toggleItemType(this, 'pareo')"><span class="icon">🔗</span><div>Pareo/Relación</div><div class="item-check">✓ Seleccionado</div></div>
+<div class="item-type-card" onclick="toggleItemType(this, 'ordenar')"><span class="icon">📋</span><div>Ordenar Elementos</div><div class="item-check">✓ Seleccionado</div></div>
+<div class="item-type-card" onclick="toggleItemType(this, 'desarrollo')"><span class="icon">📄</span><div>Desarrollo/Essay</div><div class="item-check">✓ Seleccionado</div></div>
+<div class="item-type-card" onclick="toggleItemType(this, 'grafico')"><span class="icon">📊</span><div>Análisis Gráfico</div><div class="item-check">✓ Seleccionado</div></div>
+<div class="item-type-card" onclick="toggleItemType(this, 'caso')"><span class="icon">🎯</span><div>Estudio de Caso</div><div class="item-check">✓ Seleccionado</div></div>
+<div class="item-type-card" onclick="toggleItemType(this, 'practico')"><span class="icon">🔬</span><div>Ejercicio Práctico</div><div class="item-check">✓ Seleccionado</div></div>
 </div>
-<div class="item-type-card" onclick="toggleItemType(this, 'verdadero_falso')">
-<div class="icon">✅</div>
-<div>Verdadero/Falso</div>
+<div class="form-grid" style="margin-top:1.5rem">
+<div class="form-group"><label for="numPreguntasPractica">📊 Preguntas de práctica</label><input type="number" id="numPreguntasPractica" class="form-control" min="1" max="20" value="8"></div>
+<div class="form-group"><label for="numPreguntasQuiz">📝 Preguntas de quiz</label><input type="number" id="numPreguntasQuiz" class="form-control" min="1" max="20" value="10"></div>
 </div>
-<div class="item-type-card" onclick="toggleItemType(this, 'respuesta_corta')">
-<div class="icon">✏️</div>
-<div>Respuesta Corta</div>
-</div>
-<div class="item-type-card" onclick="toggleItemType(this, 'completar')">
-<div class="icon">📝</div>
-<div>Completar Espacios</div>
-</div>
-<div class="item-type-card" onclick="toggleItemType(this, 'pareo')">
-<div class="icon">🔗</div>
-<div>Pareo/Relación</div>
-</div>
-<div class="item-type-card" onclick="toggleItemType(this, 'ordenar')">
-<div class="icon">📋</div>
-<div>Ordenar Elementos</div>
-</div>
-<div class="item-type-card" onclick="toggleItemType(this, 'desarrollo')">
-<div class="icon">📄</div>
-<div>Desarrollo/Essay</div>
-</div>
-<div class="item-type-card" onclick="toggleItemType(this, 'grafico')">
-<div class="icon">📊</div>
-<div>Análisis Gráfico</div>
-</div>
-<div class="item-type-card" onclick="toggleItemType(this, 'caso')">
-<div class="icon">🎯</div>
-<div>Estudio de Caso</div>
-</div>
-<div class="item-type-card" onclick="toggleItemType(this, 'practico')">
-<div class="icon">🔬</div>
-<div>Ejercicio Práctico</div>
-</div>
-</div>
-<div class="form-grid" style="margin-top: 2rem;">
-<div class="form-group">
-<label for="numPreguntasPractica">📊 Número de preguntas de práctica (con verificación):</label>
-<input type="number" id="numPreguntasPractica" class="form-control" min="1" max="20" value="8">
-</div>
-<div class="form-group">
-<label for="numPreguntasQuiz">📝 Número de preguntas de quiz (evaluación):</label>
-<input type="number" id="numPreguntasQuiz" class="form-control" min="1" max="20" value="10">
-</div>
-</div>
-<div class="form-group">
-<label for="instruccionesEspeciales">📋 Instrucciones Especiales para los Ítems:</label>
-<textarea id="instruccionesEspeciales" class="textarea-large" style="min-height: 100px;" placeholder="Ejemplo:
-- Las preguntas de selección múltiple deben tener 4 opciones
-- Incluir retroalimentación para cada respuesta
-- Las preguntas de desarrollo deben tener rúbrica de evaluación
-- Los ejercicios prácticos deben mostrar el procedimiento paso a paso"></textarea>
-</div>
+<div class="form-group"><label for="instruccionesEspeciales">📋 Instrucciones Especiales</label><textarea id="instruccionesEspeciales" class="textarea-large" style="min-height:90px" placeholder="- Las preguntas de selección múltiple deben tener 4 opciones"></textarea></div>
 </section>
-
-<!-- SECCIÓN 6: FORMULARIO DE ENVÍO DE RESPUESTAS -->
+<!-- PASO 6 -->
 <section class="section formulario-envio-section" id="step6">
 <h2 class="section-title">📤 6. Formulario de Envío de Respuestas</h2>
-<div class="info-box">
-<p><strong>🌟 NUEVA FUNCIONALIDAD:</strong> Active esta opción para incluir un formulario donde los estudiantes puedan enviar sus respuestas del quiz directamente a su correo.</p>
-<p><strong>✅ Incluye:</strong> Calificación automática, resumen de respuestas, envío a FormSubmit.co, y copia al estudiante.</p>
-</div>
-<div class="checkbox-group" style="background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%); border: 2px solid var(--success);">
-<input type="checkbox" id="activarFormulario" onchange="toggleFormulario()" checked>
-<label for="activarFormulario" style="font-size: 1.2rem; color: var(--success);">✅ ACTIVAR FORMULARIO DE ENVÍO DE RESPUESTAS CON CALIFICACIÓN</label>
-</div>
+<div class="info-box"><strong>🌟 NUEVA FUNCIONALIDAD:</strong> Active para incluir formulario de envío de respuestas al docente.</div>
+<div class="checkbox-group" style="background:var(--teal-lt); border-color:var(--teal)"><input type="checkbox" id="activarFormulario" onchange="toggleFormulario()" checked><label for="activarFormulario" style="color:var(--teal-dk)">✅ ACTIVAR FORMULARIO DE ENVÍO</label></div>
 <div id="formularioContainer" class="formulario-config">
 <div class="form-grid">
-<div class="form-group">
-<label for="correoDestino">📧 Correo para recibir respuestas:</label>
-<input type="email" id="correoDestino" class="form-control" placeholder="Se usará el correo del docente por defecto">
-</div>
-<div class="form-group">
-<label for="asuntoCorreo">📋 Asunto del correo:</label>
-<input type="text" id="asuntoCorreo" class="form-control" value="📝 Nuevas Respuestas de Estudiante" placeholder="Asunto del email">
-</div>
+<div class="form-group"><label for="correoDestino">📧 Correo para respuestas</label><input type="email" id="correoDestino" class="form-control" placeholder="Se usará el correo del docente"></div>
+<div class="form-group"><label for="asuntoCorreo">📋 Asunto del correo</label><input type="text" id="asuntoCorreo" class="form-control" value="📝 Nuevas Respuestas de Estudiante"></div>
 </div>
 <div class="form-grid">
-<div class="form-group">
-<label for="datosEstudiante">👤 Datos del estudiante a solicitar:</label>
-<textarea id="datosEstudiante" class="textarea-large" style="min-height: 100px;" placeholder="Ejemplo:
-- Nombre completo (requerido)
-- Correo electrónico (requerido)
-- Grupo/Sección (requerido)
-- Número de identificación (opcional)"></textarea>
+<div class="form-group"><label for="datosEstudiante">👤 Datos del estudiante</label><textarea id="datosEstudiante" class="textarea-large" style="min-height:90px" placeholder="- Nombre completo (requerido)&#10;- Correo electrónico (requerido)&#10;- Grupo/Sección (requerido)"></textarea></div>
+<div class="form-group"><label for="configuracionFormulario">⚙️ Configuración adicional</label><textarea id="configuracionFormulario" class="textarea-large" style="min-height:90px" placeholder="- Mostrar calificación inmediatamente&#10;- Enviar copia de confirmación al estudiante"></textarea></div>
 </div>
-<div class="form-group">
-<label for="configuracionFormulario">⚙️ Configuración adicional:</label>
-<textarea id="configuracionFormulario" class="textarea-large" style="min-height: 150px;" placeholder="Ejemplo:
-- Mostrar calificación inmediatamente después de enviar
-- Enviar copia de confirmación al estudiante
-- Incluir resumen de respuestas correctas e incorrectas
-- Mostrar tiempo dedicado al quiz
-- Permitir reintentar el quiz
-- Incluir barra de progreso durante el quiz"></textarea>
-</div>
-</div>
-<div class="formulario-preview">
-<h4 style="color: var(--primary); margin-bottom: 1rem;">📋 Vista Previa de lo que se Incluirá:</h4>
-<ul style="line-height: 2; color: #666;">
-<li>✅ Formulario con datos del estudiante (nombre, correo, grupo)</li>
-<li>✅ 10 preguntas del quiz con selección múltiple</li>
-<li>✅ Cálculo automático de calificación (0-100%)</li>
-<li>✅ Resumen visual de respuestas correctas/incorrectas</li>
-<li>✅ Envío automático a <strong id="previewCorreo">correo@ejemplo.com</strong></li>
-<li>✅ Copia de confirmación al estudiante</li>
-<li>✅ Mensaje de éxito después del envío</li>
-</ul>
-</div>
+<div class="formulario-preview"><h4>📋 Vista Previa del Formulario</h4><ul><li>✅ Formulario con datos del estudiante</li><li>✅ Calificación automática (0–100%)</li><li>✅ Envío a <strong id="previewCorreo">correo@ejemplo.com</strong></li><li>✅ Copia de confirmación al estudiante</li></ul></div>
 </div>
 </section>
-
-<!-- SECCIÓN 7: GENERAR PROMPT Y DESCARGAR HTML -->
+<!-- PASO 7: SELECTOR DE MODO + GENERACIÓN -->
 <section class="section" id="step7">
 <h2 class="section-title">🚀 7. Generar Prompt y Descargar HTML</h2>
-<div class="info-box">
-<p><strong>📌 PASO 1:</strong> Genere el prompt optimizado para la IA</p>
-<p><strong>📌 PASO 2:</strong> Pegue el código HTML generado por la IA en el área de texto</p>
-<p><strong>📌 PASO 3:</strong> Descargue el archivo index.html listo para usar</p>
+<!-- SELECTOR DE MODO -->
+<div class="modo-selector">
+<h3>⚙️ Modo de Generación</h3>
+<div class="modo-options">
+<div class="modo-card selected" onclick="seleccionarModo(this,'completo')" data-modo="completo">
+<div style="font-size:1.5rem;margin-bottom:0.4rem">🏆</div><strong>Completo</strong>
+<p>Prompt premium con todas las secciones. Mejor resultado, requiere IA con contexto amplio (DeepSeek, GPT-4o).</p>
+<span class="modo-badge" style="background:#d1fae5;color:#065f46">Recomendado</span>
 </div>
-<button class="btn btn-primary" onclick="generarPrompt()">✨ Generar Prompt Optimizado</button>
-<button class="btn btn-success" onclick="mejorarPromptConIA()" style="margin-left: 1rem;">🤖 Mejorar Prompt con IA</button>
-<button class="btn btn-warning" onclick="mostrarAreaDescarga()" style="margin-left: 1rem;">📥 Preparar Descarga de HTML</button>
-
+<div class="modo-card" onclick="seleccionarModo(this,'modular')" data-modo="modular">
+<div style="font-size:1.5rem;margin-bottom:0.4rem">🧩</div><strong>Modular (4 Fases)</strong>
+<p>Divide el trabajo en 4 prompts especializados. Ideal si la IA trunca o para modelos con ventana pequeña.</p>
+<span class="modo-badge" style="background:#e0e7ff;color:#3730a3">Anti-truncamiento</span>
+</div>
+<div class="modo-card" onclick="seleccionarModo(this,'minimal')" data-modo="minimal">
+<div style="font-size:1.5rem;margin-bottom:0.4rem">⚡</div><strong>Mínimo Viable</strong>
+<p>Solo el núcleo crítico: estructura, preguntas, formulario. Sin decoración. Máxima fiabilidad.</p>
+<span class="modo-badge" style="background:#fef3c7;color:#92400e">Más confiable</span>
+</div>
+</div>
+<input type="hidden" id="modoGeneracion" value="completo">
+<div class="tasa-cumplimiento" id="tasaCumplimiento">🏆 <strong>Modo Completo:</strong> Estructura HTML/CSS ~95% · Lógica JS ~85% · Cantidades exactas ~70% — <em>Use DeepSeek R1 o GPT-4o para mejores resultados.</em></div>
+</div>
+<div class="info-box"><strong>📌 PASO 1:</strong> Elija el modo → <strong>PASO 2:</strong> Genere y copie el prompt → <strong>PASO 3:</strong> Péguelo en la IA → <strong>PASO 4:</strong> Pegue y descargue el HTML</div>
+<div style="display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:1.2rem">
+<button class="btn btn-primary" onclick="generarPromptPorModo()">✨ Generar Prompt</button>
+<button class="btn btn-secondary" onclick="mejorarPromptConIA()">🤖 Abrir en IA</button>
+<button class="btn btn-success" onclick="mostrarAreaDescarga()">📥 Preparar Descarga</button>
+<button class="btn btn-outline" onclick="validarPrompt()">🔍 Validar Checklist</button>
+</div>
+<!-- PANEL MODULAR (4 FASES) -->
+<div id="fasesContainer" class="fases-container"></div>
+<!-- PANEL COMPLETO / MINIMAL -->
 <div id="promptGenerado" class="output-section hidden">
-<h3>✨ Prompt Generado (Estructurado):</h3>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem;flex-wrap:wrap;gap:0.5rem">
+<h3 style="margin:0" id="promptTitulo">✨ Prompt Generado</h3>
+<span id="promptTokEstimado" style="font-size:0.78rem;color:#67e8f9;background:rgba(255,255,255,0.06);padding:0.2rem 0.7rem;border-radius:6px"></span>
+</div>
 <div class="code-preview" id="promptText"></div>
-<button class="btn btn-secondary" onclick="copiarPrompt()">📋 Copiar Prompt</button>
-<button class="btn btn-warning" onclick="guardarEnBanco()" style="margin-left: 1rem;">💾 Guardar en Banco</button>
+<div style="display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:1rem">
+<button class="btn btn-primary btn-small" onclick="copiarPrompt()">📋 Copiar Prompt</button>
+<button class="btn btn-success btn-small" onclick="guardarEnBanco()">💾 Guardar en Banco</button>
 </div>
-
-<!-- ÁREA PARA PEGAR CÓDIGO Y DESCARGAR -->
+</div>
+<!-- ÁREA PARA PEGAR Y DESCARGAR -->
 <div id="areaDescarga" class="output-section hidden">
-<h3>📥 Pegar Código HTML Generado por IA</h3>
-<p style="color: #dfe6e9; margin-bottom: 1rem;">Después de generar el prompt, péguelo en su IA preferida, copie el código HTML resultante y péguelo aquí:</p>
-<textarea id="codigoHTMLGenerado" class="textarea-large" style="min-height: 300px; background: #1e272e; color: #dfe6e9;" placeholder="Pegue aquí el código HTML completo generado por la IA..."></textarea>
-<button class="btn btn-success" onclick="descargarHTML()" style="margin-top: 1rem;">💾 Descargar archivo index.html</button>
-<button class="btn btn-info" onclick="validarHTML()" style="margin-left: 1rem;">✓ Validar Código</button>
-<div id="validacionResultado" style="margin-top: 1rem; padding: 1rem; border-radius: 10px; display: none;"></div>
+<h3>📥 Pegar Código HTML Generado por la IA</h3>
+<p style="color:#94a3b8;font-size:0.85rem;margin-bottom:0.8rem">Pegue aquí el código HTML completo. Se validará automáticamente.</p>
+<textarea id="codigoHTMLGenerado" class="textarea-large" style="min-height:260px;background:#020617;color:#94a3b8;border-color:rgba(255,255,255,0.1)" placeholder="Pegue aquí el código HTML..." oninput="validarCodigoGenerado(this.value)"></textarea>
+<!-- Panel de validación -->
+<div id="validacionCodigo" style="display:none;margin-top:1rem;background:#0f172a;border-radius:12px;padding:1.2rem;border:1px solid rgba(255,255,255,0.08)">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem">
+<span style="color:#67e8f9;font-weight:700;font-size:0.9rem">✅ Validación del Código</span>
+<span id="validacionScore" style="font-size:1.2rem;font-weight:800"></span>
 </div>
-
-<h3 style="margin: 2rem 0 1rem; color: var(--primary);">🔗 Enlaces a Plataformas de IA:</h3>
+<div id="validacionItems" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:0.4rem"></div>
+<div id="validacionMensaje" style="margin-top:0.8rem;font-size:0.82rem"></div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:1rem">
+<button class="btn btn-primary btn-small" onclick="descargarHTML()">💾 Descargar index.html</button>
+<button class="btn btn-info btn-small" onclick="validarHTML()">✓ Validar HTML básico</button>
+</div>
+<div id="validacionResultado" style="display:none;margin-top:0.8rem"></div>
+</div>
+<!-- ENSAMBLADO FINAL (solo modo modular) -->
+<div id="ensambladoFinal" class="ensamblado-final">
+<h3>🎉 ¡Fases Completadas!</h3>
+<p style="margin-bottom:1rem">Los 4 bloques han sido guardados. Elija una opción:</p>
+<button class="btn btn-success" onclick="ensamblarYDescargar()">🔗 Ensamblar y Descargar HTML</button>
+<button class="btn btn-secondary" onclick="verCodigoEnsamblado()">👁️ Vista Previa del Código</button>
+<button class="btn btn-outline" onclick="reiniciarFases()">🔄 Reiniciar Fases</button>
+</div>
+<div class="divider"></div>
+<h3 style="color:var(--ink);font-size:1rem;font-weight:700;margin-bottom:0.8rem">🔗 Abrir en IA</h3>
 <div class="ai-links">
-<div class="ai-card" onclick="abrirIA('https://chat.deepseek.com')">
-<h3>🧠 Deep Seek</h3>
-<p>IA avanzada para código</p>
-</div>
-<div class="ai-card" onclick="abrirIA('https://chat.qwen.ai')">
-<h3>💬 Qwen AI</h3>
-<p>Modelo multimodal</p>
-</div>
-<div class="ai-card" onclick="abrirIA('https://chat.openai.com')">
-<h3>💡 ChatGPT</h3>
-<p>OpenAI Assistant</p>
-</div>
-<div class="ai-card" onclick="abrirIA('https://gemini.google.com')">
-<h3>⭐ Google Gemini</h3>
-<p>IA de Google</p>
-</div>
+<div class="ai-card" onclick="abrirIA('https://chat.deepseek.com')"><h3>🧠 DeepSeek</h3><p>Mejor para código largo</p><span style="font-size:0.7rem;color:var(--teal);font-weight:700">~95% cumplimiento</span></div>
+<div class="ai-card" onclick="abrirIA('https://chat.openai.com')"><h3>💡 ChatGPT</h3><p>GPT-4o recomendado</p><span style="font-size:0.7rem;color:var(--teal);font-weight:700">~90% cumplimiento</span></div>
+<div class="ai-card" onclick="abrirIA('https://gemini.google.com')"><h3>⭐ Gemini</h3><p>Contexto 1M tokens</p><span style="font-size:0.7rem;color:var(--amber);font-weight:700">~85% cumplimiento</span></div>
+<div class="ai-card" onclick="abrirIA('https://chat.qwen.ai')"><h3>💬 Qwen</h3><p>Multimodal, gratuito</p><span style="font-size:0.7rem;color:var(--amber);font-weight:700">~80% cumplimiento</span></div>
 </div>
 </section>
 </div>
-
-<!-- ============================================
-     MÓDULO 2: ESTADÍSTICAS
-     ============================================ -->
+<!-- MÓDULO 2: ESTADÍSTICAS -->
 <div id="moduleEstadisticas" class="module-content">
 <button class="back-btn" onclick="showWelcome()">← Volver al Inicio</button>
-<section class="section">
-<h2 class="section-title">📊 Dashboard de Estadísticas</h2>
+<section class="section"><h2 class="section-title">📊 Dashboard de Estadísticas</h2>
 <div class="stats-dashboard">
-<div class="stat-card">
-<span class="stat-number" id="statTotalActividades">0</span>
-<div class="stat-label">Actividades Creadas</div>
+<div class="stat-card"><span class="stat-number" id="statTotalActividades">0</span><div class="stat-label">Actividades Creadas</div></div>
+<div class="stat-card"><span class="stat-number" id="statTotalPreguntas">0</span><div class="stat-label">Preguntas Generadas</div></div>
+<div class="stat-card"><span class="stat-number" id="statMateriaPopular">—</span><div class="stat-label">Materia Más Usada</div></div>
+<div class="stat-card"><span class="stat-number" id="statUltimaActividad">—</span><div class="stat-label">Última Creación</div></div>
 </div>
-<div class="stat-card">
-<span class="stat-number" id="statTotalPreguntas">0</span>
-<div class="stat-label">Preguntas Generadas</div>
-</div>
-<div class="stat-card">
-<span class="stat-number" id="statMateriaPopular">-</span>
-<div class="stat-label">Materia Más Usada</div>
-</div>
-<div class="stat-card">
-<span class="stat-number" id="statUltimaActividad">-</span>
-<div class="stat-label">Última Creación</div>
-</div>
-</div>
-<div class="section" style="margin-top: 2rem;">
-<h3 style="color: var(--primary); margin-bottom: 1rem;">📈 Progreso por Materia</h3>
-<div id="progresoMaterias" style="display: grid; gap: 1rem;">
-<!-- Se llenará dinámicamente -->
-</div>
-</div>
+<div class="divider"></div>
+<h3 style="color:var(--teal);margin-bottom:1rem;font-size:1rem;font-weight:700">📈 Progreso por Materia</h3>
+<div id="progresoMaterias" style="display:grid;gap:0.8rem"></div>
 </section>
 </div>
-
-<!-- ============================================
-     MÓDULO 3: BANCO DE ACTIVIDADES
-     ============================================ -->
+<!-- MÓDULO 3: BANCO -->
 <div id="moduleBanco" class="module-content">
 <button class="back-btn" onclick="showWelcome()">← Volver al Inicio</button>
-<section class="section">
-<h2 class="section-title">📦 Banco de Actividades Guardadas</h2>
-<div class="info-box">
-<p><strong>💡 Información:</strong> Aquí se almacenan todas las actividades que ha guardado. Puede reutilizarlas, editarlas o eliminarlas.</p>
-</div>
-<div class="activity-bank" id="activityBank">
-<p style="text-align: center; color: #666; padding: 2rem;">No hay actividades guardadas aún. Cree una actividad y guárdela en el banco.</p>
-</div>
-<div style="text-align: center; margin-top: 2rem;">
-<button class="btn btn-danger" onclick="limpiarBanco()" style="background: var(--danger);">🗑️ Limpiar Todo el Banco</button>
-<button class="btn btn-primary" onclick="exportarBanco()" style="margin-left: 1rem;">📤 Exportar Banco (JSON)</button>
-<button class="btn btn-secondary" onclick="importarBanco()" style="margin-left: 1rem;">📥 Importar Banco</button>
+<section class="section"><h2 class="section-title">📦 Banco de Actividades</h2>
+<div class="info-box"><strong>💡 Información:</strong> Aquí se almacenan sus actividades guardadas.</div>
+<div id="activityBank" style="margin-top:1.2rem"><p style="text-align:center;color:var(--ink-soft);padding:2rem">No hay actividades guardadas aún.</p></div>
+<div style="display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:1.5rem">
+<button class="btn btn-danger" onclick="limpiarBanco()">🗑️ Limpiar Todo</button>
+<button class="btn btn-primary" onclick="exportarBanco()">📤 Exportar (JSON)</button>
+<button class="btn btn-secondary" onclick="importarBanco()">📥 Importar</button>
 </div>
 </section>
 </div>
-
-<!-- ============================================
-     MÓDULO 4: ENLACES Y RECURSOS EXTERNOS
-     ============================================ -->
+<!-- MÓDULO 4: ENLACES -->
 <div id="moduleEnlaces" class="module-content">
 <button class="back-btn" onclick="showWelcome()">← Volver al Inicio</button>
-
-<section class="section">
-<h2 class="section-title">🔗 Enlaces y Recursos Externos</h2>
-
-<div class="info-box">
-<p><strong>💡 Funcionalidad:</strong> Agregue enlaces a páginas web, videos de YouTube, PDFs, documentos y otros recursos digitales para compartir con sus estudiantes.</p>
-<p><strong>📌 Los enlaces se guardan en el navegador y puede exportarlos/importarlos.</strong></p>
-</div>
-
-<!-- FORMULARIO PARA AGREGAR ENLACE -->
-<div class="formulario-config" style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border: 2px solid var(--info);">
-<h3 style="color: var(--info); margin-bottom: 1rem;">➕ Agregar Nuevo Enlace</h3>
+<section class="section"><h2 class="section-title">🔗 Enlaces y Recursos</h2>
+<div class="info-box"><strong>💡 Funcionalidad:</strong> Agregue enlaces a páginas web, videos, PDFs y recursos digitales.</div>
+<div class="formulario-config" style="background:var(--indigo-lt);border-color:rgba(79,70,229,0.2);margin-top:1.2rem">
+<h3 style="color:var(--indigo);margin-bottom:1rem;font-size:1rem">➕ Agregar Nuevo Enlace</h3>
 <div class="form-grid">
-<div class="form-group">
-<label for="enlaceTitulo">📌 Título del Recurso:</label>
-<input type="text" id="enlaceTitulo" class="form-control" placeholder="Ej: Video sobre Circunferencias">
-</div>
-<div class="form-group">
-<label for="enlaceURL">🔗 URL del Enlace:</label>
-<input type="url" id="enlaceURL" class="form-control" placeholder="https://www.youtube.com/watch?v=...">
-</div>
+<div class="form-group"><label for="enlaceTitulo">📌 Título</label><input type="text" id="enlaceTitulo" class="form-control" placeholder="Video sobre Circunferencias"></div>
+<div class="form-group"><label for="enlaceURL">🔗 URL</label><input type="url" id="enlaceURL" class="form-control" placeholder="https://www.youtube.com/watch?v=..."></div>
 </div>
 <div class="form-grid">
-<div class="form-group">
-<label for="enlaceTipo">📁 Tipo de Recurso:</label>
-<select id="enlaceTipo" class="form-control">
-<option value="pagina">🌐 Página Web</option>
-<option value="video">🎥 Video (YouTube/Vimeo)</option>
-<option value="pdf">📄 Documento PDF</option>
-<option value="documento">📝 Documento (Word/Excel)</option>
-<option value="imagen">🖼️ Imagen/Infografía</option>
-<option value="otro">📦 Otro</option>
-</select>
+<div class="form-group"><label for="enlaceTipo">📁 Tipo</label><select id="enlaceTipo" class="form-control"><option value="pagina">🌐 Página Web</option><option value="video">🎥 Video</option><option value="pdf">📄 PDF</option><option value="documento">📝 Documento</option><option value="imagen">🖼️ Imagen</option><option value="otro">📦 Otro</option></select></div>
+<div class="form-group"><label for="enlaceMateria">📚 Materia</label><select id="enlaceMateria" class="form-control"><option value="">— Seleccione —</option><option value="matematica">Matemática</option><option value="ciencias">Ciencias</option><option value="estudios_sociales">Estudios Sociales</option><option value="espanol">Español</option><option value="ingles">Inglés</option><option value="otro">Otro</option></select></div>
 </div>
-<div class="form-group">
-<label for="enlaceMateria">📚 Materia Relacionada:</label>
-<select id="enlaceMateria" class="form-control">
-<option value="">-- Seleccione --</option>
-<option value="matematica">Matemática</option>
-<option value="ciencias">Ciencias</option>
-<option value="estudios_sociales">Estudios Sociales</option>
-<option value="espanol">Español</option>
-<option value="ingles">Inglés</option>
-<option value="educacion_fisica">Educación Física</option>
-<option value="otro">Otro</option>
-</select>
+<div class="form-group" style="margin-bottom:1rem"><label for="enlaceDescripcion">📝 Descripción</label><textarea id="enlaceDescripcion" class="textarea-large" style="min-height:70px" placeholder="Breve descripción..."></textarea></div>
+<div style="display:flex;gap:0.6rem;flex-wrap:wrap"><button class="btn btn-primary" onclick="agregarEnlace()">💾 Guardar Enlace</button><button class="btn btn-outline" onclick="limpiarFormularioEnlace()">🧹 Limpiar</button></div>
 </div>
-</div>
-<div class="form-group">
-<label for="enlaceDescripcion">📝 Descripción (opcional):</label>
-<textarea id="enlaceDescripcion" class="textarea-large" style="min-height: 80px;" placeholder="Breve descripción del recurso..."></textarea>
-</div>
-<button class="btn btn-primary" onclick="agregarEnlace()">💾 Guardar Enlace</button>
-<button class="btn btn-secondary" onclick="limpiarFormularioEnlace()" style="margin-left: 1rem;">🧹 Limpiar Formulario</button>
-</div>
-
-<!-- LISTA DE ENLACES GUARDADOS -->
-<div style="margin-top: 2rem;">
-<h3 style="color: var(--primary); margin-bottom: 1rem;">📋 Enlaces Guardados (<span id="contadorEnlaces">0</span>)</h3>
-<div id="listaEnlaces" style="display: grid; gap: 1rem;">
-<!-- Se llenará dinámicamente -->
-</div>
-</div>
-
-<!-- BOTONES DE GESTIÓN -->
-<div style="text-align: center; margin-top: 2rem;">
-<button class="btn btn-primary" onclick="exportarEnlaces()">📤 Exportar Enlaces (JSON)</button>
-<button class="btn btn-secondary" onclick="importarEnlaces()" style="margin-left: 1rem;">📥 Importar Enlaces</button>
-<button class="btn btn-danger" onclick="limpiarTodosEnlaces()" style="margin-left: 1rem;">🗑️ Eliminar Todos</button>
-</div>
+<div style="margin-top:1.8rem"><h3 style="color:var(--ink);font-size:0.95rem;font-weight:700;margin-bottom:1rem">📋 Enlaces Guardados <span class="tag tag-teal" id="contadorEnlaces">0</span></h3><div id="listaEnlaces"><p style="text-align:center;color:var(--ink-soft);padding:2rem">No hay enlaces guardados aún.</p></div></div>
+<div style="display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:1.2rem"><button class="btn btn-primary" onclick="exportarEnlaces()">📤 Exportar</button><button class="btn btn-secondary" onclick="importarEnlaces()">📥 Importar</button><button class="btn btn-danger" onclick="limpiarTodosEnlaces()">🗑️ Eliminar Todos</button></div>
 </section>
 </div>
-
-<!-- ============================================
-     MÓDULO 5: RECURSOS
-     ============================================ -->
+<!-- MÓDULO 5: RECURSOS -->
 <div id="moduleRecursos" class="module-content">
 <button class="back-btn" onclick="showWelcome()">← Volver al Inicio</button>
-<section class="section">
-<h2 class="section-title">📚 Recursos para Docentes</h2>
-<div class="info-box">
-<h3>🎯 ¿Cómo usar esta plataforma?</h3>
-<ol style="margin-left: 1.5rem; line-height: 2.2;">
-<li>Vaya a <strong>"Crear Actividad"</strong> y complete los datos del docente</li>
-<li>Ingrese el <strong>contenido teórico completo</strong> (definiciones, conceptos, ejemplos)</li>
-<li>Defina las <strong>habilidades</strong> generales y específicas</li>
-<li>Configure <strong>apoyos curriculares</strong> si necesita adecuaciones</li>
-<li>Seleccione los <strong>tipos de ítems</strong> que desea incluir</li>
-<li><strong>ACTIVE el formulario de envío</strong> si quiere recibir las respuestas por correo</li>
-<li>Genere el prompt con el botón <strong>"Generar Prompt Optimizado"</strong></li>
-<li>Copie el prompt y péguelo en su IA preferida</li>
-<li>Pegue el código HTML generado y descargue el archivo index.html</li>
-<li>Comparta el archivo con sus estudiantes</li>
-</ol>
-</div>
+<section class="section"><h2 class="section-title">📚 Recursos para Docentes</h2>
+<div class="info-box"><h3 style="margin-bottom:0.7rem;font-size:1rem">🎯 ¿Cómo usar esta plataforma?</h3><ol style="margin-left:1.4rem;line-height:2.2;font-size:0.9rem"><li>Vaya a <strong>"Crear Actividad"</strong> y complete los datos del docente</li><li>Ingrese el <strong>contenido teórico completo</strong> en el Paso 2</li><li>Defina las <strong>habilidades</strong> generales y específicas</li><li>Configure <strong>apoyos curriculares</strong> si necesita adecuaciones (Decreto N° 37486-MP-MEP)</li><li>Seleccione los <strong>tipos de ítems</strong> que desea incluir</li><li><strong>ACTIVE el formulario de envío</strong> si quiere recibir respuestas por correo</li><li>Genere el prompt con <strong>"Generar Prompt"</strong></li><li>Copie el prompt y péguelo en su IA preferida (DeepSeek, ChatGPT, Gemini…)</li><li>Pegue el código HTML generado en el área de descarga</li><li>Descargue el archivo y compártalo con sus estudiantes</li></ol></div>
 </section>
 </div>
 </div>
-
-<!-- ============================================
-     FOOTER - PIE DE PÁGINA
-     ============================================ -->
+<!-- FOOTER -->
 <footer class="footer">
 <h3>🎓 EduHTML Builder PRO MAX</h3>
 <p><strong>Profesor Carlos Elizondo Castillo</strong></p>
 <p>📧 <a href="mailto:carlos.elizondo.castillo@mep.go.cr">carlos.elizondo.castillo@mep.go.cr</a></p>
-<p>© 2026 - Todos los derechos reservados</p>
-<p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
-"Transformando la educación mediante la tecnología inclusiva"
-</p>
+<p>© 2026 — Todos los derechos reservados</p>
+<p class="footer-quote">"Transformando la educación mediante la tecnología inclusiva"</p>
 </footer>
-
-<!-- ============================================
-     JAVASCRIPT - LÓGICA Y FUNCIONALIDAD
-     ============================================ -->
 <script>
-// ============================================
-// VARIABLES GLOBALES
-// ============================================
+/* ============================================
+ESTADO GLOBAL
+============================================ */
 let itemTypesSeleccionados = [];
-let preguntasPersonalizadas = [];
-
-// ============================================
-// NAVEGACIÓN ENTRE MÓDULOS
-// ============================================
-function showModule(moduleName, event) {
+let modoActual = 'completo';
+let fasesGuardadas = {}; // Para modo modular: {1: html, 2: html, 3: html, 4: html}
+let faseActual = 1;
+/* ============================================
+NAVEGACIÓN
+============================================ */
+function showModule(name, event) {
 document.getElementById('welcomeScreen').style.display = 'none';
 document.querySelectorAll('.module-content').forEach(m => m.classList.remove('active'));
-document.getElementById('module' + moduleName.charAt(0).toUpperCase() + moduleName.slice(1)).classList.add('active');
-// Update active button
-document.querySelectorAll('.module-btn').forEach(btn => btn.classList.remove('active'));
-if(event) {
-event.target.classList.add('active');
-}
+document.getElementById('module' + name.charAt(0).toUpperCase() + name.slice(1)).classList.add('active');
+document.querySelectorAll('.module-btn').forEach(b => b.classList.remove('active'));
+if (event && event.target) event.target.classList.add('active');
 window.scrollTo({ top: 0, behavior: 'smooth' });
-// Load specific module data
-if(moduleName === 'banco') {
-cargarBanco();
+if (name === 'banco') cargarBanco();
+if (name === 'estadisticas') actualizarEstadisticas();
+if (name === 'enlaces') cargarEnlaces();
 }
-if(moduleName === 'estadisticas') {
-actualizarEstadisticas();
-}
-if(moduleName === 'enlaces') {
-cargarEnlaces();
-}
-}
-
 function showWelcome() {
 document.getElementById('welcomeScreen').style.display = 'block';
 document.querySelectorAll('.module-content').forEach(m => m.classList.remove('active'));
-document.querySelectorAll('.module-btn').forEach(btn => btn.classList.remove('active'));
-document.querySelector('.module-btn:first-child').classList.add('active');
+document.querySelectorAll('.module-btn').forEach(b => b.classList.remove('active'));
+document.querySelector('.module-btn').classList.add('active');
 window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
-// ============================================
-// BARRA DE PROGRESO - ACTUALIZACIÓN
-// ============================================
+/* ============================================
+PROGRESO
+============================================ */
 function updateProgress(step) {
-const progressLine = document.getElementById('progressLine');
-const percentage = (step / 7) * 100;
-progressLine.style.width = percentage + '%';
-document.querySelectorAll('.step').forEach((s, index) => {
-if(index + 1 < step) {
-s.classList.add('completed');
-s.classList.remove('active');
-} else if(index + 1 === step) {
-s.classList.add('active');
-s.classList.remove('completed');
-} else {
+document.getElementById('progressLine').style.width = ((step / 7) * 100) + '%';
+document.querySelectorAll('.step').forEach((s, i) => {
 s.classList.remove('active', 'completed');
-}
+if (i + 1 < step) s.classList.add('completed');
+else if (i + 1 === step) s.classList.add('active');
 });
 }
-
-// ============================================
-// TOGGLE ADECUACIÓN CURRICULAR
-// ============================================
+/* ============================================
+TOGGLES
+============================================ */
 function toggleAdecuacion() {
-const checkbox = document.getElementById('necesitaAdecuacion');
-const container = document.getElementById('adecuacionContainer');
-container.classList.toggle('hidden', !checkbox.checked);
+const checked = document.getElementById('necesitaAdecuacion').checked;
+document.getElementById('adecuacionContainer').classList.toggle('hidden', !checked);
 }
-
-// ============================================
-// TOGGLE FORMULARIO DE ENVÍO
-// ============================================
 function toggleFormulario() {
-const checkbox = document.getElementById('activarFormulario');
-const container = document.getElementById('formularioContainer');
+const checked = document.getElementById('activarFormulario').checked;
 const correo = document.getElementById('correo').value || 'correo@ejemplo.com';
 document.getElementById('previewCorreo').textContent = correo;
-container.classList.toggle('hidden', !checkbox.checked);
+document.getElementById('formularioContainer').classList.toggle('hidden', !checked);
 }
-
-// ============================================
-// SELECCIÓN DE TIPOS DE ÍTEMS
-// ============================================
 function toggleItemType(card, type) {
 card.classList.toggle('selected');
-if (itemTypesSeleccionados.includes(type)) {
-itemTypesSeleccionados = itemTypesSeleccionados.filter(t => t !== type);
+if (itemTypesSeleccionados.includes(type)) { itemTypesSeleccionados = itemTypesSeleccionados.filter(t => t !== type); }
+else { itemTypesSeleccionados.push(type); }
+}
+/* ============================================
+SELECTOR DE MODO
+============================================ */
+const TASAS_MODO = {
+completo: '🏆 <strong>Modo Completo:</strong> HTML/CSS ~95% · Lógica JS ~85% · Cantidades exactas ~70% — <em>Usar DeepSeek R1 o GPT-4o.</em>',
+modular: '🧩 <strong>Modo Modular:</strong> 4 prompts independientes. Pégalos en orden en la misma conversación. Reduce truncamiento ~60%.',
+minimal: '⚡ <strong>Modo Mínimo:</strong> HTML/CSS ~99% · Lógica JS ~95% · Cantidades exactas ~90% — Sin animaciones ni glassmorphism.'
+};
+function seleccionarModo(card, modo) {
+document.querySelectorAll('.modo-card').forEach(c => c.classList.remove('selected'));
+card.classList.add('selected');
+document.getElementById('modoGeneracion').value = modo;
+modoActual = modo;
+document.getElementById('tasaCumplimiento').innerHTML = TASAS_MODO[modo];
+// Ocultar paneles anteriores
+document.getElementById('promptGenerado').classList.add('hidden');
+document.getElementById('fasesContainer').classList.remove('active');
+document.getElementById('ensambladoFinal').classList.remove('active');
+}
+/* ============================================
+GENERAR PROMPT POR MODO
+============================================ */
+function generarPromptPorModo() {
+const modo = document.getElementById('modoGeneracion').value;
+if (modo === 'modular') { generarPromptModular(); return; }
+if (modo === 'minimal') { generarPromptMinimal(); return; }
+generarPrompt(); // completo
+}
+/* ============================================
+DATOS MEP
+============================================ */
+const MEP_REFERENCIAS = {
+matematica: {
+7: { habilidad: 'Resolución de problemas en contextos cotidianos con números enteros, fracciones y decimales', ejes: 'Números, Medidas, Geometría, Relaciones y álgebra, Estadística y probabilidad', indicadores: 'Resuelve situaciones problemáticas aplicando operaciones con números racionales; identifica y clasifica figuras geométricas; interpreta datos estadísticos básicos.' },
+8: { habilidad: 'Uso del razonamiento lógico-matemático en situaciones de variación y regularidades', ejes: 'Números, Medidas, Geometría, Relaciones y álgebra, Estadística y probabilidad', indicadores: 'Resuelve ecuaciones lineales; calcula perímetros y áreas de figuras planas; construye e interpreta gráficos estadísticos.' },
+9: { habilidad: 'Modelización matemática de situaciones reales mediante funciones y geometría del espacio', ejes: 'Números, Medidas, Geometría, Relaciones y álgebra, Estadística y probabilidad', indicadores: 'Aplica el teorema de Pitágoras; trabaja con funciones lineales; calcula probabilidades simples y compuestas.' },
+10: { habilidad: 'Aplicación de conceptos de geometría analítica y álgebra en la resolución de problemas', ejes: 'Números, Medidas, Geometría analítica, Relaciones y álgebra, Estadística y probabilidad', indicadores: 'Determina ecuaciones de circunferencias; opera con vectores en el plano; aplica funciones cuadráticas; analiza distribuciones estadísticas.' },
+11: { habilidad: 'Comprensión del cálculo diferencial como herramienta para analizar cambios y optimizar', ejes: 'Números, Medidas, Geometría, Cálculo diferencial, Estadística y probabilidad', indicadores: 'Calcula límites de funciones; determina derivadas aplicando reglas; resuelve problemas de optimización; interpreta la derivada geométricamente.' },
+12: { habilidad: 'Integración del cálculo integral y la estadística inferencial para modelar fenómenos reales', ejes: 'Números, Medidas, Geometría, Cálculo integral, Estadística inferencial', indicadores: 'Calcula integrales definidas e indefinidas; aplica el teorema fundamental del cálculo; interpreta intervalos de confianza.' }
+},
+ciencias: {
+7: { habilidad: 'Comprensión de los sistemas naturales y la interacción materia-energía en el entorno', ejes: 'Materia y energía, Seres vivos, Tierra y Universo, Ciencia-Tecnología-Sociedad', indicadores: 'Distingue propiedades físicas y químicas de la materia; identifica flujos de energía en ecosistemas; describe estructuras celulares básicas.' },
+8: { habilidad: 'Aplicación de leyes físicas y principios químicos para explicar fenómenos naturales', ejes: 'Materia y energía, Seres vivos, Tierra y Universo, Ciencia-Tecnología-Sociedad', indicadores: 'Aplica leyes del movimiento; describe reacciones químicas básicas; explica procesos de reproducción celular.' },
+9: { habilidad: 'Análisis de procesos evolutivos, genéticos y reacciones químicas en contextos reales', ejes: 'Materia y energía, Seres vivos, Tierra y Universo, Ciencia-Tecnología-Sociedad', indicadores: 'Aplica leyes de Mendel; interpreta árboles filogenéticos; balancea ecuaciones químicas; analiza ciclos biogeoquímicos.' },
+10: { habilidad: 'Integración de conceptos de física, química y biología para explicar fenómenos complejos', ejes: 'Física: Mecánica y electromagnetismo, Química: Tabla periódica y enlaces, Biología molecular', indicadores: 'Aplica leyes de Newton; interpreta la tabla periódica; describe la estructura del ADN y síntesis de proteínas.' },
+11: { habilidad: 'Profundización en biología celular, química orgánica y física moderna', ejes: 'Biología celular avanzada, Química orgánica, Física: ondas y óptica', indicadores: 'Describe el metabolismo celular (respiración y fotosíntesis); clasifica compuestos orgánicos; explica fenómenos de difracción e interferencia.' },
+12: { habilidad: 'Comprensión de física moderna, química avanzada y biotecnología', ejes: 'Física moderna, Química analítica, Biotecnología y ética científica', indicadores: 'Aplica principios de física cuántica; realiza cálculos de química analítica; evalúa implicaciones éticas de la biotecnología.' }
+},
+estudios_sociales: {
+7: { habilidad: 'Comprensión del espacio geográfico costarricense y su relación con el desarrollo humano', ejes: 'Espacio geográfico, Tiempo histórico, Ciudadanía, Economía y ambiente', indicadores: 'Ubica regiones geográficas de Costa Rica; describe la organización político-administrativa; analiza indicadores de desarrollo humano.' },
+8: { habilidad: 'Análisis de procesos históricos centroamericanos y su impacto en la identidad regional', ejes: 'Espacio geográfico, Tiempo histórico, Ciudadanía, Economía y ambiente', indicadores: 'Describe la formación de los Estados centroamericanos; analiza conflictos regionales del siglo XX; interpreta mapas históricos.' },
+9: { habilidad: 'Comprensión de los procesos históricos latinoamericanos y la construcción de la democracia', ejes: 'Espacio geográfico, Tiempo histórico, Ciudadanía, Economía y ambiente', indicadores: 'Analiza revoluciones e independencias latinoamericanas; evalúa sistemas de gobierno; interpreta indicadores económicos regionales.' },
+10: { habilidad: 'Análisis crítico de los procesos históricos mundiales y su influencia en la actualidad', ejes: 'Historia universal, Geografía mundial, Ciudadanía global, Economía política', indicadores: 'Evalúa causas y consecuencias de las guerras mundiales; analiza procesos de descolonización; interpreta fenómenos de globalización.' },
+11: { habilidad: 'Comprensión del Costa Rica del siglo XX y los retos de la sociedad contemporánea', ejes: 'Historia de Costa Rica, Geografía nacional, Democracia y ciudadanía, Desarrollo sostenible', indicadores: 'Analiza el Estado de bienestar costarricense; evalúa la evolución del sistema democrático; propone soluciones a problemas socioambientales.' },
+12: { habilidad: 'Análisis de la geopolítica contemporánea y el desarrollo sostenible global', ejes: 'Geopolítica, Economía global, Derechos humanos, Sostenibilidad y ambiente', indicadores: 'Evalúa organismos internacionales; analiza acuerdos de libre comercio; propone estrategias de desarrollo sostenible.' }
+},
+espanol: {
+7: { habilidad: 'Comprensión y producción de textos en diversas situaciones comunicativas cotidianas', ejes: 'Comprensión lectora, Expresión escrita, Expresión oral, Gramática y ortografía, Literatura', indicadores: 'Identifica la idea principal y detalles en textos narrativos e informativos; redacta párrafos coherentes; aplica normas ortográficas básicas.' },
+8: { habilidad: 'Análisis de textos literarios y producción de escritura creativa y argumentativa', ejes: 'Comprensión lectora, Expresión escrita, Expresión oral, Gramática y ortografía, Literatura', indicadores: 'Analiza características de géneros literarios; produce textos descriptivos y argumentativos; aplica conectores textuales.' },
+9: { habilidad: 'Desarrollo del pensamiento crítico a través del análisis literario y discursivo', ejes: 'Comprensión lectora, Expresión escrita, Expresión oral, Gramática y ortografía, Literatura hispanoamericana', indicadores: 'Analiza figuras literarias; produce ensayos argumentativos; reconoce intención comunicativa en discursos públicos.' },
+10: { habilidad: 'Análisis de la literatura costarricense y producción de textos académicos', ejes: 'Literatura costarricense, Medios de comunicación, Expresión oral formal, Escritura académica', indicadores: 'Analiza obras representativas de la literatura costarricense; produce reseñas y artículos de opinión; evalúa mensajes mediáticos.' },
+11: { habilidad: 'Comprensión de la literatura latinoamericana y desarrollo de la escritura académica avanzada', ejes: 'Literatura latinoamericana, Géneros discursivos, Investigación documental, Oratoria', indicadores: 'Analiza el boom latinoamericano; produce monografías y trabajos de investigación; aplica normas APA básicas.' },
+12: { habilidad: 'Análisis de la literatura universal y dominio de la comunicación académica y profesional', ejes: 'Literatura universal, Crítica literaria, Escritura profesional, Competencia comunicativa avanzada', indicadores: 'Analiza movimientos literarios universales; produce textos críticos y académicos; se comunica con registro formal apropiado.' }
+},
+ingles: {
+7: { habilidad: 'Comunicación en inglés en situaciones cotidianas usando vocabulario básico', ejes: 'Listening, Speaking, Reading, Writing, Language Use', indicadores: 'Comprende instrucciones simples; describe su entorno inmediato; lee textos cortos con apoyo visual; escribe oraciones simples.' },
+10: { habilidad: 'Comunicación efectiva en inglés en contextos académicos y sociales variados', ejes: 'Listening, Speaking, Reading, Writing, Language Use', indicadores: 'Comprende diálogos sobre temas conocidos; participa en conversaciones; lee textos de nivel intermedio; produce párrafos coherentes.' }
+},
+educacion_fisica: {
+7: { habilidad: 'Desarrollo de capacidades físicas y habilidades motrices en contextos deportivos y recreativos', ejes: 'Capacidades físicas, Habilidades motrices, Salud y bienestar, Valores deportivos', indicadores: 'Demuestra mejora en resistencia aeróbica; ejecuta habilidades básicas de deportes colectivos; valora la actividad física para la salud.' }
+}
+};
+/* ============================================
+PLANTILLAS DUA
+============================================ */
+const DUA_PLANTILLAS = {
+visual: {
+representacion: ['Usar contraste mínimo 7:1 (negro sobre amarillo o blanco sobre negro)','Tipografía sans-serif, tamaño mínimo 18px en cuerpo y 24px en títulos','Todo elemento gráfico con texto alternativo descriptivo (atributo alt)','Compatible con lectores de pantalla (NVDA, JAWS): orden lógico de DOM','Opción de zoom hasta 200% sin pérdida de funcionalidad','Fórmulas matemáticas con notación MathJax accesible'],
+accion: ['Navegación completa por teclado (Tab, Shift+Tab, Enter, Espacio)','Indicadores de foco visibles (outline 3px color primario)','Evitar información transmitida SOLO por color'],
+motivacion: ['Instrucciones de audio (text-to-speech) como opción','Feedback descriptivo, no solo visual (mensajes de texto claros)']
+},
+auditiva: {
+representacion: ['Transcripción escrita completa de cualquier contenido auditivo','Pictogramas ARASAAC para secuencias de instrucciones','Código de colores semántico y consistente (verde=correcto, rojo=error)','Subtítulos en todos los videos (formato SRT)','Glosario visual con definiciones ilustradas'],
+accion: ['Respuestas mediante texto, no requieren comunicación oral','Instrucciones escritas paso a paso numeradas'],
+motivacion: ['Refuerzo visual inmediato (animaciones, cambio de color, iconos)','Progreso visible mediante barra o porcentaje']
+},
+motriz: {
+representacion: ['Información en bloques cortos, sin scroll excesivo','Layouts simples y predecibles, sin necesidad de precisión'],
+accion: ['Botones con área de clic mínima 44×44px (estándar WCAG 2.5.5)','Navegación completa por teclado sin ratón','Sin límite de tiempo para completar actividades','Evitar drag-and-drop como única interacción; ofrecer alternativas','Autoguardado automático cada 30 segundos','Botón de "Continuar después" visible en todo momento'],
+motivacion: ['Confirmación de selección clara antes de enviar','Opción de revisar y cambiar respuestas fácilmente']
+},
+cognitiva: {
+representacion: ['Lenguaje Fácil Lectura: oraciones cortas (máx. 15 palabras), vocabulario común','Instrucciones paso a paso, una acción por instrucción','Glosario de términos clave con definición simple y ejemplo','Apoyos visuales (iconos, diagramas) junto a cada instrucción escrita','Ejemplos resueltos visibles durante toda la actividad','Estructura predecible: mismo formato en cada sección'],
+accion: ['Actividades divididas en pasos pequeños con confirmación','Botón "¿Necesitas ayuda?" con pista adicional','Tiempo flexible, sin presión de temporizador'],
+motivacion: ['Feedback positivo por cada respuesta correcta','Mensajes de aliento al cometer errores (no penalizantes)','Progreso visual (estrellitas, porcentaje, barra de logro)']
+},
+tdah: {
+representacion: ['Diseño sin distractores: fondos limpios, sin animaciones de fondo','Un solo concepto o tarea por pantalla','Instrucciones breves con negritas en palabras clave','Colores de alto contraste para elementos importantes'],
+accion: ['Actividades de máximo 10 minutos divididas en micro-tareas','Botón de pausa visible en todo momento','Recordatorios visuales del objetivo de la tarea','Autoguardado automático'],
+motivacion: ['Feedback inmediato después de CADA respuesta (no al final)','Sistema de puntos o logros visibles','Variedad de tipos de preguntas para mantener el interés','Contador de progreso: "Pregunta X de Y"']
+},
+autismo: {
+representacion: ['Estructura visual predecible y consistente en todas las secciones','Pictogramas de secuencia para indicar pasos del proceso','Evitar lenguaje ambiguo, metáforas o ironía; usar lenguaje literal','Instrucciones explícitas sobre qué hacer y qué se espera','Sin cambios bruscos de diseño entre secciones'],
+accion: ['Anticipación clara: indicar siempre qué viene después','Opciones de respuesta claramente delimitadas y diferenciadas','Evitar sorpresas o elementos inesperados'],
+motivacion: ['Temáticas de interés especial si el estudiante las tiene','Rutina clara: misma secuencia en cada actividad','Zona de descanso opcional entre secciones']
+},
+dislexia: {
+representacion: ['Tipografía: OpenDyslexic o Verdana, tamaño 16-18px','Interlineado 1.5, espaciado entre letras aumentado (0.05em)','Fondo color crema (#FFF8DC) o azul pálido (#E8F4F8), NO blanco puro','Texto alineado a la izquierda, NUNCA justificado','Párrafos cortos (máx. 3-4 líneas), una idea por párrafo','Lectora de texto (text-to-speech) como opción'],
+accion: ['Opciones de respuesta con apoyo de pictogramas o colores','Evitar transcripción manual; preferir selección múltiple o clics'],
+motivacion: ['Tiempo extendido sin límite visible','Valorar el contenido sobre la forma ortográfica','Mensajes de refuerzo que no enfaticen errores escritos']
+}
+};
+/* ============================================
+GENERAR PROMPT COMPLETO
+============================================ */
+function generarPrompt() {
+const get = id => document.getElementById(id).value || '';
+const profesor = get('profesor') || 'Profesor';
+const correo = get('correo') || 'correo@ejemplo.com';
+const institucion = get('institucion') || 'Institución Educativa';
+const materia = get('materia') || 'materia';
+const nivel = parseInt(get('nivel')) || 0;
+const tema = get('tema') || 'Tema';
+const habilidadGeneral = get('habilidadGeneral') || 'Habilidad general';
+const habilidadEsp = get('habilidadEspecifica') || 'Habilidad específica';
+const teoriaContenido = get('teoriaContenido') || 'Sin contenido teórico';
+const ejemplos = get('ejemplosResueltos') || 'Sin ejemplos';
+const numPractica = parseInt(get('numPreguntasPractica')) || 8;
+const numQuiz = parseInt(get('numPreguntasQuiz')) || 10;
+const instrEsp = get('instruccionesEspeciales') || '';
+const tiposSeleccionados = itemTypesSeleccionados.length ? itemTypesSeleccionados.join(', ') : 'seleccion_multiple, verdadero_falso, respuesta_corta';
+const necesitaAdecuacion = document.getElementById('necesitaAdecuacion').checked;
+const tipoAdecuacion = get('tipoAdecuacion') || 'cognitiva';
+const descripcionAdec = get('descripcionAdecuacion') || 'Necesidad educativa especial';
+const estrategiasAdec = get('estrategiasAdecuacion') || '';
+const recursosApoyo = get('recursosApoyo') || '';
+const activarFormulario = document.getElementById('activarFormulario').checked;
+const correoDestino = get('correoDestino') || correo;
+const asuntoCorreo = get('asuntoCorreo') || '📝 Nuevas Respuestas de Estudiante';
+const configForm = get('configuracionFormulario') || '';
+const mepData = MEP_REFERENCIAS[materia]?.[nivel];
+const nivelLabel = nivel ? `${nivel}° Año` : 'nivel no especificado';
+const citaMEP = mepData ? `PROGRAMA DE ESTUDIO MEP — ${materia.toUpperCase()} — ${nivelLabel}\n• Habilidad curricular oficial: "${mepData.habilidad}"\n• Ejes temáticos: ${mepData.ejes}\n• Indicadores de logro: ${mepData.indicadores}\n• Marco legal: Decreto Ejecutivo N° 38170-MEP (Transformación Curricular) y lineamientos del Departamento de Desarrollo Curricular del MEP.` : `PROGRAMA DE ESTUDIO MEP — ${materia.toUpperCase()} — ${nivelLabel}\n• Marco curricular: Programas de Estudio vigentes del Ministerio de Educación Pública de Costa Rica.\n• Decreto Ejecutivo N° 38170-MEP: Transformación Curricular con enfoque en resolución de problemas.\n• Lineamientos: Departamento de Desarrollo Curricular, Dirección de Gestión y Evaluación de la Calidad.`;
+const duaData = DUA_PLANTILLAS[tipoAdecuacion] || DUA_PLANTILLAS.cognitiva;
+const adecuacionesSection = necesitaAdecuacion ? `ADECUACIONES CURRICULARES — DECRETO N° 37486-MP-MEP\nTipo de necesidad: ${tipoAdecuacion} — ${descripcionAdec}\n▸ PRINCIPIO 1 — MÚLTIPLES FORMAS DE REPRESENTACIÓN:\n${duaData.representacion.map(e => '  • ' + e).join('\n')}\n▸ PRINCIPIO 2 — MÚLTIPLES FORMAS DE ACCIÓN Y EXPRESIÓN:\n${duaData.accion.map(e => '  • ' + e).join('\n')}\n▸ PRINCIPIO 3 — MÚLTIPLES FORMAS DE MOTIVACIÓN:\n${duaData.motivacion.map(e => '  • ' + e).join('\n')}\n${estrategiasAdec ? '▸ ESTRATEGIAS ADICIONALES DEL DOCENTE:\n' + estrategiasAdec : ''}\n${recursosApoyo ? '▸ RECURSOS DE APOYO:\n' + recursosApoyo : ''}` : `ACCESIBILIDAD UNIVERSAL (sin adecuación específica):\n• Contraste WCAG AA mínimo (4.5:1)\n• Navegación completa por teclado\n• Tipografía legible ≥14px\n• Etiquetas ARIA en elementos interactivos`;
+const formularioSection = activarFormulario ? `FORMULARIO DE ENVÍO — IMPLEMENTACIÓN TÉCNICA OBLIGATORIA:\n▸ Usar FormSubmit.co con action="https://formsubmit.co/${correoDestino}"\n▸ Campos REQUERIDOS con validación HTML5:\n- Nombre completo: <input name="nombre" required minlength="5">\n- Correo electrónico: <input type="email" name="correo" required>\n- Grupo/Sección: <input name="grupo" required>\n- Campo oculto de calificación: <input type="hidden" name="calificacion" id="calificacionFinal">\n- Campo oculto de respuestas: <input type="hidden" name="respuestas_detalle" id="detalleRespuestas">\n▸ Configuración FormSubmit:\n- <input type="hidden" name="_subject" value="${asuntoCorreo}">\n- <input type="hidden" name="_next" value="about:blank">\n- <input type="hidden" name="_captcha" value="false">\n- <input type="hidden" name="_autoresponse" value="¡Gracias! Tu actividad fue enviada correctamente. El profesor ${profesor} recibirá tus respuestas.">\n▸ JavaScript: antes del submit, calcular calificación y rellenar campos ocultos.\n▸ Mostrar pantalla de éxito con confetti (canvas-confetti CDN) tras envío.\n${configForm ? '▸ Configuración adicional: ' + configForm : ''}` : `QUIZ SIN FORMULARIO:\n▸ Mostrar calificación en pantalla (0-100%) al finalizar.\n▸ Botón "Ver respuestas correctas" que resalta errores en rojo y aciertos en verde.\n▸ Botón "Intentar de nuevo" que reinicia el quiz.\n▸ NO incluir ningún formulario ni acción de envío.`;
+const tiposArray = tiposSeleccionados.split(', ');
+const practica_por_tipo = Math.ceil(numPractica / tiposArray.length);
+const cantidadesSection = `ESTRUCTURA EXACTA DE ÍTEMS (NO variar estas cantidades):\n▸ SECCIÓN PRÁCTICA — EXACTAMENTE ${numPractica} ejercicios en total:\n${tiposArray.map((t, i) => `   ${i+1}. Tipo "${t}": EXACTAMENTE ${i < numPractica % tiposArray.length || numPractica % tiposArray.length === 0 ? practica_por_tipo : practica_por_tipo - 1} ejercicios`).join('\n')}\n▸ SECCIÓN QUIZ — EXACTAMENTE ${numQuiz} preguntas en total:\n- Tipo "seleccion_multiple": EXACTAMENTE ${numQuiz} preguntas\n- EXACTAMENTE 4 opciones por pregunta (a, b, c, d)\n- UNA sola respuesta correcta por pregunta\n- Preguntas basadas EXCLUSIVAMENTE en la teoría proporcionada\n- Dificultad progresiva: 40% fácil → 40% media → 20% difícil\n${instrEsp ? '\n▸ INSTRUCCIONES ESPECIALES DEL DOCENTE:\n' + instrEsp : ''}`;
+const restriccionesSection = `RESTRICCIONES — LO QUE NO SE DEBE HACER:\n✗ NO usar Bootstrap, Tailwind, jQuery ni ningún framework externo.\n✗ NO crear múltiples archivos; todo en un ÚNICO archivo HTML.\n✗ NO dejar preguntas de ejemplo, placeholder o "Lorem ipsum".\n✗ NO cambiar las cantidades exactas de preguntas indicadas.\n✗ NO inventar contenido que no esté en la teoría proporcionada.\n✗ NO usar alert() para mostrar la calificación; usar HTML/CSS.\n✗ NO omitir el nombre del profesor en el header de la actividad.\n✗ NO usar setTimeout mayor a 3000ms ni animaciones que duren más de 1s.\n✗ NO olvidar la sección de teoría completa ANTES de las preguntas.\n✗ NO generar código sin comentarios; cada sección debe estar comentada.`;
+const prompt = `╔══════════════════════════════════════════════════════════════╗\n║    🎓 ACTIVIDAD EDUCATIVA INTERACTIVA — MEP COSTA RICA       ║\n╚══════════════════════════════════════════════════════════════╝\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nROL Y TAREA\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nEres un experto en desarrollo frontend educativo y diseño instruccional.\nTu tarea: generar UN ÚNICO archivo HTML5/CSS3/JavaScript autocontenido,\nfuncional, accesible y listo para distribuir a estudiantes.\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nDATOS DEL DOCENTE\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nNombre: ${profesor}\nCorreo: ${correo}\nInstitución: ${institucion}\nMateria: ${materia} | Nivel: ${nivelLabel}\nTema específico: ${tema}\nHabilidad general: ${habilidadGeneral}\nHabilidades específicas:\n${habilidadEsp}\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nREFERENCIA CURRICULAR OFICIAL\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n${citaMEP}\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nADECUACIONES CURRICULARES Y DISEÑO UNIVERSAL\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n${adecuacionesSection}\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nCONTENIDO TEÓRICO (INCLUIR COMPLETO EN LA ACTIVIDAD)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n${teoriaContenido}\nEJEMPLOS RESUELTOS:\n${ejemplos}\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nESTRUCTURA EXACTA DE ÍTEMS\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n${cantidadesSection}\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nFORMULARIO Y CALIFICACIÓN\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n${formularioSection}\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nDISEÑO VISUAL OBLIGATORIO\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n• Fondo general: gradiente sutil #f0f4f8 → #e8f4f0\n• Tarjetas con glassmorphism: backdrop-filter:blur(10px), fondo rgba(255,255,255,0.85)\n• Border-radius: 20-28px en contenedores, 12px en inputs\n• Tipografía: 'Segoe UI', system-ui, Georgia para títulos\n• Paleta: --teal:#0d9488, --amber:#d97706, --indigo:#4f46e5, --rose:#e11d48\n• Animación carga: keyframe fadeInUp (opacity 0→1, translateY 20px→0)\n• Hover en botones: translateY(-2px) + box-shadow más pronunciada\n• Barra de progreso del quiz: gradiente teal animado\n• Confetti (canvas-confetti CDN) solo si calificación ≥ 70%\n• 100% responsive: breakpoints 768px y 480px\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nREQUISITOS TÉCNICOS\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n• Pestañas CSS puras (Teoría / Práctica / Quiz / Resultados)\n• Header fijo: nombre del docente + institución + tema\n• Footer: correo del docente + fecha de creación\n• localStorage: guardar progreso al cambiar de pestaña\n• MathJax 3 (CDN) para renderizar fórmulas matemáticas\n• Atributos aria-label en botones e inputs\n• Metaetiqueta <meta name="author" content="${profesor}">\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n${restriccionesSection}\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nENTREGA: Código HTML completo y funcional. Sin explicaciones previas.\nComenzar directamente con <!DOCTYPE html>.`;
+document.getElementById('promptModularPanel')?.classList.add('hidden');
+document.getElementById('promptGenerado').classList.remove('hidden');
+document.getElementById('promptTitulo').textContent = '✨ Prompt Completo';
+document.getElementById('promptText').textContent = prompt;
+const tokens = Math.round(prompt.length / 4);
+document.getElementById('promptTokEstimado').textContent = `~${tokens.toLocaleString()} tokens`;
+updateProgress(7);
+validarPrompt();
+document.getElementById('promptGenerado').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+/* ============================================
+VALIDAR PROMPT
+============================================ */
+function validarPrompt() {
+const get = id => document.getElementById(id).value.trim();
+const checks = [
+{ ok: get('profesor').length >= 3, label: 'Nombre del docente', prioridad: 'critica' },
+{ ok: get('correo').includes('@'), label: 'Correo electrónico válido', prioridad: 'critica' },
+{ ok: get('materia') !== '', label: 'Materia seleccionada', prioridad: 'critica' },
+{ ok: get('nivel') !== '', label: 'Nivel/grado seleccionado', prioridad: 'critica' },
+{ ok: get('tema').length >= 3, label: 'Tema específico', prioridad: 'critica' },
+{ ok: get('teoriaContenido').length >= 100, label: 'Contenido teórico (≥100 chars)', prioridad: 'alta' },
+{ ok: get('habilidadGeneral').length >= 5, label: 'Habilidad general', prioridad: 'alta' },
+{ ok: itemTypesSeleccionados.length > 0, label: 'Tipos de ítems seleccionados', prioridad: 'alta' },
+{ ok: parseInt(get('numPreguntasPractica') || 0) > 0, label: 'Cantidad de práctica > 0', prioridad: 'alta' },
+{ ok: parseInt(get('numPreguntasQuiz') || 0) > 0, label: 'Cantidad de quiz > 0', prioridad: 'alta' },
+{ ok: get('ejemplosResueltos').length >= 20, label: 'Ejemplos resueltos', prioridad: 'media' },
+{ ok: get('habilidadEspecifica').length >= 10, label: 'Habilidades específicas', prioridad: 'media' },
+{ ok: !document.getElementById('activarFormulario').checked || get('correoDestino').includes('@'), label: 'Correo destino (si formulario activo)', prioridad: 'media' },
+{ ok: !document.getElementById('necesitaAdecuacion').checked || get('tipoAdecuacion') !== '', label: 'Tipo adecuación (si está activo)', prioridad: 'alta' },
+];
+const total = checks.length;
+const pasados = checks.filter(c => c.ok).length;
+const pct = Math.round((pasados / total) * 100);
+const colores = { critica: '#e11d48', alta: '#d97706', media: '#0d9488' };
+const etiquetas = { critica: '🔴 Crítica', alta: '🟠 Alta', media: '🟢 Media' };
+const html = `<div style="margin-top:1.4rem;background:#0f172a;border-radius:16px;padding:1.4rem;border:1px solid rgba(255,255,255,0.08)"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem"><h3 style="color:#67e8f9;font-size:0.95rem;font-weight:700">🔍 Validación del Prompt</h3><span style="font-size:1.4rem;font-weight:800;color:${pct>=80?'#4ade80':pct>=50?'#fbbf24':'#f87171'}">${pct}%</span></div><div style="background:#1e293b;border-radius:8px;height:8px;overflow:hidden;margin-bottom:1rem"><div style="height:100%;width:${pct}%;background:${pct>=80?'linear-gradient(90deg,#0d9488,#4ade80)':pct>=50?'linear-gradient(90deg,#d97706,#fbbf24)':'linear-gradient(90deg,#e11d48,#f87171)'};transition:width 0.5s ease;border-radius:8px"></div></div><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:0.5rem">${checks.map(c => `<div style="display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;color:${c.ok?'#94a3b8':'#fca5a5'}"><span style="font-size:1rem">${c.ok ? '✅' : '❌'}</span><span>${c.label}</span>${!c.ok ? `<span style="font-size:0.7rem;padding:0.1rem 0.4rem;border-radius:4px;background:rgba(${c.prioridad==='critica'?'225,29,72':c.prioridad==='alta'?'217,119,6':'13,148,136'}, 0.2);color:${colores[c.prioridad]}">${etiquetas[c.prioridad]}</span>` : ''}</div>`).join('')}</div>${pasados < total ? `<p style="color:#fbbf24;font-size:0.8rem;margin-top:0.8rem">⚠️ Complete los campos marcados con ❌ para mejorar la calidad del prompt.</p>` : `<p style="color:#4ade80;font-size:0.8rem;margin-top:0.8rem">🎉 ¡Prompt completo y listo para usar!</p>`}</div>`;
+let panel = document.getElementById('validacionPrompt');
+if (!panel) { panel = document.createElement('div'); panel.id = 'validacionPrompt'; document.getElementById('promptGenerado')?.appendChild(panel); }
+panel.innerHTML = html;
+}
+/* ============================================
+ACCIONES DEL PROMPT
+============================================ */
+function copiarPrompt() { const text = document.getElementById('promptText').textContent; navigator.clipboard.writeText(text).then(() => alert('✅ Prompt copiado al portapapeles.')); }
+function mejorarPromptConIA() { if (!document.getElementById('promptText').textContent) { alert('❌ Primero genere el prompt.'); return; } window.open('https://chat.deepseek.com', '_blank'); }
+function abrirIA(url) { window.open(url, '_blank'); }
+/* ============================================
+MODO MODULAR - 4 FASES
+============================================ */
+function generarPromptModular() {
+const get = id => document.getElementById(id).value || '';
+const profesor = get('profesor') || 'Profesor';
+const correo = get('correo') || 'correo@ejemplo.com';
+const institucion = get('institucion') || 'Institución';
+const materia = get('materia') || 'materia';
+const nivel = parseInt(get('nivel')) || 0;
+const tema = get('tema') || 'Tema';
+const numPractica = parseInt(get('numPreguntasPractica')) || 8;
+const numQuiz = parseInt(get('numPreguntasQuiz')) || 10;
+const teoria = get('teoriaContenido') || 'Sin contenido';
+const ejemplos = get('ejemplosResueltos') || '';
+const correoDestino = get('correoDestino') || correo;
+const asunto = get('asuntoCorreo') || '📝 Respuestas de Estudiante';
+const activarFormulario = document.getElementById('activarFormulario').checked;
+const mepData = MEP_REFERENCIAS[materia]?.[nivel];
+const citaMEP = mepData ? `Habilidad MEP: "${mepData.habilidad}" | Indicadores: ${mepData.indicadores}` : `Programa de Estudio MEP — ${materia} ${nivel}° año`;
+const fases = [
+{ titulo: '🏗️ FASE 1 — Estructura HTML + Estilos CSS', desc: 'Enviar primero. La IA generará el esqueleto visual.', texto: `FASE 1 DE 4 — ESTRUCTURA Y ESTILOS\nCrea la estructura base de una actividad educativa HTML. No incluyas preguntas ni JS todavía.\nDOCENTE: ${profesor} | ${correo} | ${institucion}\nTEMA: ${tema} (${materia}, ${nivel}° año MEP)\n${citaMEP}\nESTRUCTURA HTML necesaria:\n- Header fijo: nombre docente + institución + tema\n- 4 pestañas CSS puras: Teoría | Práctica | Quiz | Resultados\n- Footer: correo docente\n- Metaetiqueta <meta name="author" content="${profesor}">\nESTILOS OBLIGATORIOS:\n- Google Fonts: usar 'Segoe UI', system-ui, Georgia como fallback\n- Paleta: --teal:#0d9488, --amber:#d97706, --indigo:#4f46e5\n- Glassmorphism: backdrop-filter:blur(10px)\n- Animación fadeInUp en secciones\n- 100% responsive (breakpoint 768px)\n- NO usar Bootstrap ni Tailwind\nEntrega SOLO HTML + CSS. Cierra en <!-- FIN FASE 1 -->` },
+{ titulo: '📖 FASE 2 — Sección de Teoría Completa', desc: 'Pegar en la misma conversación tras recibir la Fase 1.', texto: `FASE 2 DE 4 — CONTENIDO TEÓRICO\nAgrega la sección de Teoría dentro de la pestaña "Teoría".\nUsa MathJax 3 (CDN: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js) para fórmulas.\nCONTENIDO A INCLUIR (copiar textualmente):\n${teoria}\nEJEMPLOS RESUELTOS:\n${ejemplos}\nFormato: título con Georgia, bloques de definición con borde teal, ejemplos en caja gris oscura con código Courier.\nNO incluir preguntas ni formulario todavía. Cierra en <!-- FIN FASE 2 -->` },
+{ titulo: '📝 FASE 3 — Ejercicios de Práctica y Quiz', desc: 'Pegar tras recibir la Fase 2. Incluye EXACTAMENTE las cantidades indicadas.', texto: `FASE 3 DE 4 — EJERCICIOS Y QUIZ\nAgrega EXACTAMENTE ${numPractica} ejercicios de práctica y EXACTAMENTE ${numQuiz} preguntas de quiz.\nBasarte SOLO en el contenido teórico de la Fase 2.\nPRÁCTICA — EXACTAMENTE ${numPractica} ejercicios:\n- Tipo: input de respuesta + botón "Verificar"\n- Feedback inmediato en color (verde correcto, rojo incorrecto)\n- Sin alert(), usar HTML/CSS para mostrar resultado\n- Template a repetir ${numPractica} veces:\n<div class="practice-card" data-ej="N">\n<p class="question">[PREGUNTA_N basada en la teoría]</p>\n<input type="text" id="ans_N" aria-label="Respuesta ejercicio N">\n<button onclick="verificar(N,'[RESPUESTA_CORRECTA]')">✓ Verificar</button>\n<div id="fb_N" class="feedback"></div>\n</div>\nQUIZ — EXACTAMENTE ${numQuiz} preguntas de selección múltiple:\n- 4 opciones por pregunta (a, b, c, d)\n- 1 sola respuesta correcta\n- Dificultad: ${Math.round(numQuiz*0.4)} fácil | ${Math.round(numQuiz*0.4)} media | ${Math.round(numQuiz*0.2)} difícil\n- Barra de progreso animada: "Pregunta X de ${numQuiz}"\nNO incluir formulario todavía. Cierra en <!-- FIN FASE 3 -->` },
+{ titulo: `📤 FASE 4 — Formulario, Calificación y Entrega Final`, desc: 'Pegar al final. Completa el archivo y lo cierra.', texto: `FASE 4 DE 4 — FORMULARIO Y ENTREGA FINAL\n${activarFormulario ? `FORMULARIO DE ENVÍO con FormSubmit.co:\n- action="https://formsubmit.co/${correoDestino}"\n- Campos requeridos con validación HTML5:\n<input name="nombre" required minlength="5" placeholder="Nombre completo">\n<input type="email" name="correo" required>\n<input name="grupo" required placeholder="Grupo/Sección">\n<input type="hidden" name="calificacion" id="calificacionFinal">\n<input type="hidden" name="respuestas_detalle" id="detalleRespuestas">\n<input type="hidden" name="_subject" value="${asunto}">\n<input type="hidden" name="_next" value="about:blank">\n<input type="hidden" name="_captcha" value="false">\n<input type="hidden" name="_autoresponse" value="Gracias. Tu actividad fue enviada a ${profesor}.">\n- Antes del submit: JS calcula calificación y rellena campos ocultos.\n- Pantalla de éxito con canvas-confetti si calificación ≥ 70%.` : `Sin formulario. Mostrar calificación en pantalla. Botón "Ver respuestas correctas" y "Reintentar".`}\nJAVASCRIPT FINAL:\n- función verificar(n, respuesta) para práctica\n- función calcularQuiz() → porcentaje + desglose\n- función guardarProgreso() usando localStorage\n- canvas-confetti CDN si calificación ≥ 70%\n- Navegación por teclado en todas las pestañas\nCierra el archivo correctamente con </body></html>.\nVERIFICAR antes de entregar:\n[ ] MathJax 3.x cargado\n[ ] EXACTAMENTE ${numPractica} ejercicios de práctica\n[ ] EXACTAMENTE ${numQuiz} preguntas de quiz\n[ ] ${activarFormulario ? 'FormSubmit configurado con '+correoDestino : 'Sin formulario (correcto)'}\n[ ] Sin ningún alert() para feedback educativo\n[ ] Archivo cierra con </html>` }
+];
+// Mostrar panel modular
+document.getElementById('promptGenerado').classList.add('hidden');
+const container = document.getElementById('fasesContainer');
+container.classList.add('active');
+container.innerHTML = fases.map((f, i) => `
+<div class="fase-card" id="faseCard${i+1}">
+<h4><span class="fase-numero">${i+1}</span>${f.titulo}<span style="margin-left:auto;font-size:0.75rem;color:#94a3b8;font-weight:400">${f.desc}</span></h4>
+<div class="code-preview" id="faseTexto${i+1}">${escapeHTML(f.texto)}</div>
+<button class="btn btn-primary btn-small" style="margin-top:0.8rem" onclick="copiarFase(${i+1})">📋 Copiar Prompt de esta Fase</button>
+<div class="fase-pegar-area">
+<textarea id="fasePegar${i+1}" placeholder="Pegue aquí el código HTML que generó la IA para esta fase..."></textarea>
+<div style="display:flex;gap:0.5rem;margin-top:0.5rem">
+<button class="btn btn-success btn-small" onclick="guardarFase(${i+1})">✅ Guardar y Continuar →</button>
+<button class="btn btn-outline btn-small" onclick="validarFase(${i+1})">🔍 Validar esta fase</button>
+</div>
+<div class="fase-validacion" id="faseValidacion${i+1}"></div>
+</div>
+</div>`).join('');
+// Guardar textos para copiar
+window._fasesTextos = fases.map(f => f.texto);
+updateProgress(7);
+// Resetear fases guardadas
+fasesGuardadas = {};
+faseActual = 1;
+document.getElementById('ensambladoFinal').classList.remove('active');
+}
+function escapeHTML(str) { return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function copiarFase(i) { navigator.clipboard.writeText(window._fasesTextos[i-1]).then(() => alert(`✅ Fase ${i} copiada. Pégala en la IA.`)); }
+function guardarFase(i) {
+const codigo = document.getElementById(`fasePegar${i}`).value.trim();
+if (!codigo) { alert('❌ Pegue el código generado por la IA primero.'); return; }
+// Validación básica
+const ok = codigo.includes('<!DOCTYPE html>') || codigo.includes('<html') || codigo.includes('</html>');
+if (!ok) { if (!confirm('⚠️ El código no parece HTML válido. ¿Guardar de todos modos?')) return; }
+fasesGuardadas[i] = codigo;
+// Mostrar validación
+const div = document.getElementById(`faseValidacion${i}`);
+div.className = 'fase-validacion active ok';
+div.innerHTML = `✅ Fase ${i} guardada correctamente. ${i < 4 ? 'Continúe con la siguiente fase.' : '¡Todas las fases completadas!'}`;
+// Avanzar automáticamente
+if (i < 4) {
+setTimeout(() => {
+document.getElementById(`faseCard${i+1}`).scrollIntoView({ behavior: 'smooth', block: 'center' });
+}, 500);
 } else {
-itemTypesSeleccionados.push(type);
+// Mostrar ensamblado final
+document.getElementById('ensambladoFinal').classList.add('active');
+document.getElementById('ensambladoFinal').scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 }
-
-// ============================================
-// MOSTRAR ÁREA DE DESCARGA
-// ============================================
+function validarFase(i) {
+const codigo = document.getElementById(`fasePegar${i}`).value.trim();
+const div = document.getElementById(`faseValidacion${i}`);
+if (!codigo) { div.className = 'fase-validacion active error'; div.innerHTML = '❌ El área está vacía.'; return; }
+const checks = [];
+if (i === 1) { checks.push({ok: /header|<header/i.test(codigo), msg: '✅ Header presente'}); checks.push({ok: /backdrop-filter|glass/i.test(codigo), msg: '✅ Estilos glassmorphism'}); }
+if (i === 2) { checks.push({ok: /MathJax|mathjax/i.test(codigo), msg: '✅ MathJax incluido'}); checks.push({ok: /teor[aí]a|definici[oó]n/i.test(codigo.toLowerCase()), msg: '✅ Contenido teórico'}); }
+if (i === 3) { checks.push({ok: /practice|pr[aá]ctica/i.test(codigo.toLowerCase()), msg: '✅ Ejercicios de práctica'}); checks.push({ok: /quiz|pregunta/i.test(codigo.toLowerCase()), msg: '✅ Preguntas de quiz'}); }
+if (i === 4) { checks.push({ok: /formsubmit|formulario/i.test(codigo.toLowerCase()), msg: '✅ Formulario configurado'}); checks.push({ok: /<\/html>/i.test(codigo), msg: '✅ Archivo cierra correctamente'}); }
+const okCount = checks.filter(c => c.ok).length;
+if (okCount === checks.length) { div.className = 'fase-validacion active ok'; div.innerHTML = checks.map(c => c.msg).join(' · '); }
+else { div.className = 'fase-validacion active error'; div.innerHTML = `⚠️ ${checks.length - okCount} validación(es) pendiente(s): ${checks.filter(c => !c.ok).map(c => c.msg.replace('✅','❌')).join(' · ')}`; }
+}
+function ensamblarYDescargar() {
+// Verificar que todas las fases estén guardadas
+if (Object.keys(fasesGuardadas).length < 4) { alert('❌ Debe completar las 4 fases primero.'); return; }
+// Ensamblar: tomar Fase 1 completa, luego extraer solo el body de las fases 2,3,4
+let htmlFinal = fasesGuardadas[1]; // Fase 1 completa
+for (let i = 2; i <= 4; i++) {
+let codigo = fasesGuardadas[i];
+// Eliminar DOCTYPE, head, html opening si existen
+codigo = codigo.replace(/<!DOCTYPE[^>]*>/i, '').replace(/<html[^>]*>/i, '').replace(/<\/html>/i, '');
+// Extraer solo el contenido entre <body> y </body> si existe
+const bodyMatch = codigo.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+if (bodyMatch) {
+htmlFinal = htmlFinal.replace(/<\/body>/i, bodyMatch[1] + '\n</body>');
+} else {
+// Si no hay body, append al final antes de </body>
+htmlFinal = htmlFinal.replace(/<\/body>/i, codigo + '\n</body>');
+}
+}
+// Descargar
+const blob = new Blob([htmlFinal], { type: 'text/html' });
+const url = URL.createObjectURL(blob);
+const a = document.createElement('a');
+a.href = url;
+const fecha = new Date().toISOString().slice(0, 10);
+const tema = document.getElementById('tema').value || 'actividad';
+a.download = `actividad_${tema.replace(/\s+/g,'_').toLowerCase()}_${fecha}.html`;
+document.body.appendChild(a); a.click(); document.body.removeChild(a);
+URL.revokeObjectURL(url);
+alert('✅ Archivo ensamblado y descargado exitosamente.');
+}
+function verCodigoEnsamblado() {
+if (Object.keys(fasesGuardadas).length < 4) { alert('❌ Debe completar las 4 fases primero.'); return; }
+let htmlFinal = fasesGuardadas[1];
+for (let i = 2; i <= 4; i++) {
+let codigo = fasesGuardadas[i];
+codigo = codigo.replace(/<!DOCTYPE[^>]*>/i, '').replace(/<html[^>]*>/i, '').replace(/<\/html>/i, '');
+const bodyMatch = codigo.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+if (bodyMatch) { htmlFinal = htmlFinal.replace(/<\/body>/i, bodyMatch[1] + '\n</body>'); }
+else { htmlFinal = htmlFinal.replace(/<\/body>/i, codigo + '\n</body>'); }
+}
+const ventana = window.open('', '_blank');
+ventana.document.write(`<pre style="white-space:pre-wrap;word-wrap:break-word;font-family:monospace;font-size:0.85rem">${escapeHTML(htmlFinal)}</pre>`);
+ventana.document.close();
+}
+function reiniciarFases() {
+if (confirm('¿Reiniciar las 4 fases? Se perderá el progreso actual.')) {
+fasesGuardadas = {};
+faseActual = 1;
+document.querySelectorAll('.fase-validacion').forEach(d => { d.className = 'fase-validacion'; d.innerHTML = ''; });
+document.querySelectorAll('.fase-pegar-area textarea').forEach(t => t.value = '');
+document.getElementById('ensambladoFinal').classList.remove('active');
+document.getElementById('faseCard1').scrollIntoView({ behavior: 'smooth' });
+}
+}
+/* ============================================
+MODO MÍNIMO
+============================================ */
+function generarPromptMinimal() {
+const get = id => document.getElementById(id).value || '';
+const profesor = get('profesor') || 'Profesor';
+const correo = get('correo') || 'correo@ejemplo.com';
+const materia = get('materia') || 'materia';
+const nivel = get('nivel') || '0';
+const tema = get('tema') || 'Tema';
+const teoria = get('teoriaContenido') || 'Sin contenido';
+const numPractica = parseInt(get('numPreguntasPractica')) || 8;
+const numQuiz = parseInt(get('numPreguntasQuiz')) || 10;
+const correoDestino = get('correoDestino') || correo;
+const activarForm = document.getElementById('activarFormulario').checked;
+const prompt = `GENERA UNA ACTIVIDAD EDUCATIVA HTML — NÚCLEO FUNCIONAL
+DOCENTE: ${profesor} | ${correo}
+MATERIA: ${materia} — ${nivel}° año | TEMA: ${tema}
+═══ REGLAS ABSOLUTAS (no negociables) ═══
+1. Un ÚNICO archivo HTML autocontenido
+2. EXACTAMENTE ${numPractica} ejercicios de práctica
+3. EXACTAMENTE ${numQuiz} preguntas de quiz con 4 opciones cada una
+4. CERO alert() — todo feedback en HTML/CSS
+5. Sin Bootstrap, sin Tailwind, sin jQuery
+6. El archivo DEBE cerrar con </html>
+═══ CONTENIDO TEÓRICO ═══
+${teoria}
+═══ ESTRUCTURA MÍNIMA REQUERIDA ═══
+- Header: "${profesor} | ${tema}"
+- Sección Teoría: mostrar el contenido anterior
+- Sección Práctica: ${numPractica} inputs con botón Verificar y feedback inline
+- Sección Quiz: ${numQuiz} preguntas selección múltiple + calificación al finalizar
+${activarForm ? `- Formulario: action="https://formsubmit.co/${correoDestino}" con campos nombre, correo, grupo, y campo oculto calificacion` : '- Sin formulario: mostrar calificación en pantalla'}
+═══ ESTILO MÍNIMO ═══
+- Fuente: 'Segoe UI', system-ui, sans-serif (sin Google Fonts)
+- Fondo: #f5f5f5 | Tarjetas: white, border-radius:12px, box-shadow
+- Botones: background:#0d9488, color:white, border-radius:8px
+- Correcto: #d1fae5 | Incorrecto: #fee2e2
+═══ CHECKLIST ANTES DE ENTREGAR ═══
+[ ] Cuenta ${numPractica} ejercicios de práctica — si son menos, AGREGA los faltantes
+[ ] Cuenta ${numQuiz} preguntas de quiz — si son menos, AGREGA las faltantes
+[ ] No hay ningún alert() en el código
+[ ] El archivo termina con </body></html>
+Genera el código HTML completo ahora. Empieza con <!DOCTYPE html>.`;
+document.getElementById('promptModularPanel')?.classList.add('hidden');
+document.getElementById('promptGenerado').classList.remove('hidden');
+document.getElementById('promptTitulo').textContent = '⚡ Prompt Mínimo Viable';
+document.getElementById('promptText').textContent = prompt;
+const tokens = Math.round(prompt.length / 4);
+document.getElementById('promptTokEstimado').textContent = `~${tokens.toLocaleString()} tokens`;
+updateProgress(7);
+validarPrompt();
+document.getElementById('promptGenerado').scrollIntoView({ behavior:'smooth', block:'start' });
+}
+/* ============================================
+VALIDAR CÓDIGO GENERADO
+============================================ */
+function validarCodigoGenerado(codigo) {
+if (!codigo || codigo.length < 50) { document.getElementById('validacionCodigo').style.display = 'none'; return; }
+const get = id => document.getElementById(id).value || '';
+const numPractica = parseInt(get('numPreguntasPractica')) || 8;
+const numQuiz = parseInt(get('numPreguntasQuiz')) || 10;
+const correoDestino = get('correoDestino') || get('correo') || '';
+const activarForm = document.getElementById('activarFormulario').checked;
+const practiceCount = (codigo.match(/practice-card|verificar\(/g) || []).length;
+const quizCount = (codigo.match(/quiz-question|type="radio"/g) || []).length;
+const checks = [
+{ label:'Estructura HTML válida', ok: /<!DOCTYPE html>/i.test(codigo) && /<\/html>/i.test(codigo), prioridad:'critica' },
+{ label:'Archivo completo (cierra HTML)', ok: /<\/html>\s*$/i.test(codigo.trim()), prioridad:'critica' },
+{ label:`~${numPractica} ejercicios práctica`, ok: practiceCount >= Math.round(numPractica * 0.8), prioridad:'alta' },
+{ label:`~${numQuiz} preguntas quiz`, ok: quizCount >= Math.round(numQuiz * 0.8), prioridad:'alta' },
+{ label:'MathJax 3.x incluido', ok: /mathjax@3/i.test(codigo), prioridad:'alta' },
+{ label:'Sin alert() educativo', ok: !/(alert\s*\(['"].*?(correcto|incorrecto|✓|✗|wrong|correct))/i.test(codigo), prioridad:'alta' },
+{ label:'Atributos aria-label/role', ok: /aria-label|role=/i.test(codigo), prioridad:'media' },
+{ label:'Responsive (media query)', ok: /@media/i.test(codigo), prioridad:'media' },
+...(activarForm ? [{ label:'FormSubmit configurado', ok: /formsubmit\.co/i.test(codigo), prioridad:'critica' }, { label:`Correo destino correcto`, ok: correoDestino ? codigo.includes(correoDestino) : true, prioridad:'alta' }] : []),
+{ label:'Canvas-confetti incluido', ok: /canvas-confetti/i.test(codigo), prioridad:'media' },
+{ label:'LocalStorage para progreso', ok: /localStorage/i.test(codigo), prioridad:'media' },
+];
+const ok = checks.filter(c => c.ok).length;
+const tot = checks.length;
+const pct = Math.round((ok / tot) * 100);
+const color = pct >= 85 ? '#4ade80' : pct >= 60 ? '#fbbf24' : '#f87171';
+const colores = { critica:'#f87171', alta:'#fbbf24', media:'#67e8f9' };
+const etiq = { critica:'🔴', alta:'🟠', media:'🟢' };
+document.getElementById('validacionScore').innerHTML = `<span style="color:${color}">${pct}%</span>`;
+document.getElementById('validacionItems').innerHTML = checks.map(c => `<div style="display:flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:${c.ok?'#94a3b8':'#fca5a5'}">${c.ok ? '✅' : `${etiq[c.prioridad]}❌`}<span>${c.label}</span></div>`).join('');
+const pendientesCriticos = checks.filter(c => !c.ok && c.prioridad === 'critica');
+document.getElementById('validacionMensaje').innerHTML = pendientesCriticos.length ? `<span style="color:#f87171">⚠️ ${pendientesCriticos.length} requisito(s) crítico(s) no cumplidos: ${pendientesCriticos.map(c=>c.label).join(' · ')}. Considere regenerar.</span>` : pct >= 85 ? `<span style="color:#4ade80">🎉 Código listo para descargar (${ok}/${tot} validaciones pasadas).</span>` : `<span style="color:#fbbf24">⚠️ ${tot-ok} validaciones pendientes — revise antes de descargar.</span>`;
+document.getElementById('validacionCodigo').style.display = 'block';
+}
+/* ============================================
+DESCARGA Y VALIDACIÓN HTML
+============================================ */
 function mostrarAreaDescarga() {
-const promptGenerado = document.getElementById('promptGenerado');
-if (promptGenerado.classList.contains('hidden')) {
-alert('⚠️ Primero genere el prompt con el botón "Generar Prompt Optimizado"');
+if (document.getElementById('promptGenerado').classList.contains('hidden') && !document.getElementById('fasesContainer').classList.contains('active')) {
+alert('⚠️ Primero genere el prompt con el botón "Generar Prompt".');
 return;
 }
-document.getElementById('areaDescarga').classList.remove('hidden');
-window.scrollTo({ top: document.getElementById('areaDescarga').offsetTop - 100, behavior: 'smooth' });
+const area = document.getElementById('areaDescarga');
+area.classList.remove('hidden');
+area.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
-
-// ============================================
-// VALIDAR CÓDIGO HTML
-// ============================================
 function validarHTML() {
-const codigo = document.getElementById('codigoHTMLGenerado').value;
-const resultadoDiv = document.getElementById('validacionResultado');
-resultadoDiv.style.display = 'block';
-
-if (!codigo.trim()) {
-resultadoDiv.style.background = '#ff7675';
-resultadoDiv.style.color = 'white';
-resultadoDiv.innerHTML = '❌ El área de código está vacía. Pegue el código HTML primero.';
-return;
+const codigo = document.getElementById('codigoHTMLGenerado').value.trim();
+const div = document.getElementById('validacionResultado');
+div.style.display = 'block';
+if (!codigo) { div.style.cssText = 'background:#fee2e2;color:#991b1b;padding:0.8rem 1rem;border-radius:10px'; div.innerHTML = '❌ El área de código está vacía.'; return; }
+const errores = [];
+if (!codigo.includes('<!DOCTYPE html>')) errores.push('Falta DOCTYPE');
+if (!codigo.includes('<html')) errores.push('Falta &lt;html&gt;');
+if (!codigo.includes('</html>')) errores.push('Falta &lt;/html&gt;');
+if (!codigo.includes('<head>')) errores.push('Falta &lt;head&gt;');
+if (!codigo.includes('<body>')) errores.push('Falta &lt;body&gt;');
+if (errores.length) { div.style.cssText = 'background:#fef3c7;color:#92400e;padding:0.8rem 1rem;border-radius:10px'; div.innerHTML = '⚠️ Advertencias: ' + errores.join(', '); }
+else { div.style.cssText = 'background:#d1fae5;color:#065f46;padding:0.8rem 1rem;border-radius:10px'; div.innerHTML = '✅ Código HTML válido y listo para descargar.'; }
 }
-
-// Validaciones básicas
-let errores = [];
-if (!codigo.includes('<!DOCTYPE html>')) {
-errores.push('Falta la declaración DOCTYPE');
-}
-if (!codigo.includes('<html')) {
-errores.push('Falta la etiqueta <html>');
-}
-if (!codigo.includes('</html>')) {
-errores.push('Falta la etiqueta de cierre </html>');
-}
-if (!codigo.includes('<head>')) {
-errores.push('Falta la etiqueta <head>');
-}
-if (!codigo.includes('<body>')) {
-errores.push('Falta la etiqueta <body>');
-}
-
-if (errores.length > 0) {
-resultadoDiv.style.background = '#ffeaa7';
-resultadoDiv.style.color = '#2d3436';
-resultadoDiv.innerHTML = '⚠️ Advertencias: ' + errores.join(', ');
-} else {
-resultadoDiv.style.background = '#55efc4';
-resultadoDiv.style.color = '#2d3436';
-resultadoDiv.innerHTML = '✅ Código HTML válido. Listo para descargar.';
-}
-}
-
-// ============================================
-// DESCARGAR ARCHIVO HTML
-// ============================================
 function descargarHTML() {
-const codigo = document.getElementById('codigoHTMLGenerado').value;
-
-if (!codigo.trim()) {
-alert('❌ Por favor pegue el código HTML generado por la IA primero.');
-return;
-}
-
-// Validar que sea código HTML
-if (!codigo.includes('<!DOCTYPE html>') && !codigo.includes('<html')) {
-alert('⚠️ El código no parece ser HTML válido. Verifique que haya copiado todo el código de la IA.');
-return;
-}
-
-// Crear blob y descargar
+const codigo = document.getElementById('codigoHTMLGenerado').value.trim();
+if (!codigo) { alert('❌ Pegue el código HTML primero.'); return; }
+if (!codigo.includes('<!DOCTYPE html>') && !codigo.includes('<html')) { if (!confirm('⚠️ El código no parece HTML estándar. ¿Descargar de todos modos?')) return; }
 const blob = new Blob([codigo], { type: 'text/html' });
 const url = URL.createObjectURL(blob);
 const a = document.createElement('a');
 a.href = url;
-
-// Generar nombre de archivo con fecha
 const fecha = new Date().toISOString().slice(0, 10);
 const tema = document.getElementById('tema').value || 'actividad';
-a.download = `index_${tema.replace(/\s+/g, '_').toLowerCase()}_${fecha}.html`;
-
-document.body.appendChild(a);
-a.click();
-document.body.removeChild(a);
+a.download = `index_${tema.replace(/\s+/g,'_').toLowerCase()}_${fecha}.html`;
+document.body.appendChild(a); a.click(); document.body.removeChild(a);
 URL.revokeObjectURL(url);
-
-// Mostrar mensaje de éxito
-alert('✅ Archivo HTML descargado exitosamente.\n\n📁 Nombre: ' + a.download + '\n\n📍 El archivo se encuentra en su carpeta de Descargas.');
 }
-
-// ============================================
-// GENERAR PROMPT ESTRUCTURADO
-// ============================================
-function generarPrompt() {
-const profesor = document.getElementById('profesor').value || 'Profesor';
-const correo = document.getElementById('correo').value || 'correo@ejemplo.com';
-const institucion = document.getElementById('institucion').value || 'Institución Educativa';
-const materia = document.getElementById('materia').value || 'Materia';
-const nivel = document.getElementById('nivel').value || 'Nivel';
-const tema = document.getElementById('tema').value || 'Tema';
-const habilidadGeneral = document.getElementById('habilidadGeneral').value || 'Habilidad general';
-const habilidadEspecifica = document.getElementById('habilidadEspecifica').value || 'Habilidad específica';
-const teoriaContenido = document.getElementById('teoriaContenido').value || 'Sin contenido teórico';
-const ejemplosResueltos = document.getElementById('ejemplosResueltos').value || 'Sin ejemplos';
-const numPractica = document.getElementById('numPreguntasPractica').value || 8;
-const numQuiz = document.getElementById('numPreguntasQuiz').value || 10;
-const necesitaAdecuacion = document.getElementById('necesitaAdecuacion').checked;
-const tipoAdecuacion = document.getElementById('tipoAdecuacion').value || 'No especificado';
-const estrategiasAdecuacion = document.getElementById('estrategiasAdecuacion').value || 'Ninguna';
-const instruccionesEspeciales = document.getElementById('instruccionesEspeciales').value || 'Sin instrucciones especiales';
-// NUEVO: Formulario de envío
-const activarFormulario = document.getElementById('activarFormulario').checked;
-const correoDestino = document.getElementById('correoDestino').value || correo;
-const asuntoCorreo = document.getElementById('asuntoCorreo').value || '📝 Nuevas Respuestas de Estudiante';
-const datosEstudiante = document.getElementById('datosEstudiante').value || 'Nombre, Correo, Grupo';
-const configuracionFormulario = document.getElementById('configuracionFormulario').value || 'Calificación automática, copia al estudiante';
-let formularioSection = '';
-if (activarFormulario) {
-formularioSection = `
-🔷 SECCIÓN DE FORMULARIO DE ENVÍO (ACTIVADA):
-- Incluir formulario completo con datos del estudiante:
-* Nombre completo (requerido)
-* Correo electrónico (requerido)
-* Grupo/Sección (requerido)
-- ${numQuiz} preguntas de quiz con selección múltiple
-- Calificación automática al enviar (0-100%)
-- Mostrar resumen de respuestas correctas e incorrectas
-- Enviar datos a FormSubmit.co: ${correoDestino}
-- Asunto: ${asuntoCorreo}
-- Enviar copia de confirmación al estudiante
-- Mostrar mensaje de éxito después del envío
-- Incluir botón para ver resultados y volver a intentar
-- Diseño profesional con gradientes y animaciones
-`;
-} else {
-formularioSection = `
-🔷 SECCIÓN DE FORMULARIO DE ENVÍO (DESACTIVADA):
-- No incluir formulario de envío
-- Solo mostrar calificación en pantalla sin envío por correo
-`;
-}
-const prompt = `========================================
-📋 PROMPT ESTRUCTURADO PARA GENERAR ACTIVIDAD HTML PROFESIONAL
-========================================
-1️⃣ DATOS DEL DOCENTE:
-- Profesor: ${profesor}
-- Correo: ${correo}
-- Institución: ${institucion}
-- Materia: ${materia}
-- Nivel: ${nivel}° año
-- Tema: ${tema}
-2️⃣ HABILIDADES:
-- Habilidad General: ${habilidadGeneral}
-- Habilidades Específicas: ${habilidadEspecifica}
-3️⃣ CONTENIDO TEÓRICO COMPLETO (INCLUIR EN PORTADA):
-${teoriaContenido}
-4️⃣ EJEMPLOS RESUELTOS:
-${ejemplosResueltos}
-5️⃣ TIPOS DE ÍTEMS SELECCIONADOS:
-${itemTypesSeleccionados.length > 0 ? itemTypesSeleccionados.join(', ') : 'Selección múltiple, Verdadero/Falso, Respuesta corta'}
-6️⃣ CANTIDAD DE PREGUNTAS:
-- Práctica (con verificación): ${numPractica} preguntas
-- Quiz (evaluación): ${numQuiz} preguntas
-7️⃣ INSTRUCCIONES ESPECIALES:
-${instruccionesEspeciales}
-8️⃣ ADECUACIÓN CURRICULAR ${necesitaAdecuacion ? '(INCLUIR)' : '(NO INCLUIR)'}:
-${necesitaAdecuacion ? `
-- Tipo: ${tipoAdecuacion}
-- Estrategias de apoyo: ${estrategiasAdecuacion}
-- Incluir sección especial con adaptaciones
-- Considerar: tiempo extendido, instrucciones simplificadas, apoyos visuales` : ''}
-${formularioSection}
-9️⃣ ESTRUCTURA REQUERIDA DEL HTML:
-- PORTADA PROFESIONAL con:
-* Nombre del profesor
-* Habilidades generales y específicas
-* Teoría completa explicada ampliamente
-* Ejemplos resueltos
-- SECCIÓN DE TEORÍA con formato claro
-- SECCIÓN DE PRÁCTICA con verificación automática
-- SECCIÓN DE QUIZ autocorregible
-${activarFormulario ? '- SECCIÓN DE FORMULARIO DE ENVÍO con FormSubmit.co' : ''}
-${activarFormulario ? '- CÁLCULO AUTOMÁTICO DE CALIFICACIÓN' : ''}
-${activarFormulario ? '- RESUMEN DE RESPUESTAS (correctas/incorrectas)' : ''}
-- SECCIÓN DE APOYO ESPECIAL (si aplica)
-- ESTADÍSTICAS de rendimiento del estudiante
-🔟 REQUISITOS TÉCNICOS:
-- Diseño moderno con gradientes y animaciones
-- Totalmente responsive
-- Verificación automática de respuestas
-- Retroalimentación inmediata
-- Un solo archivo HTML autocontenido
-- CSS inline en <head>
-- JavaScript optimizado
-========================================
-⚠️ IMPORTANTE: Generar código completo y funcional
-========================================`;
-document.getElementById('promptText').textContent = prompt;
-document.getElementById('promptGenerado').classList.remove('hidden');
-updateProgress(7);
-}
-
-// ============================================
-// COPIAR PROMPT AL PORTAPAPELES
-// ============================================
-function copiarPrompt() {
-const promptText = document.getElementById('promptText').textContent;
-navigator.clipboard.writeText(promptText).then(() => {
-alert('✅ Prompt copiado al portapapeles.\nAhora pégalo en la IA de tu preferencia.');
-});
-}
-
-// ============================================
-// MEJORAR PROMPT CON IA
-// ============================================
-function mejorarPromptConIA() {
-const promptText = document.getElementById('promptText').textContent;
-if (!promptText) {
-alert('❌ Primero genere el prompt con el botón "Generar Prompt Optimizado"');
-return;
-}
-window.open('https://chat.deepseek.com', '_blank');
-}
-
-// ============================================
-// ABRIR PLATAFORMAS DE IA
-// ============================================
-function abrirIA(url) {
-window.open(url, '_blank');
-}
-
-// ============================================
-// ESTADÍSTICAS - ACTUALIZAR DASHBOARD
-// ============================================
-function actualizarEstadisticas() {
-const banco = JSON.parse(localStorage.getItem('eduHTML_banco') || '[]');
-// Total actividades
-document.getElementById('statTotalActividades').textContent = banco.length;
-// Total preguntas
-let totalPreguntas = 0;
-banco.forEach(act => {
-totalPreguntas += (parseInt(act.numPractica) || 0) + (parseInt(act.numQuiz) || 0);
-});
-document.getElementById('statTotalPreguntas').textContent = totalPreguntas;
-// Materia más usada
-if (banco.length > 0) {
-const materias = banco.map(a => a.materia || 'Sin materia');
-const materiaPopular = materias.sort((a,b) =>
-materias.filter(v => v===a).length - materias.filter(v => v===b).length
-).pop();
-document.getElementById('statMateriaPopular').textContent = materiaPopular;
-// Última actividad
-const ultima = banco[banco.length - 1];
-document.getElementById('statUltimaActividad').textContent = ultima.fecha || 'N/A';
-// Progreso por materia
-const conteoMaterias = {};
-materias.forEach(m => {
-conteoMaterias[m] = (conteoMaterias[m] || 0) + 1;
-});
-let htmlProgreso = '';
-for (const [materia, cantidad] of Object.entries(conteoMaterias)) {
-const porcentaje = (cantidad / banco.length) * 100;
-htmlProgreso += `
-<div style="background: white; padding: 1rem; border-radius: 10px;">
-<div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-<strong>${materia}</strong>
-<span>${cantidad} actividades</span>
-</div>
-<div style="background: #e9ecef; border-radius: 10px; height: 20px; overflow: hidden;">
-<div style="background: var(--gradient-1); height: 100%; width: ${porcentaje}%; border-radius: 10px;"></div>
-</div>
-</div>
-`;
-}
-document.getElementById('progresoMaterias').innerHTML = htmlProgreso;
-}
-}
-
-// ============================================
-// BANCO DE ACTIVIDADES - GUARDAR
-// ============================================
+/* ============================================
+BANCO DE ACTIVIDADES
+============================================ */
 function guardarEnBanco() {
+const get = id => document.getElementById(id).value || '';
 const actividad = {
-id: Date.now(),
-fecha: new Date().toLocaleDateString(),
-profesor: document.getElementById('profesor').value || 'Sin nombre',
-materia: document.getElementById('materia').value || 'Sin materia',
-nivel: document.getElementById('nivel').value || 'Sin nivel',
-tema: document.getElementById('tema').value || 'Sin tema',
-habilidadGeneral: document.getElementById('habilidadGeneral').value || '',
-habilidadEspecifica: document.getElementById('habilidadEspecifica').value || '',
-teoriaContenido: document.getElementById('teoriaContenido').value || '',
-ejemplosResueltos: document.getElementById('ejemplosResueltos').value || '',
+id: Date.now(), fecha: new Date().toLocaleDateString(),
+profesor: get('profesor'), materia: get('materia'), nivel: get('nivel'),
+tema: get('tema'), habilidadGeneral: get('habilidadGeneral'),
+habilidadEspecifica: get('habilidadEspecifica'),
+teoriaContenido: get('teoriaContenido'), ejemplosResueltos: get('ejemplosResueltos'),
 necesitaAdecuacion: document.getElementById('necesitaAdecuacion').checked,
-tipoAdecuacion: document.getElementById('tipoAdecuacion').value || '',
-estrategiasAdecuacion: document.getElementById('estrategiasAdecuacion').value || '',
+tipoAdecuacion: get('tipoAdecuacion'), estrategiasAdecuacion: get('estrategiasAdecuacion'),
 activarFormulario: document.getElementById('activarFormulario').checked,
-correoDestino: document.getElementById('correoDestino').value || '',
-itemTypes: itemTypesSeleccionados,
-numPractica: document.getElementById('numPreguntasPractica').value || 8,
-numQuiz: document.getElementById('numPreguntasQuiz').value || 10,
-prompt: document.getElementById('promptText').textContent || ''
+correoDestino: get('correoDestino'), itemTypes: [...itemTypesSeleccionados],
+numPractica: get('numPreguntasPractica'), numQuiz: get('numPreguntasQuiz'),
+prompt: document.getElementById('promptText').textContent
 };
-let banco = JSON.parse(localStorage.getItem('eduHTML_banco') || '[]');
+const banco = JSON.parse(localStorage.getItem('eduHTML_banco') || '[]');
 banco.push(actividad);
 localStorage.setItem('eduHTML_banco', JSON.stringify(banco));
-alert('✅ Actividad guardada en el banco.\nPuede acceder a ella desde el módulo "Banco de Actividades".');
+alert('✅ Actividad guardada en el banco.');
 }
-
-// ============================================
-// BANCO DE ACTIVIDADES - CARGAR LISTA
-// ============================================
 function cargarBanco() {
 const banco = JSON.parse(localStorage.getItem('eduHTML_banco') || '[]');
 const container = document.getElementById('activityBank');
-if(banco.length === 0) {
-container.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem;">No hay actividades guardadas aún. Cree una actividad y guárdela en el banco.</p>';
-return;
+if (!banco.length) { container.innerHTML = '<p style="text-align:center;color:var(--ink-soft);padding:2rem">No hay actividades guardadas aún.</p>'; return; }
+container.innerHTML = banco.map((a, i) => `<div class="activity-item"><div><h4>📚 ${a.tema || 'Actividad sin título'}</h4><p><strong>Materia:</strong> ${a.materia || '—'} | <strong>Nivel:</strong> ${a.nivel || '—'}°</p><p><strong>Habilidad:</strong> ${a.habilidadEspecifica || 'No especificada'}</p><p><strong>Fecha:</strong> ${a.fecha} | <strong>Docente:</strong> ${a.profesor || '—'}</p>${a.necesitaAdecuacion ? '<p style="color:var(--amber)">♿ Incluye adecuación curricular</p>' : ''}${a.activarFormulario ? '<p style="color:var(--teal)">📤 Incluye formulario de envío</p>' : ''}</div><div class="activity-actions"><button class="btn btn-primary btn-small" onclick="cargarActividad(${i})">📋 Cargar</button><button class="btn btn-danger btn-small" onclick="eliminarActividad(${i})">🗑️ Eliminar</button></div></div>`).join('');
 }
-let html = '';
-banco.forEach((actividad, index) => {
-html += `
-<div class="activity-item" style="background: var(--light); padding: 1.5rem; border-radius: 15px; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s;">
-<div class="activity-info">
-<h4 style="color: var(--primary); margin-bottom: 0.5rem;">📚 ${actividad.tema || 'Actividad sin título'}</h4>
-<p><strong>Materia:</strong> ${actividad.materia} | <strong>Nivel:</strong> ${actividad.nivel}°</p>
-<p><strong>Habilidad:</strong> ${actividad.habilidadEspecifica || 'No especificada'}</p>
-<p><strong>Fecha:</strong> ${actividad.fecha} | <strong>Profesor:</strong> ${actividad.profesor}</p>
-${actividad.necesitaAdecuacion ? '<p style="color: var(--warning);">♿ Incluye adecuación curricular</p>' : ''}
-${actividad.activarFormulario ? '<p style="color: var(--success);">📤 Incluye formulario de envío</p>' : ''}
-</div>
-<div class="activity-actions" style="display: flex; gap: 0.5rem;">
-<button class="btn btn-primary btn-small" onclick="cargarActividad(${index})">📋 Cargar</button>
-<button class="btn btn-danger btn-small" onclick="eliminarActividad(${index})" style="background: var(--danger);">🗑️ Eliminar</button>
-</div>
-</div>
-`;
-});
-container.innerHTML = html;
-}
-
-// ============================================
-// BANCO DE ACTIVIDADES - CARGAR ACTIVIDAD
-// ============================================
 function cargarActividad(index) {
 const banco = JSON.parse(localStorage.getItem('eduHTML_banco') || '[]');
-const actividad = banco[index];
-if(actividad) {
-document.getElementById('profesor').value = actividad.profesor || '';
-document.getElementById('materia').value = actividad.materia || '';
-document.getElementById('nivel').value = actividad.nivel || '';
-document.getElementById('tema').value = actividad.tema || '';
-document.getElementById('habilidadGeneral').value = actividad.habilidadGeneral || '';
-document.getElementById('habilidadEspecifica').value = actividad.habilidadEspecifica || '';
-document.getElementById('teoriaContenido').value = actividad.teoriaContenido || '';
-document.getElementById('ejemplosResueltos').value = actividad.ejemplosResueltos || '';
-document.getElementById('numPreguntasPractica').value = actividad.numPractica || 8;
-document.getElementById('numPreguntasQuiz').value = actividad.numQuiz || 10;
-if(actividad.necesitaAdecuacion) {
-document.getElementById('necesitaAdecuacion').checked = true;
-toggleAdecuacion();
-document.getElementById('tipoAdecuacion').value = actividad.tipoAdecuacion || '';
-document.getElementById('estrategiasAdecuacion').value = actividad.estrategiasAdecuacion || '';
+const a = banco[index];
+if (!a) return;
+['profesor','materia','nivel','tema','habilidadGeneral','habilidadEspecifica','teoriaContenido','ejemplosResueltos','numPreguntasPractica','numPreguntasQuiz'].forEach((id, i) => {
+const keys = ['profesor','materia','nivel','tema','habilidadGeneral','habilidadEspecifica','teoriaContenido','ejemplosResueltos','numPractica','numQuiz'];
+document.getElementById(id).value = a[keys[i]] || '';
+});
+if (a.necesitaAdecuacion) { document.getElementById('necesitaAdecuacion').checked = true; toggleAdecuacion(); document.getElementById('tipoAdecuacion').value = a.tipoAdecuacion || ''; document.getElementById('estrategiasAdecuacion').value = a.estrategiasAdecuacion || ''; }
+if (a.activarFormulario) { document.getElementById('activarFormulario').checked = true; toggleFormulario(); document.getElementById('correoDestino').value = a.correoDestino || ''; }
+showModule('crear', null); updateProgress(2); alert('✅ Actividad cargada correctamente.');
 }
-if(actividad.activarFormulario) {
-document.getElementById('activarFormulario').checked = true;
-toggleFormulario();
-document.getElementById('correoDestino').value = actividad.correoDestino || '';
+function eliminarActividad(index) { if (!confirm('¿Eliminar esta actividad?')) return; const banco = JSON.parse(localStorage.getItem('eduHTML_banco') || '[]'); banco.splice(index, 1); localStorage.setItem('eduHTML_banco', JSON.stringify(banco)); cargarBanco(); }
+function limpiarBanco() { if (!confirm('⚠️ ¿Eliminar TODAS las actividades?')) return; localStorage.removeItem('eduHTML_banco'); cargarBanco(); }
+function exportarBanco() { descargarJSON(localStorage.getItem('eduHTML_banco') || '[]', 'actividades.json'); }
+function importarBanco() { importarJSON(data => { localStorage.setItem('eduHTML_banco', data); cargarBanco(); }); }
+/* ============================================
+ESTADÍSTICAS
+============================================ */
+function actualizarEstadisticas() {
+const banco = JSON.parse(localStorage.getItem('eduHTML_banco') || '[]');
+document.getElementById('statTotalActividades').textContent = banco.length;
+let total = 0; banco.forEach(a => { total += (parseInt(a.numPractica) || 0) + (parseInt(a.numQuiz) || 0); });
+document.getElementById('statTotalPreguntas').textContent = total;
+if (banco.length) {
+const materias = banco.map(a => a.materia || 'Sin materia');
+const freq = {}; materias.forEach(m => { freq[m] = (freq[m] || 0) + 1; });
+const popular = Object.entries(freq).sort((a,b) => b[1]-a[1])[0][0];
+document.getElementById('statMateriaPopular').textContent = popular;
+document.getElementById('statUltimaActividad').textContent = banco[banco.length-1].fecha || '—';
+document.getElementById('progresoMaterias').innerHTML = Object.entries(freq).map(([mat, qty]) => { const pct = Math.round((qty / banco.length) * 100); return `<div style="background:white;padding:1rem;border-radius:12px;border:1.5px solid var(--border)"><div style="display:flex;justify-content:space-between;margin-bottom:0.5rem"><strong style="font-size:0.9rem">${mat}</strong><span class="tag tag-teal">${qty} actividades</span></div><div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div></div>`; }).join('');
+} else { document.getElementById('statMateriaPopular').textContent = '—'; document.getElementById('statUltimaActividad').textContent = '—'; document.getElementById('progresoMaterias').innerHTML = '<p style="color:var(--ink-soft);font-size:0.9rem">No hay datos aún.</p>'; }
 }
-showModule('crear', null);
-updateProgress(2);
-alert('✅ Actividad cargada. Puede editarla y generar un nuevo prompt.');
-}
-}
-
-// ============================================
-// BANCO DE ACTIVIDADES - ELIMINAR
-// ============================================
-function eliminarActividad(index) {
-if(confirm('¿Está seguro de que desea eliminar esta actividad?')) {
-let banco = JSON.parse(localStorage.getItem('eduHTML_banco') || '[]');
-banco.splice(index, 1);
-localStorage.setItem('eduHTML_banco', JSON.stringify(banco));
-cargarBanco();
-alert('✅ Actividad eliminada.');
-}
-}
-
-// ============================================
-// BANCO DE ACTIVIDADES - LIMPIAR TODO
-// ============================================
-function limpiarBanco() {
-if(confirm('⚠️ ¿Está seguro de que desea eliminar TODAS las actividades del banco? Esta acción no se puede deshacer.')) {
-localStorage.removeItem('eduHTML_banco');
-cargarBanco();
-alert('✅ Banco limpiado.');
-}
-}
-
-// ============================================
-// BANCO DE ACTIVIDADES - EXPORTAR JSON
-// ============================================
-function exportarBanco() {
-const banco = localStorage.getItem('eduHTML_banco') || '[]';
-const blob = new Blob([banco], { type: 'application/json' });
-const url = URL.createObjectURL(blob);
-const a = document.createElement('a');
-a.href = url;
-a.download = 'actividades.json';
-document.body.appendChild(a);
-a.click();
-document.body.removeChild(a);
-URL.revokeObjectURL(url);
-}
-
-// ============================================
-// BANCO DE ACTIVIDADES - IMPORTAR JSON
-// ============================================
-function importarBanco() {
-const input = document.createElement('input');
-input.type = 'file';
-input.accept = '.json';
-input.onchange = function(e) {
-const file = e.target.files[0];
-const reader = new FileReader();
-reader.onload = function(e) {
-try {
-const contenido = e.target.result;
-JSON.parse(contenido);
-localStorage.setItem('eduHTML_banco', contenido);
-cargarBanco();
-alert('✅ Banco importado correctamente.');
-} catch(error) {
-alert('❌ El archivo no es válido.');
-}
-};
-reader.readAsText(file);
-};
-input.click();
-}
-
-// ============================================
-// GESTIÓN DE ENLACES Y RECURSOS EXTERNOS
-// ============================================
-
-// AGREGAR NUEVO ENLACE
+/* ============================================
+ENLACES
+============================================ */
+const ICONOS_TIPO = { pagina:'🌐', video:'🎥', pdf:'📄', documento:'📝', imagen:'🖼️', otro:'📦' };
 function agregarEnlace() {
 const titulo = document.getElementById('enlaceTitulo').value.trim();
 const url = document.getElementById('enlaceURL').value.trim();
-const tipo = document.getElementById('enlaceTipo').value;
-const materia = document.getElementById('enlaceMateria').value;
-const descripcion = document.getElementById('enlaceDescripcion').value.trim();
-
-// Validaciones
-if (!titulo) {
-alert('❌ Por favor ingrese un título para el recurso.');
-return;
-}
-if (!url) {
-alert('❌ Por favor ingrese la URL del enlace.');
-return;
-}
-// Validar URL básica
-if (!url.startsWith('http://') && !url.startsWith('https://')) {
-alert('⚠️ La URL debe comenzar con http:// o https://');
-return;
-}
-
-// Crear objeto enlace
-const nuevoEnlace = {
-id: Date.now(),
-fecha: new Date().toLocaleDateString(),
-titulo: titulo,
-url: url,
-tipo: tipo,
-materia: materia || 'General',
-descripcion: descripcion || 'Sin descripción'
-};
-
-// Guardar en localStorage
-let enlaces = JSON.parse(localStorage.getItem('eduHTML_enlaces') || '[]');
-enlaces.push(nuevoEnlace);
+if (!titulo) { alert('❌ Ingrese un título.'); return; }
+if (!url) { alert('❌ Ingrese la URL.'); return; }
+if (!url.startsWith('http://') && !url.startsWith('https://')) { alert('⚠️ La URL debe comenzar con http:// o https://'); return; }
+const enlace = { id: Date.now(), fecha: new Date().toLocaleDateString(), titulo, url, tipo: document.getElementById('enlaceTipo').value, materia: document.getElementById('enlaceMateria').value || 'General', descripcion: document.getElementById('enlaceDescripcion').value.trim() || '' };
+const enlaces = JSON.parse(localStorage.getItem('eduHTML_enlaces') || '[]');
+enlaces.push(enlace);
 localStorage.setItem('eduHTML_enlaces', JSON.stringify(enlaces));
-
-// Limpiar formulario y recargar lista
-limpiarFormularioEnlace();
-cargarEnlaces();
-
-alert('✅ Enlace guardado exitosamente.');
+limpiarFormularioEnlace(); cargarEnlaces();
 }
-
-// CARGAR LISTA DE ENLACES
 function cargarEnlaces() {
 const enlaces = JSON.parse(localStorage.getItem('eduHTML_enlaces') || '[]');
+document.getElementById('contadorEnlaces').textContent = enlaces.length;
 const container = document.getElementById('listaEnlaces');
-const contador = document.getElementById('contadorEnlaces');
-
-contador.textContent = enlaces.length;
-
-if (enlaces.length === 0) {
-container.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem;">No hay enlaces guardados aún. Agregue su primer recurso.</p>';
-return;
+if (!enlaces.length) { container.innerHTML = '<p style="text-align:center;color:var(--ink-soft);padding:2rem">No hay enlaces guardados aún.</p>'; return; }
+container.innerHTML = enlaces.map((e, i) => `<div class="enlace-item"><div class="enlace-info"><h4>${ICONOS_TIPO[e.tipo] || '🔗'} ${e.titulo}</h4><p><strong>URL:</strong> <a href="${e.url}" target="_blank">${e.url.length > 60 ? e.url.slice(0,60)+'…' : e.url}</a></p><p><strong>Tipo:</strong> ${e.tipo} | <strong>Materia:</strong> ${e.materia}</p>${e.descripcion ? `<p style="font-style:italic;color:var(--ink-soft)">"${e.descripcion}"</p>` : ''}<p style="font-size:0.78rem;color:#9ca3af;margin-top:0.3rem">📅 ${e.fecha}</p></div><div class="enlace-actions"><a href="${e.url}" target="_blank" class="btn btn-primary btn-small">🔗 Abrir</a><button class="btn btn-secondary btn-small" onclick="copiarEnlace('${e.url}')">📋 Copiar</button><button class="btn btn-danger btn-small" onclick="eliminarEnlace(${i})">🗑️</button></div></div>`).join('');
 }
-
-// Iconos por tipo
-const iconosTipo = {
-'pagina': '🌐',
-'video': '🎥',
-'pdf': '📄',
-'documento': '📝',
-'imagen': '🖼️',
-'otro': '📦'
-};
-
-let html = '';
-enlaces.forEach((enlace, index) => {
-html += `
-<div class="enlace-item" style="background: white; padding: 1.5rem; border-radius: 15px; border-left: 5px solid var(--primary); box-shadow: var(--shadow); display: flex; justify-content: space-between; align-items: center; transition: all 0.3s;">
-<div class="enlace-info" style="flex: 1;">
-<div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-<span style="font-size: 1.5rem;">${iconosTipo[enlace.tipo] || '🔗'}</span>
-<h4 style="color: var(--primary); margin: 0;">${enlace.titulo}</h4>
-</div>
-<p style="color: #666; margin: 0.5rem 0;"><strong>URL:</strong> <a href="${enlace.url}" target="_blank" style="color: var(--info); text-decoration: none;">${enlace.url.substring(0, 50)}${enlace.url.length > 50 ? '...' : ''}</a></p>
-<p style="color: #666; margin: 0.5rem 0;"><strong>Tipo:</strong> ${enlace.tipo} | <strong>Materia:</strong> ${enlace.materia}</p>
-${enlace.descripcion ? `<p style="color: #888; margin: 0.5rem 0; font-style: italic;">"${enlace.descripcion}"</p>` : ''}
-<p style="color: #999; font-size: 0.85rem; margin-top: 0.5rem;">📅 Agregado: ${enlace.fecha}</p>
-</div>
-<div class="enlace-actions" style="display: flex; gap: 0.5rem; flex-direction: column;">
-<a href="${enlace.url}" target="_blank" class="btn btn-primary btn-small" style="padding: 0.5rem 1rem; font-size: 0.85rem;">🔗 Abrir</a>
-<button class="btn btn-secondary btn-small" onclick="copiarEnlace('${enlace.url}')" style="padding: 0.5rem 1rem; font-size: 0.85rem;">📋 Copiar URL</button>
-<button class="btn btn-danger btn-small" onclick="eliminarEnlace(${index})" style="padding: 0.5rem 1rem; font-size: 0.85rem; background: var(--danger);">🗑️ Eliminar</button>
-</div>
-</div>
-`;
-});
-
-container.innerHTML = html;
-}
-
-// ELIMINAR ENLACE INDIVIDUAL
-function eliminarEnlace(index) {
-if(confirm('¿Está seguro de que desea eliminar este enlace?')) {
-let enlaces = JSON.parse(localStorage.getItem('eduHTML_enlaces') || '[]');
-enlaces.splice(index, 1);
-localStorage.setItem('eduHTML_enlaces', JSON.stringify(enlaces));
-cargarEnlaces();
-alert('✅ Enlace eliminado.');
-}
-}
-
-// COPIAR URL AL PORTAPAPELES
-function copiarEnlace(url) {
-navigator.clipboard.writeText(url).then(() => {
-alert('✅ URL copiada al portapapeles.');
-});
-}
-
-// LIMPIAR FORMULARIO
-function limpiarFormularioEnlace() {
-document.getElementById('enlaceTitulo').value = '';
-document.getElementById('enlaceURL').value = '';
-document.getElementById('enlaceTipo').value = 'pagina';
-document.getElementById('enlaceMateria').value = '';
-document.getElementById('enlaceDescripcion').value = '';
-}
-
-// LIMPIAR TODOS LOS ENLACES
-function limpiarTodosEnlaces() {
-if(confirm('⚠️ ¿Está seguro de que desea eliminar TODOS los enlaces? Esta acción no se puede deshacer.')) {
-localStorage.removeItem('eduHTML_enlaces');
-cargarEnlaces();
-alert('✅ Todos los enlaces han sido eliminados.');
-}
-}
-
-// EXPORTAR ENLACES A JSON
-function exportarEnlaces() {
-const enlaces = localStorage.getItem('eduHTML_enlaces') || '[]';
-const blob = new Blob([enlaces], { type: 'application/json' });
-const url = URL.createObjectURL(blob);
-const a = document.createElement('a');
-a.href = url;
-a.download = 'enlaces_recursos.json';
-document.body.appendChild(a);
-a.click();
-document.body.removeChild(a);
-URL.revokeObjectURL(url);
-alert('✅ Enlaces exportados exitosamente.');
-}
-
-// IMPORTAR ENLACES DESDE JSON
-function importarEnlaces() {
-const input = document.createElement('input');
-input.type = 'file';
-input.accept = '.json';
-input.onchange = function(e) {
-const file = e.target.files[0];
-const reader = new FileReader();
-reader.onload = function(e) {
-try {
-const contenido = e.target.result;
-JSON.parse(contenido); // Validar JSON
-localStorage.setItem('eduHTML_enlaces', contenido);
-cargarEnlaces();
-alert('✅ Enlaces importados correctamente.');
-} catch(error) {
-alert('❌ El archivo no es válido.');
-}
-};
-reader.readAsText(file);
-};
-input.click();
-}
-
-// ============================================
-// AUTO-GUARDADO - ANTES DE CERRAR
-// ============================================
-window.addEventListener('beforeunload', () => {
-const datos = {
-profesor: document.getElementById('profesor').value,
-correo: document.getElementById('correo').value,
-institucion: document.getElementById('institucion').value,
-materia: document.getElementById('materia').value,
-nivel: document.getElementById('nivel').value,
-tema: document.getElementById('tema').value,
-habilidadGeneral: document.getElementById('habilidadGeneral').value,
-habilidadEspecifica: document.getElementById('habilidadEspecifica').value,
-teoriaContenido: document.getElementById('teoriaContenido').value,
-ejemplosResueltos: document.getElementById('ejemplosResueltos').value,
-numPreguntasPractica: document.getElementById('numPreguntasPractica').value,
-numPreguntasQuiz: document.getElementById('numPreguntasQuiz').value,
-activarFormulario: document.getElementById('activarFormulario').checked,
-correoDestino: document.getElementById('correoDestino').value
-};
-localStorage.setItem('eduHTML_v6', JSON.stringify(datos));
-});
-
-// ============================================
-// CARGAR DATOS GUARDADOS - AL INICIAR
-// ============================================
-window.addEventListener('load', () => {
-const datos = JSON.parse(localStorage.getItem('eduHTML_v6'));
-if (datos) {
-document.getElementById('profesor').value = datos.profesor || '';
-document.getElementById('correo').value = datos.correo || '';
-document.getElementById('institucion').value = datos.institucion || '';
-document.getElementById('materia').value = datos.materia || '';
-document.getElementById('nivel').value = datos.nivel || '';
-document.getElementById('tema').value = datos.tema || '';
-document.getElementById('habilidadGeneral').value = datos.habilidadGeneral || '';
-document.getElementById('habilidadEspecifica').value = datos.habilidadEspecifica || '';
-document.getElementById('teoriaContenido').value = datos.teoriaContenido || '';
-document.getElementById('ejemplosResueltos').value = datos.ejemplosResueltos || '';
-document.getElementById('numPreguntasPractica').value = datos.numPreguntasPractica || 8;
-document.getElementById('numPreguntasQuiz').value = datos.numPreguntasQuiz || 10;
-document.getElementById('activarFormulario').checked = datos.activarFormulario !== false;
-document.getElementById('correoDestino').value = datos.correoDestino || '';
-toggleFormulario();
-}
-updateProgress(1);
-});
-
-// ============================================
-// ACTUALIZAR VISTA PREVIA DE CORREO
-// ============================================
-document.getElementById('correo').addEventListener('input', function() {
-const correo = this.value || 'correo@ejemplo.com';
-document.getElementById('previewCorreo').textContent = correo;
-if(!document.getElementById('correoDestino').value) {
-document.getElementById('correoDestino').value = correo;
-}
-});
+function eliminarEnlace(index) { if (!confirm('¿Eliminar este enlace?')) return; const enlaces = JSON.parse(localStorage.getItem('eduHTML_enlaces') || '[]'); enlaces.splice(index, 1); localStorage.setItem('eduHTML_enlaces', JSON.stringify(enlaces)); cargarEnlaces(); }
+function copiarEnlace(url) { navigator.clipboard.writeText(url).then(() => alert('✅ URL copiada.')); }
+function limpiarFormularioEnlace() { ['enlaceTitulo','enlaceURL','enlaceDescripcion'].forEach(id => document.getElementById(id).value = ''); document.getElementById('enlaceTipo').value = 'pagina'; document.getElementById('enlaceMateria').value = ''; }
+function limpiarTodosEnlaces() { if (!confirm('⚠️ ¿Eliminar TODOS los enlaces?')) return; localStorage.removeItem('eduHTML_enlaces'); cargarEnlaces(); }
+function exportarEnlaces() { descargarJSON(localStorage.getItem('eduHTML_enlaces') || '[]', 'enlaces_recursos.json'); }
+function importarEnlaces() { importarJSON(data => { localStorage.setItem('eduHTML_enlaces', data); cargarEnlaces(); }); }
+/* ============================================
+HELPERS
+============================================ */
+function descargarJSON(contenido, nombreArchivo) { const blob = new Blob([contenido], { type: 'application/json' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = nombreArchivo; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url); }
+function importarJSON(callback) { const input = document.createElement('input'); input.type = 'file'; input.accept = '.json'; input.onchange = e => { const reader = new FileReader(); reader.onload = ev => { try { JSON.parse(ev.target.result); callback(ev.target.result); alert('✅ Datos importados.'); } catch { alert('❌ Archivo JSON no válido.'); } }; reader.readAsText(e.target.files[0]); }; input.click(); }
+/* ============================================
+PERSISTENCIA
+============================================ */
+const CAMPOS_PERSISTIR = ['profesor','correo','institucion','materia','nivel','tema','habilidadGeneral','habilidadEspecifica','teoriaContenido','ejemplosResueltos','numPreguntasPractica','numPreguntasQuiz','correoDestino','asuntoCorreo'];
+window.addEventListener('beforeunload', () => { const datos = {}; CAMPOS_PERSISTIR.forEach(id => { datos[id] = document.getElementById(id).value; }); datos.activarFormulario = document.getElementById('activarFormulario').checked; localStorage.setItem('eduHTML_v7', JSON.stringify(datos)); });
+window.addEventListener('load', () => { const datos = JSON.parse(localStorage.getItem('eduHTML_v7')); if (datos) { CAMPOS_PERSISTIR.forEach(id => { if (datos[id] !== undefined) document.getElementById(id).value = datos[id]; }); document.getElementById('activarFormulario').checked = datos.activarFormulario !== false; toggleFormulario(); } updateProgress(1); });
+document.getElementById('correo').addEventListener('input', function() { const val = this.value || 'correo@ejemplo.com'; document.getElementById('previewCorreo').textContent = val; if (!document.getElementById('correoDestino').value) { document.getElementById('correoDestino').value = val; } });
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 
-================================================================================
-                    📚 GUÍA DE REFERENCIA RÁPIDA - EDUHTML BUILDER PRO MAX
-                    Profesor: Carlos Elizondo Castillo
-                    Última Actualización: 2026
-================================================================================
-
-================================================================================
-🌐 PLATAFORMAS GRATUITAS PARA PUBLICAR SU PÁGINA HTML
-================================================================================
-
-1️⃣ NETLIFY (RECOMENDADO - MÁS FÁCIL)
-   🔗 URL: https://www.netlify.com
-   ⭐ Dificultad: Muy Fácil (Arrastrar y soltar)
-   💰 Precio: 100% Gratis
-   📦 Límite: 100 GB/mes
-   🔒 SSL: HTTPS incluido
-   🌐 Dominio: sutitio.netlify.app
-   📌 Cómo usar:
-      - Cree cuenta en netlify.com
-      - Vaya a "Sites" → "Add new site" → "Deploy manually"
-      - Arrastre su archivo index.html
-      - ¡Listo! URL generada automáticamente
-
-2️⃣ VERCEL
-   🔗 URL: https://vercel.com
-   ⭐ Dificultad: Muy Fácil
-   💰 Precio: 100% Gratis para hobby
-   📦 Límite: Ilimitado
-   🔒 SSL: HTTPS incluido
-   🌐 Dominio: sutitio.vercel.app
-   📌 Requiere: Cuenta de GitHub
-
-3️⃣ GITHUB PAGES
-   🔗 URL: https://pages.github.com
-   ⭐ Dificultad: Fácil
-   💰 Precio: 100% Gratis
-   📦 Límite: Ilimitado
-   🔒 SSL: HTTPS incluido
-   🌐 Dominio: usuario.github.io/repositorio
-   📌 Requiere: Cuenta de GitHub + Repositorio
-
-4️⃣ CLOUDFLARE PAGES
-   🔗 URL: https://pages.cloudflare.com
-   ⭐ Dificultad: Fácil
-   💰 Precio: 100% Gratis
-   📦 Límite: Ilimitado
-   🔒 SSL: HTTPS incluido
-   🌐 Dominio: sutitio.pages.dev
-   📌 Requiere: Cuenta de GitHub o GitLab
-
-5️⃣ FIREBASE HOSTING
-   🔗 URL: https://firebase.google.com
-   ⭐ Dificultad: Media
-   💰 Precio: Gratis (plan Spark)
-   📦 Límite: 10 GB
-   🔒 SSL: HTTPS incluido
-   🌐 Dominio: sutitio.web.app
-   📌 Requiere: Firebase CLI instalado
-
-================================================================================
-🔗 ENLACES IMPORTANTES - PLATAFORMAS DE IA PARA GENERAR CÓDIGO
-================================================================================
-
-🧠 Deep Seek (Recomendado para código)
-   🔗 https://chat.deepseek.com
-   ✅ Especialidad: Generación de código HTML/CSS/JS
-   ✅ Gratis con límites generosos
-
-💬 Qwen AI
-   🔗 https://chat.qwen.ai
-   ✅ Especialidad: Modelo multimodal
-   ✅ Bueno para código y texto
-
-💡 ChatGPT (OpenAI)
-   🔗 https://chat.openai.com
-   ✅ Especialidad: Uso general
-   ⚠️ Versión gratis con límites
-
-⭐ Google Gemini
-   🔗 https://gemini.google.com
-   ✅ Especialidad: Integración con Google
-   ✅ Gratis con cuenta Google
-
-🎨 Claude AI
-   🔗 https://claude.ai
-   ✅ Especialidad: Texto y código limpio
-   ⚠️ Límites en versión gratis
-
-================================================================================
-📁 ESTRUCTURA DEL PROYECTO
-================================================================================
-
-📂 EduHTML Builder PRO MAX
-   │
-   ├── 📄 index.html (Este archivo - Constructor de actividades)
-   │
-   ├── 📄 actividades_generadas/ (Carpeta para guardar HTMLs generados)
-   │   └── index_tema_fecha.html
-   │
-   ├── 📄 respaldos/ (Carpeta para backups JSON)
-   │   ├── actividades.json
-   │   └── enlaces_recursos.json
-   │
-   └── 📄 dokumentos/ (Recursos adicionales)
-       ├── prompts_ejemplo.txt
-       └── guia_uso.pdf
-
-================================================================================
-🎯 FLUJO DE TRABAJO RECOMENDADO
-================================================================================
-
-PASO 1: Crear Actividad
-   → Complete los 7 pasos en el módulo "Crear Actividad"
-   → Datos del docente → Teoría → Habilidades → Apoyo → Ítems → Formulario → Prompt
-
-PASO 2: Generar Prompt
-   → Click en "✨ Generar Prompt Optimizado"
-   → Copie el prompt generado
-
-PASO 3: Usar IA
-   → Abra su IA preferida (Deep Seek recomendado)
-   → Pegue el prompt
-   → Espere a que genere el código HTML completo
-
-PASO 4: Descargar HTML
-   → Copie el código HTML de la IA
-   → Pegue en el área "📥 Pegar Código HTML Generado por IA"
-   → Click en "💾 Descargar archivo index.html"
-
-PASO 5: Publicar en Internet
-   → Vaya a Netlify (https://www.netlify.com)
-   → Arrastre el archivo index.html descargado
-   → Copie la URL generada
-   → Comparta con estudiantes
-
-PASO 6: Recibir Respuestas
-   → Los estudiantes completan la actividad
-   → Las respuestas llegan a su correo (FormSubmit.co)
-   → Revise calificaciones automáticas
-
-================================================================================
-💾 GESTIÓN DE DATOS Y RESPALDOS
-================================================================================
-
-📊 localStorage (Datos guardados en el navegador)
-   ├── eduHTML_v6 (Datos del formulario actual)
-   ├── eduHTML_banco (Actividades guardadas)
-   └── eduHTML_enlaces (Enlaces a recursos externos)
-
-📤 Exportar Datos
-   → Módulo "Banco" → "📤 Exportar Banco (JSON)"
-   → Módulo "Enlaces" → "📤 Exportar Enlaces (JSON)"
-   → Guarde los archivos en Google Drive o USB
-
-📥 Importar Datos
-   → Módulo "Banco" → "📥 Importar Banco"
-   → Módulo "Enlaces" → "📥 Importar Enlaces"
-   → Seleccione el archivo JSON previamente exportado
-
-⚠️ IMPORTANTE:
-   - Los datos se guardan SOLO en el navegador actual
-   - Si borra el caché, pierde los datos (por eso exporte)
-   - Exporte regularmente (recomendado: cada semana)
-
-================================================================================
-🔧 SOLUCIÓN DE PROBLEMAS COMUNES
-================================================================================
-
-❌ Problema: El archivo HTML no se descarga
-   ✅ Solución: Verifique que el navegador permite descargas
-   ✅ Solución: Revise la carpeta de "Descargas" de su computadora
-
-❌ Problema: El prompt no genera código completo
-   ✅ Solución: Use Deep Seek o ChatGPT-4
-   ✅ Solución: Agregue al final: "Genera el código HTML completo sin omitir nada"
-
-❌ Problema: Las respuestas no llegan al correo
-   ✅ Solución: Verifique que FormSubmit.co esté activado
-   ✅ Solución: Revise la carpeta de Spam/Correo no deseado
-   ✅ Solución: Confirme el correo la primera vez que usa FormSubmit
-
-❌ Problema: Los datos del banco se pierden
-   ✅ Solución: Exporte regularmente el banco a JSON
-   ✅ Solución: No borre el caché del navegador sin respaldo
-
-❌ Problema: La página no se ve bien en Netlify
-   ✅ Solución: Asegúrese de que el archivo se llame "index.html"
-   ✅ Solución: Verifique que todo el código esté en un solo archivo
-
-================================================================================
-📞 CONTACTO Y SOPORTE
-================================================================================
-
-👨‍🏫 Profesor: Carlos Elizondo Castillo
-📧 Correo: carlos.elizondo.castillo@mep.go.cr
-🏫 Institución: Ministerio de Educación Pública (MEP) - Costa Rica
-📅 Año: 2026
-
-================================================================================
-📚 RECURSOS ADICIONALES RECOMENDADOS
-================================================================================
-
-🎓 Tutoriales de HTML/CSS:
-   → https://www.w3schools.com
-   → https://developer.mozilla.org/es/
-   → https://www.freecodecamp.org
-
-🛠️ Herramientas de Desarrollo:
-   → Visual Studio Code: https://code.visualstudio.com
-   → Live Server (extensión VS Code)
-   → HTML Validator: https://validator.w3.org
-
-📖 Documentación de FormSubmit:
-   → https://formsubmit.co
-
-🎨 Recursos de Diseño:
-   → Iconos: https://fontawesome.com
-   → Colores: https://coolors.co
-   → Gradientes: https://webgradients.com
-
-================================================================================
-⚙️ CONFIGURACIONES TÉCNICAS
-================================================================================
-
-✅ Requisitos del Navegador:
-   - Google Chrome (Recomendado)
-   - Mozilla Firefox
-   - Microsoft Edge
-   - Safari
-
-✅ Características Requeridas:
-   - JavaScript habilitado
-   - localStorage habilitado
-   - Descargas permitidas
-
-✅ Dimensiones Recomendadas:
-   - Mínimo: 1366x768 píxeles
-   - Óptimo: 1920x1080 píxeles
-
-================================================================================
-📝 NOTAS IMPORTANTES
-================================================================================
-
-1. Este archivo es AUTOCONTENIDO - Todo el código está en un solo HTML
-2. No requiere servidor - Funciona directamente en el navegador
-3. Los datos se guardan en LOCALSTORAGE del navegador
-4. Exporte regularmente para no perder información
-5. Use siempre el mismo navegador para mantener los datos
-6. Para compartir actividades, use Netlify u otra plataforma de hosting
-
-================================================================================
-🔄 HISTORIAL DE VERSIONES
-================================================================================
-
-Versión 6.0 (2026)
-   ✅ Módulo de Enlaces y Recursos Externos agregado
-   ✅ Botón para descargar archivo index.html
-   ✅ Área para pegar código HTML generado por IA
-   ✅ Validador de código HTML
-   ✅ Comentarios detallados en todo el código
-   ✅ Exportar/Importar enlaces en JSON
-   ✅ 5 módulos principales (Crear, Estadísticas, Banco, Enlaces, Recursos)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </body>
 </html>
